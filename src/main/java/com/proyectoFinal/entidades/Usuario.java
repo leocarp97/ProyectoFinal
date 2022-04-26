@@ -3,12 +3,15 @@ package com.proyectoFinal.entidades;
 
 import com.proyectoFinal.enums.Rol;
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@Table(name = "Usuarios")
 public class Usuario implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -17,12 +20,18 @@ public class Usuario implements Serializable {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     
+    @Column(name = "nombre")
     private String nombre;
+    @Column(name = "apellido")
     private String apellido;
     private Rol rol;
+    @Column(unique = true)
     private Integer dni;
+    @Column(name = "email", unique = true)
     private String email;
+    @Column(name = "telefono", unique = true)
     private Integer telefono;
+    @Column(name = "contraseña")
     private String password;
 
     public Usuario() {
