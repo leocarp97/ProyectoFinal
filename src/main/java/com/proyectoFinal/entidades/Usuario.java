@@ -1,10 +1,11 @@
-
 package com.proyectoFinal.entidades;
 
 import com.proyectoFinal.enums.Rol;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -13,17 +14,18 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "Usuarios")
 public class Usuario implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    
+
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "apellido")
     private String apellido;
+    @Enumerated(EnumType.STRING)
     private Rol rol;
     @Column(unique = true)
     private Integer dni;
@@ -116,11 +118,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", rol=" + rol + ", dni=" + dni + ", email=" + email + ", telefono=" + telefono + ", password=" + password + '}';
     }
- 
-    
-    
-    
-    
-    
-    
+
 }
