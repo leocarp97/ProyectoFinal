@@ -1,4 +1,3 @@
-
 package com.proyectoFinal.entidades;
 
 import com.proyectoFinal.enums.Nivel;
@@ -6,6 +5,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -16,16 +17,17 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "Cursos")
 public class Curso implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    
+
     @Column(name = "nombre_del_curso")
     private String nombre;
     @Column(name = "nivel_del_curso")
+    @Enumerated(EnumType.STRING)
     private Nivel nivel;
     @OneToMany
     private List<Usuario> alumnos;
