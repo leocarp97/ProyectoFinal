@@ -77,8 +77,14 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<Usuario> listarId(String id) {
-        return usuarioRepositorio.findById(id);
+    public Usuario BuscarId(String id) {
+        Optional<Usuario> respuesta =  usuarioRepositorio.findById(id);
+        if(respuesta.isPresent())    {
+            return respuesta.get();
+        }else{  
+            throw new Exception("No ha encontrado el usuario");
+        }
+        
     }
 
     public void eliminarUsuario(String id) {

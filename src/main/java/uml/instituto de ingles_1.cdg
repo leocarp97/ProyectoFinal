@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="instituto de ingles">
+  <ClassDiagramComponents>
+    <Class name="Usuario" package="" visibility="public" xPosition="215.0" yPosition="468.0">
+      <Fields>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="apellido" type="String" visibility="private"/>
+        <Field name="rol" type="Rol" visibility="private"/>
+        <Field name="dni" type="Integer" visibility="private"/>
+        <Field name="email" type="String" visibility="private"/>
+        <Field name="telefono" type="Integer" visibility="private"/>
+        <Field name="password" type="String" visibility="private"/>
+        <Field name="pais" type="Pais" visibility="private"/>
+        <Field name="region" type="Region" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Curso" package="" visibility="public" xPosition="832.0" yPosition="497.0">
+      <Fields>
+        <Field name="nivel" type="NIvel" visibility="private"/>
+        <Field name="alumnos" type="List&lt;Usuario&gt;" visibility="private"/>
+        <Field name="profesor" type="Usuario" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="idiomas" type="Enum" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="untitledMethod" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Enum name="Rol" package="" visibility="public" xPosition="698.0" yPosition="322.0">
+      <Literals>
+        <Literal name="Alumno"/>
+        <Literal name="Profesor"/>
+      </Literals>
+    </Enum>
+    <Enum name="Nivel" package="" visibility="public" xPosition="1137.0" yPosition="246.0">
+      <Literals>
+        <Literal name="A1"/>
+        <Literal name="A2"/>
+        <Literal name="B1"/>
+        <Literal name="B2"/>
+        <Literal name="C1"/>
+        <Literal name="C2"/>
+      </Literals>
+    </Enum>
+    <Enum name="Pais" package="" visibility="public" xPosition="26.0" yPosition="205.0">
+      <Literals>
+        <Literal name="todos los paises q queramos"/>
+      </Literals>
+    </Enum>
+    <Enum name="Region" package="" visibility="public" xPosition="287.0" yPosition="205.0">
+      <Literals>
+        <Literal name="todas las regiones que tenga ese pais"/>
+      </Literals>
+    </Enum>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="un curso un profe" source="Curso" target="Usuario" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="region" source="Usuario" target="Region" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="un curso de un nivel" source="Curso" target="Nivel" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="un curso muchos usuarios" source="Curso" target="Usuario" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="un usuario un rol" source="Usuario" target="Rol" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="pais" source="Usuario" target="Pais" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

@@ -56,6 +56,24 @@ public class UsuarioControlador {
 
     }
 
+    @GetMapping("/update/{id}")
+    public String update(@PathVariable String id, ModelMap modelo) {
+        Usuario u = usuarioServicio.BuscarId(id);
+        modelo.put("usuario", u);
+        return "index";
+    }
+
+    @PostMapping("/update")
+    public String updatePost(ModelMap modelo, @RequestParam String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password) {
+        try {
+            usuarioServicio.modificar( id,nombre, apellido,dni, email, telefono,password);
+            modelo.put("exito","se pudo actualizar");
+        } catch (Exception e) {
+            modelo.put("error",e.getMessage());
+        }
+        return "index";
+    }
+
     @GetMapping("index")
     public String index() {
         return "index";

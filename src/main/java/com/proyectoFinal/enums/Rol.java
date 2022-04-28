@@ -2,6 +2,6 @@ package com.proyectoFinal.enums;
 
 public enum Rol {
 
-    ALUMNO, PROFESOR
+    ALUMNO, PROFESOR,ADMIN
 
 }

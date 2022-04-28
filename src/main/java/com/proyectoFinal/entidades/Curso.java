@@ -1,11 +1,14 @@
 
 package com.proyectoFinal.entidades;
 
+import com.proyectoFinal.enums.Idioma;
 import com.proyectoFinal.enums.Nivel;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -26,18 +29,25 @@ public class Curso implements Serializable {
     @Column(name = "nombre_del_curso")
     private String nombre;
     @Column(name = "nivel_del_curso")
+    @Enumerated(EnumType.STRING)
     private Nivel nivel;
     @OneToMany
     private List<Usuario> alumnos;
     @OneToOne
     private Usuario profesor;
+    @Enumerated(EnumType.STRING)
+    private Idioma idioma;
+    
 
-    public Curso(String id, String nombre, Nivel nivel, List<Usuario> alumnos, Usuario profesor) {
+    
+
+    public Curso(String id, String nombre, Nivel nivel, List<Usuario> alumnos, Usuario profesor, Idioma idioma) {
         this.id = id;
         this.nombre = nombre;
         this.nivel = nivel;
         this.alumnos = alumnos;
         this.profesor = profesor;
+        this.idioma = idioma;
     }
 
     public Curso() {
@@ -83,8 +93,20 @@ public class Curso implements Serializable {
         this.profesor = profesor;
     }
 
+    public Idioma getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(Idioma idioma) {
+        this.idioma = idioma;
+    }
+
     @Override
     public String toString() {
-        return "Curso{" + "id=" + id + ", nombre=" + nombre + ", nivel=" + nivel + ", alumnos=" + alumnos + ", profesor=" + profesor + '}';
+        return "Curso{" + "id=" + id + ", nombre=" + nombre + ", nivel=" + nivel + ", alumnos=" + alumnos + ", profesor=" + profesor + ", idioma=" + idioma + '}';
     }
+    
+    
+
+    
 }
