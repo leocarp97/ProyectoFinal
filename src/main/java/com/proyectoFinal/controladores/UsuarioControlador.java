@@ -30,15 +30,7 @@ public class UsuarioControlador {
     }
 
     
-      @GetMapping("/list-usuario")
-    public String dsadsa(ModelMap model) {
-
-        List<Usuario> usuarios = usuarioServicio.listarUsuarios();
-
-        model.addAttribute("usuarios", usuarios);
-
-        return "list-usuario";
-    }
+    
     @GetMapping("/form-usuario")
     public String formulario() {
         return "form-usuario";
