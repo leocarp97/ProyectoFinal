@@ -1,4 +1,3 @@
-
 package com.proyectoFinal.entidades;
 
 import com.proyectoFinal.enums.Idioma;
@@ -19,13 +18,13 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "Cursos")
 public class Curso implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    
+
     @Column(name = "nombre_del_curso")
     private String nombre;
     @Column(name = "nivel_del_curso")
