@@ -57,7 +57,7 @@ public class UsuarioControlador {
     }
 
     @GetMapping("/update/{id}")
-    public String update(@PathVariable String id, ModelMap modelo) {
+    public String update(@PathVariable String id, ModelMap modelo) throws Exception {
         Usuario u = usuarioServicio.BuscarId(id);
         modelo.put("usuario", u);
         return "index";

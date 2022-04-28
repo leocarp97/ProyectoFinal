@@ -28,13 +28,17 @@ public class Curso implements Serializable {
     
     @Column(name = "nombre_del_curso")
     private String nombre;
+    
     @Column(name = "nivel_del_curso")
     @Enumerated(EnumType.STRING)
     private Nivel nivel;
+    
     @OneToMany
     private List<Usuario> alumnos;
+    
     @OneToOne
     private Usuario profesor;
+    
     @Enumerated(EnumType.STRING)
     private Idioma idioma;
     
