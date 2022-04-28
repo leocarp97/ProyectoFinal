@@ -25,8 +25,12 @@ public class Usuario implements Serializable {
     private String nombre;
     @Column(name = "apellido")
     private String apellido;
+
+    
+
     @Enumerated(EnumType.STRING)
     private Rol rol;
+    
     @Column(unique = true)
     private Integer dni;
     @Column(name = "email", unique = true)

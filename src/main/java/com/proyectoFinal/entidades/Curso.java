@@ -1,5 +1,6 @@
 package com.proyectoFinal.entidades;
 
+import com.proyectoFinal.enums.Idioma;
 import com.proyectoFinal.enums.Nivel;
 import java.io.Serializable;
 import java.util.List;
@@ -33,13 +34,19 @@ public class Curso implements Serializable {
     private List<Usuario> alumnos;
     @OneToOne
     private Usuario profesor;
+    @Enumerated(EnumType.STRING)
+    private Idioma idioma;
+    
 
-    public Curso(String id, String nombre, Nivel nivel, List<Usuario> alumnos, Usuario profesor) {
+    
+
+    public Curso(String id, String nombre, Nivel nivel, List<Usuario> alumnos, Usuario profesor, Idioma idioma) {
         this.id = id;
         this.nombre = nombre;
         this.nivel = nivel;
         this.alumnos = alumnos;
         this.profesor = profesor;
+        this.idioma = idioma;
     }
 
     public Curso() {
@@ -85,8 +92,20 @@ public class Curso implements Serializable {
         this.profesor = profesor;
     }
 
+    public Idioma getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(Idioma idioma) {
+        this.idioma = idioma;
+    }
+
     @Override
     public String toString() {
-        return "Curso{" + "id=" + id + ", nombre=" + nombre + ", nivel=" + nivel + ", alumnos=" + alumnos + ", profesor=" + profesor + '}';
+        return "Curso{" + "id=" + id + ", nombre=" + nombre + ", nivel=" + nivel + ", alumnos=" + alumnos + ", profesor=" + profesor + ", idioma=" + idioma + '}';
     }
+    
+    
+
+    
 }
