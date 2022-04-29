@@ -83,7 +83,7 @@ public class CursoServicio {
             curso.setBaja(new Date());
             return cursoRepositorio.save(curso);
         } else {
-            throw new Exception("No se pudo encontrar el libro solicitado");
+            throw new Exception("No se pudo encontrar el curso solicitado");
         }
     }
     
@@ -99,12 +99,12 @@ public class CursoServicio {
             curso.setBaja(null);
             return cursoRepositorio.save(curso);
         } else {
-            throw new Exception("No se pudo encontrar el libro solicitado");
+            throw new Exception("No se pudo encontrar el curso solicitado");
         }
     }
     
     @Transactional(readOnly = true)
-    public List<Curso> listarUsuarios() {
+    public List<Curso> listarCursos() {
         return cursoRepositorio.findAll();
     }
 

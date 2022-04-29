@@ -111,7 +111,7 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setBaja(new Date());
             return usuarioRepositorio.save(usuario);
         } else {
-            throw new Exception("No se pudo encontrar el libro solicitado");
+            throw new Exception("No se pudo encontrar el usuario solicitado");
         }
     }
     
@@ -127,7 +127,7 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setBaja(null);
             return usuarioRepositorio.save(usuario);
         } else {
-            throw new Exception("No se pudo encontrar el libro solicitado");
+            throw new Exception("No se pudo encontrar el usuario solicitado");
         }
     }
 
