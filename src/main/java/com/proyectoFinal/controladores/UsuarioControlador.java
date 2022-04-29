@@ -29,7 +29,7 @@ public class UsuarioControlador {
         return "list-usuario";
     }
 
-   
+
     @GetMapping("/form-usuario")
     public String formulario() {
         return "form-usuario";
@@ -39,7 +39,7 @@ public class UsuarioControlador {
     public String guardar(ModelMap model, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password) {
 
         try {
-            usuarioServicio.crear(nombre, apellido, dni, email, telefono, password);
+            usuarioServicio.registrar(nombre, apellido, dni, email, telefono, password);
 
             return "redirect:/usuario/index";
         } catch (Exception e) {
@@ -49,12 +49,39 @@ public class UsuarioControlador {
     }
 
     @GetMapping("/eliminar-usuario/{id}")
-    public String eliminar(@PathVariable String id) {
+    public String eliminar(@PathVariable String id) throws Exception {
 
-        usuarioServicio.eliminarUsuario(id);
+        usuarioServicio.deshabilitar(id);
 
         return "redirect:/usuario/list-usuario/";
 
+    }
+    
+    @GetMapping("/habilitar-usuario/{id}")
+    public String habilitar(@PathVariable String id) throws Exception {
+
+        usuarioServicio.habilitar(id);
+
+        return "redirect:/usuario/list-usuario/";
+
+    }
+
+    @GetMapping("/update/{id}")
+    public String update(@PathVariable String id, ModelMap modelo) throws Exception {
+        Usuario u = usuarioServicio.BuscarId(id);
+        modelo.put("usuario", u);
+        return "index";
+    }
+
+    @PostMapping("/update")
+    public String updatePost(ModelMap modelo, @RequestParam String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password) {
+        try {
+            usuarioServicio.modificar( id,nombre, apellido,dni, email, telefono,password);
+            modelo.put("exito","se pudo actualizar");
+        } catch (Exception e) {
+            modelo.put("error",e.getMessage());
+        }
+        return "index";
     }
 
     @GetMapping("index")
