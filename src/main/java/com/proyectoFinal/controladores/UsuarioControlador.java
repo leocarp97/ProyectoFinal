@@ -29,8 +29,6 @@ public class UsuarioControlador {
         return "list-usuario";
     }
 
-    
-    
     @GetMapping("/form-usuario")
     public String formulario() {
         return "form-usuario";
@@ -40,7 +38,7 @@ public class UsuarioControlador {
     public String guardar(ModelMap model, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password) {
 
         try {
-            usuarioServicio.crear(nombre, apellido, dni, email, telefono, password);
+            usuarioServicio.registrar(nombre, apellido, dni, email, telefono, password);
 
             return "redirect:/usuario/index";
         } catch (Exception e) {
@@ -50,9 +48,18 @@ public class UsuarioControlador {
     }
 
     @GetMapping("/eliminar-usuario/{id}")
-    public String eliminar(@PathVariable String id) {
+    public String eliminar(@PathVariable String id) throws Exception {
 
-        usuarioServicio.eliminarUsuario(id);
+        usuarioServicio.deshabilitar(id);
+
+        return "redirect:/usuario/list-usuario/";
+
+    }
+    
+    @GetMapping("/habilitar-usuario/{id}")
+    public String habilitar(@PathVariable String id) throws Exception {
+
+        usuarioServicio.habilitar(id);
 
         return "redirect:/usuario/list-usuario/";
 

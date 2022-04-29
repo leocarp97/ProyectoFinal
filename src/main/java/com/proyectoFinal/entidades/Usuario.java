@@ -2,6 +2,7 @@ package com.proyectoFinal.entidades;
 
 import com.proyectoFinal.enums.Rol;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,13 +10,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "Usuarios")
 public class Usuario implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -23,27 +25,32 @@ public class Usuario implements Serializable {
 
     @Column(name = "nombre")
     private String nombre;
+    
     @Column(name = "apellido")
     private String apellido;
-
-    
 
     @Enumerated(EnumType.STRING)
     private Rol rol;
     
     @Column(unique = true)
     private Integer dni;
+    
     @Column(name = "email", unique = true)
     private String email;
+    
     @Column(name = "telefono", unique = true)
     private Integer telefono;
+    
     @Column(name = "contraseña")
     private String password;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date alta;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date baja;
 
-    public Usuario() {
-    }
-
-    public Usuario(String id, String nombre, String apellido, Rol rol, Integer dni, String email, Integer telefono, String password) {
+    public Usuario(String id, String nombre, String apellido, Rol rol, Integer dni, String email, Integer telefono, String password, Date alta, Date baja) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -52,6 +59,11 @@ public class Usuario implements Serializable {
         this.email = email;
         this.telefono = telefono;
         this.password = password;
+        this.alta = alta;
+        this.baja = baja;
+    }
+
+    public Usuario() {
     }
 
     public String getId() {
@@ -118,9 +130,25 @@ public class Usuario implements Serializable {
         this.password = password;
     }
 
+    public Date getAlta() {
+        return alta;
+    }
+
+    public void setAlta(Date alta) {
+        this.alta = alta;
+    }
+
+    public Date getBaja() {
+        return baja;
+    }
+
+    public void setBaja(Date baja) {
+        this.baja = baja;
+    }
+
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", rol=" + rol + ", dni=" + dni + ", email=" + email + ", telefono=" + telefono + ", password=" + password + '}';
+        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", rol=" + rol + ", dni=" + dni + ", email=" + email + ", telefono=" + telefono + ", password=" + password + ", alta=" + alta + ", baja=" + baja + '}';
     }
 
 }
