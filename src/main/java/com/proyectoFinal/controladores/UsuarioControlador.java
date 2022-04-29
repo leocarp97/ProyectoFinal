@@ -29,6 +29,7 @@ public class UsuarioControlador {
         return "list-usuario";
     }
 
+
     @GetMapping("/form-usuario")
     public String formulario() {
         return "form-usuario";
