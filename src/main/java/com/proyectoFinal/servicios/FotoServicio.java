@@ -19,9 +19,9 @@ public class FotoServicio {
             try {
                 Foto foto = new Foto();
                 foto.setNombre(archivo.getName());
-                foto.setNime(archivo.getContentType());
+                foto.setMime(archivo.getContentType());
                 foto.setContenido(archivo.getBytes());
-
+               
                 fotoRepositorio.save(foto);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -48,7 +48,7 @@ public class FotoServicio {
               
 
                 foto.setNombre(archivo.getName());
-                foto.setNime(archivo.getContentType());
+                foto.setMime(archivo.getContentType());
                 foto.setContenido(archivo.getBytes());
 
                 fotoRepositorio.save(foto);

@@ -83,7 +83,7 @@ public class UsuarioServicio implements UserDetailsService {
             }
             Foto foto = fotoServicio.modificar(archivo, idFoto);
             usuario.setFoto(foto);
-            
+
             usuarioRepositorio.save(usuario);
 
         } else {
