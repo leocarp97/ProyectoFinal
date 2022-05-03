@@ -39,11 +39,22 @@ public class CursoServicio {
         } else {
             throw new Exception("No se pudo encontrar el profesor solicitado");
         }
-        
+
         curso.setAlta(new Date());
         curso.setBaja(null);
 
         return cursoRepositorio.save(curso);
+    }
+
+    @Transactional(readOnly = true)
+    public Curso BuscarId(String id) throws Exception {
+        Optional<Curso> respuesta = cursoRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            return respuesta.get();
+        } else {
+            throw new Exception("No ha encontrado el curso");
+        }
+
     }
 
     public Curso modificar(String id, String nombre, Nivel nivel, Idioma idioma, String idProfesor) throws Exception {
@@ -64,21 +75,21 @@ public class CursoServicio {
             } else {
                 throw new Exception("No se pudo encontrar el profesor solicitado");
             }
-            
+
             return cursoRepositorio.save(curso);
         } else {
             throw new Exception("No se pudo encontrar el curso solicitado");
         }
     }
-    
+
     @Transactional(rollbackFor = Exception.class)
     public Curso deshabilitar(String id) throws Exception {
         if (id == null || id.trim().isEmpty()) {
             throw new Exception("El ID no puede ser nulo");
         }
-        
+
         Optional<Curso> respuesta = cursoRepositorio.findById(id);
-        if(respuesta.isPresent()) {
+        if (respuesta.isPresent()) {
             Curso curso = respuesta.get();
             curso.setBaja(new Date());
             return cursoRepositorio.save(curso);
@@ -86,15 +97,15 @@ public class CursoServicio {
             throw new Exception("No se pudo encontrar el curso solicitado");
         }
     }
-    
+
     @Transactional(rollbackFor = Exception.class)
     public Curso habilitar(String id) throws Exception {
         if (id == null || id.trim().isEmpty()) {
             throw new Exception("El ID no puede ser nulo");
         }
-        
+
         Optional<Curso> respuesta = cursoRepositorio.findById(id);
-        if(respuesta.isPresent()) {
+        if (respuesta.isPresent()) {
             Curso curso = respuesta.get();
             curso.setBaja(null);
             return cursoRepositorio.save(curso);
@@ -102,10 +113,15 @@ public class CursoServicio {
             throw new Exception("No se pudo encontrar el curso solicitado");
         }
     }
-    
+
     @Transactional(readOnly = true)
     public List<Curso> listarCursos() {
         return cursoRepositorio.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Curso> buscarCursosActivos() {
+        return cursoRepositorio.buscarActivos();
     }
 
     private void validar(String nombre, Nivel nivel, Idioma idioma, String idProfesor) throws Exception {

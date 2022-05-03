@@ -1,5 +1,6 @@
 package com.proyectoFinal.servicios;
 
+import com.proyectoFinal.entidades.Foto;
 import com.proyectoFinal.entidades.Usuario;
 import com.proyectoFinal.enums.Rol;
 import com.proyectoFinal.repositorios.UsuarioRepositorio;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class UsuarioServicio implements UserDetailsService {
@@ -27,8 +29,11 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     UsuarioRepositorio usuarioRepositorio;
 
+    @Autowired
+    FotoServicio fotoServicio;
+
     @Transactional(rollbackFor = {Exception.class})
-    public Usuario registrar(String nombre, String apellido, Integer dni, String email, Integer telefono, String password) throws Exception {
+    public Usuario registrar(MultipartFile archivo, String nombre, String apellido, Integer dni, String email, Integer telefono, String password) throws Exception {
 
         validar(nombre, apellido, dni, email, telefono, password);
 
@@ -45,15 +50,18 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setAlta(new Date());
         usuario.setBaja(null);
 
+        Foto foto = fotoServicio.guardar(archivo);
+        usuario.setFoto(foto);
+
         return usuarioRepositorio.save(usuario);
 
     }
 
     @Transactional(rollbackFor = {Exception.class})
-    public void modificar(String id, String nombre, String apellido, Integer dni, String email, Integer telefono, String password) throws Exception {
+    public void modificar(MultipartFile archivo, String id, String nombre, String apellido, Integer dni, String email, Integer telefono, String password) throws Exception {
 
         validar(nombre, apellido, dni, email, telefono, password);
-        
+
         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
 
         if (respuesta.isPresent()) {
@@ -66,6 +74,16 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setTelefono(telefono);
             String claveEncriptada = new BCryptPasswordEncoder().encode(password);
             usuario.setPassword(claveEncriptada);
+
+            String idFoto = null;
+            if (usuario.getFoto() != null) {
+
+                idFoto = usuario.getFoto().getId();
+
+            }
+            Foto foto = fotoServicio.modificar(archivo, idFoto);
+            usuario.setFoto(foto);
+            
             usuarioRepositorio.save(usuario);
 
         } else {
@@ -79,34 +97,39 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional(readOnly = true)
+    public List<Usuario> buscarUsuariosActivos() {
+        return usuarioRepositorio.buscarActivos();
+    }
+
+    @Transactional(readOnly = true)
     public Usuario BuscarId(String id) throws Exception {
-        Optional<Usuario> respuesta =  usuarioRepositorio.findById(id);
-        if(respuesta.isPresent())    {
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+        if (respuesta.isPresent()) {
             return respuesta.get();
-        }else{  
+        } else {
             throw new Exception("No ha encontrado el usuario");
         }
-        
+
     }
-    
+
     @Transactional(readOnly = true)
     public Usuario buscarProfesor(String id, Rol rol) {
         return usuarioRepositorio.buscarProfesor(id, rol);
     }
-    
+
     @Transactional(readOnly = true)
     public List<Usuario> buscarAlumnos(Rol rol) {
         return usuarioRepositorio.buscarAlumnos(rol);
     }
-    
+
     @Transactional(rollbackFor = Exception.class)
     public Usuario deshabilitar(String id) throws Exception {
         if (id == null || id.trim().isEmpty()) {
             throw new Exception("El ID no puede ser nulo");
         }
-        
+
         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
-        if(respuesta.isPresent()) {
+        if (respuesta.isPresent()) {
             Usuario usuario = respuesta.get();
             usuario.setBaja(new Date());
             return usuarioRepositorio.save(usuario);
@@ -114,15 +137,15 @@ public class UsuarioServicio implements UserDetailsService {
             throw new Exception("No se pudo encontrar el usuario solicitado");
         }
     }
-    
+
     @Transactional(rollbackFor = Exception.class)
     public Usuario habilitar(String id) throws Exception {
         if (id == null || id.trim().isEmpty()) {
             throw new Exception("El ID no puede ser nulo");
         }
-        
+
         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
-        if(respuesta.isPresent()) {
+        if (respuesta.isPresent()) {
             Usuario usuario = respuesta.get();
             usuario.setBaja(null);
             return usuarioRepositorio.save(usuario);

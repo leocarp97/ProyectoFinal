@@ -1,6 +1,7 @@
 package com.proyectoFinal.controladores;
 
 import com.proyectoFinal.entidades.Usuario;
+import com.proyectoFinal.enums.Rol;
 import com.proyectoFinal.servicios.UsuarioServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,18 @@ public class UsuarioControlador {
     }
 
 
+    @GetMapping("/list-usuario-activos")
+    public String listarUsuariosActivos(ModelMap model) {
+
+        List<Usuario> usuarios = usuarioServicio.buscarUsuariosActivos();
+
+        model.addAttribute("usuarios", usuarios);
+
+        return "list-usuario";
+    }
+
+
+
     @GetMapping("/form-usuario")
     public String formulario() {
         return "form-usuario";
@@ -56,7 +69,7 @@ public class UsuarioControlador {
         return "redirect:/usuario/list-usuario/";
 
     }
-    
+
     @GetMapping("/habilitar-usuario/{id}")
     public String habilitar(@PathVariable String id) throws Exception {
 
@@ -76,10 +89,10 @@ public class UsuarioControlador {
     @PostMapping("/update")
     public String updatePost(ModelMap modelo, @RequestParam String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password) {
         try {
-            usuarioServicio.modificar( id,nombre, apellido,dni, email, telefono,password);
-            modelo.put("exito","se pudo actualizar");
+            usuarioServicio.modificar(id, nombre, apellido, dni, email, telefono, password);
+            modelo.put("exito", "se pudo actualizar");
         } catch (Exception e) {
-            modelo.put("error",e.getMessage());
+            modelo.put("error", e.getMessage());
         }
         return "index";
     }

@@ -9,6 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -49,8 +50,13 @@ public class Usuario implements Serializable {
     
     @Temporal(TemporalType.TIMESTAMP)
     private Date baja;
+   @OneToOne
+    private Foto foto;
 
-    public Usuario(String id, String nombre, String apellido, Rol rol, Integer dni, String email, Integer telefono, String password, Date alta, Date baja) {
+    public Usuario() {
+    }
+
+    public Usuario(String id, String nombre, String apellido, Rol rol, Integer dni, String email, Integer telefono, String password, Date alta, Date baja, Foto foto) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -61,9 +67,7 @@ public class Usuario implements Serializable {
         this.password = password;
         this.alta = alta;
         this.baja = baja;
-    }
-
-    public Usuario() {
+        this.foto = foto;
     }
 
     public String getId() {
@@ -146,9 +150,19 @@ public class Usuario implements Serializable {
         this.baja = baja;
     }
 
+    public Foto getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Foto foto) {
+        this.foto = foto;
+    }
+
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", rol=" + rol + ", dni=" + dni + ", email=" + email + ", telefono=" + telefono + ", password=" + password + ", alta=" + alta + ", baja=" + baja + '}';
+        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", rol=" + rol + ", dni=" + dni + ", email=" + email + ", telefono=" + telefono + ", password=" + password + ", alta=" + alta + ", baja=" + baja + ", foto=" + foto + '}';
     }
+
+   
 
 }
