@@ -30,6 +30,7 @@ public class UsuarioControlador {
         return "list-usuario";
     }
 
+
     @GetMapping("/list-usuario-activos")
     public String listarUsuariosActivos(ModelMap model) {
 
@@ -39,6 +40,8 @@ public class UsuarioControlador {
 
         return "list-usuario";
     }
+
+
 
     @GetMapping("/form-usuario")
     public String formulario() {
