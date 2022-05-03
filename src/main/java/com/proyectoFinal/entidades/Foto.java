@@ -17,7 +17,7 @@ public class Foto implements Serializable {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String nombre;
-    private String nime;
+    private String mime;
     @Lob
     @Basic(fetch = FetchType.LAZY)
     private byte[] contenido;
@@ -25,10 +25,10 @@ public class Foto implements Serializable {
     public Foto() {
     }
 
-    public Foto(String id, String nombre, String nime, byte[] contenido) {
+    public Foto(String id, String nombre, String mime, byte[] contenido) {
         this.id = id;
         this.nombre = nombre;
-        this.nime = nime;
+        this.mime = mime;
         this.contenido = contenido;
     }
 
@@ -49,11 +49,11 @@ public class Foto implements Serializable {
     }
 
     public String getNime() {
-        return nime;
+        return mime;
     }
 
-    public void setNime(String nime) {
-        this.nime = nime;
+    public void setMime(String mime) {
+        this.mime = mime;
     }
 
     public byte[] getContenido() {
@@ -67,7 +67,7 @@ public class Foto implements Serializable {
     
     @Override
     public String toString() {
-        return "Foto{" + "id=" + id + ", nombre=" + nombre + ", nime=" + nime + ", contenido=" + contenido + '}';
+        return "Foto{" + "id=" + id + ", nombre=" + nombre + ", mime=" + mime + ", contenido=" + contenido + '}';
     }
            
     
