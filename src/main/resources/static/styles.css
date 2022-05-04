@@ -5,6 +5,8 @@
 }
 
 
+
+
 .form-register {
 
     position: absolute;
@@ -12,14 +14,17 @@
     background: #402550;
     opacity: 0.8;
     padding: 30px;
-
+    
     margin-top: 105px;
-    margin-left: 1100px;
+    margin-left: 1080px;
     top: 2%;
+    
     z-index: 999;
     border-radius: 4px;
     font-family: 'calibri';
     color: white;
+
+    
 
 }
 
@@ -55,6 +60,8 @@
 
 }
 
+
+
 .form-register a {
     
     
@@ -87,6 +94,7 @@
 }
 
 .slide img {
+    
 
 
     height: 600px;
