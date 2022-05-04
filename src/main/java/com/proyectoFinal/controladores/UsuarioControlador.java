@@ -1,7 +1,6 @@
 package com.proyectoFinal.controladores;
 
 import com.proyectoFinal.entidades.Usuario;
-import com.proyectoFinal.enums.Rol;
 import com.proyectoFinal.servicios.UsuarioServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +46,10 @@ public class UsuarioControlador {
     }
 
     @PostMapping("/form-usuario")
-    public String guardar(ModelMap model, MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password) {
+    public String guardar(ModelMap model, MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region) {
 
         try {
-            usuarioServicio.registrar(archivo,nombre, apellido, dni, email, telefono, password);
+            usuarioServicio.registrar(archivo,nombre, apellido, dni, email, telefono, password, region);
 
             return "redirect:/usuario/index";
         } catch (Exception e) {
@@ -85,9 +84,9 @@ public class UsuarioControlador {
     }
 
     @PostMapping("/update")
-    public String updatePost(ModelMap modelo,MultipartFile archivo, @RequestParam String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password) {
+    public String updatePost(ModelMap modelo,MultipartFile archivo, @RequestParam String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region) {
         try {
-            usuarioServicio.modificar(archivo,id, nombre, apellido, dni, email, telefono, password);
+            usuarioServicio.modificar(archivo,id, nombre, apellido, dni, email, telefono, password, region);
             modelo.put("exito", "se pudo actualizar");
         } catch (Exception e) {
             modelo.put("error", e.getMessage());

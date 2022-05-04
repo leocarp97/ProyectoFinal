@@ -52,11 +52,13 @@ public class Usuario implements Serializable {
     private Date baja;
    @OneToOne
     private Foto foto;
+   
+   private String region;
 
     public Usuario() {
     }
 
-    public Usuario(String id, String nombre, String apellido, Rol rol, Integer dni, String email, Integer telefono, String password, Date alta, Date baja, Foto foto) {
+    public Usuario(String id, String nombre, String apellido, Rol rol, Integer dni, String email, Integer telefono, String password, Date alta, Date baja, Foto foto, String region) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -68,6 +70,7 @@ public class Usuario implements Serializable {
         this.alta = alta;
         this.baja = baja;
         this.foto = foto;
+        this.region = region;
     }
 
     public String getId() {
@@ -158,11 +161,21 @@ public class Usuario implements Serializable {
         this.foto = foto;
     }
 
-    @Override
-    public String toString() {
-        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", rol=" + rol + ", dni=" + dni + ", email=" + email + ", telefono=" + telefono + ", password=" + password + ", alta=" + alta + ", baja=" + baja + ", foto=" + foto + '}';
+    public String getRegion() {
+        return region;
     }
 
-   
+    public void setRegion(String region) {
+        this.region = region;
+    }
 
-}
+    @Override
+    public String toString() {
+        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", rol=" + rol + ", dni=" + dni + ", email=" + email + ", telefono=" + telefono + ", password=" + password + ", alta=" + alta + ", baja=" + baja + ", foto=" + foto + ", region=" + region + '}';
+    }
+
+    
+    
+    
+    }
+ 
