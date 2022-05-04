@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CursoRepositorio extends JpaRepository<Curso, String> {
     
-   @Query("SELECT c FROM Cursos c WHERE c.baja IS NULL") 
+   @Query("SELECT c FROM Curso c WHERE c.baja IS NULL") 
     public List<Curso> buscarActivos();
 }
