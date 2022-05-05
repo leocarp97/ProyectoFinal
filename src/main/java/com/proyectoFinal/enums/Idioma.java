@@ -1,6 +1,20 @@
-
 package com.proyectoFinal.enums;
 
 public enum Idioma {
-INGLES,ESPAÑOL,PORTUGUES,FRANCES    
+    INGLES("Ingles"), ESPAÑOL("Español"), PORTUGUES("Portugués"), FRANCES("Frances"), ITALIANO("Italiano");
+
+    private String displayValue;
+
+    private Idioma(String displayValue) {
+        this.displayValue = displayValue;
+    }
+
+    public String getDisplayValue() {
+        return displayValue;
+    }
+
+    public void setDisplayValue(String displayValue) {
+        this.displayValue = displayValue;
+    }
+
 }

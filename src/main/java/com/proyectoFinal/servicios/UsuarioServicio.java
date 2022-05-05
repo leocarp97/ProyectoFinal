@@ -33,7 +33,7 @@ public class UsuarioServicio implements UserDetailsService {
     FotoServicio fotoServicio;
 
     @Transactional(rollbackFor = {Exception.class})
-    public Usuario registrar(MultipartFile archivo, String nombre, String apellido, Integer dni, String email, Integer telefono, String password) throws Exception {
+    public Usuario registrar(MultipartFile archivo, String nombre, String apellido, Integer dni, String email, Integer telefono, String password, String region) throws Exception {
 
         validar(nombre, apellido, dni, email, telefono, password);
 
@@ -46,6 +46,7 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setTelefono(telefono);
         String claveEncriptada = new BCryptPasswordEncoder().encode(password);
         usuario.setPassword(claveEncriptada);
+        usuario.setRegion(region);
         usuario.setRol(Rol.ALUMNO);
         usuario.setAlta(new Date());
         usuario.setBaja(null);
@@ -58,7 +59,7 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional(rollbackFor = {Exception.class})
-    public void modificar(MultipartFile archivo, String id, String nombre, String apellido, Integer dni, String email, Integer telefono, String password) throws Exception {
+    public void modificar(MultipartFile archivo, String id, String nombre, String apellido, Integer dni, String email, Integer telefono, String password, String region) throws Exception {
 
         validar(nombre, apellido, dni, email, telefono, password);
 
@@ -74,6 +75,7 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setTelefono(telefono);
             String claveEncriptada = new BCryptPasswordEncoder().encode(password);
             usuario.setPassword(claveEncriptada);
+            usuario.setRegion(region);
 
             String idFoto = null;
             if (usuario.getFoto() != null) {
