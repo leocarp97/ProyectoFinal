@@ -15,7 +15,7 @@ public class PortalControlador {
         return "index";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/login-profesor")
     public String login(ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) {
 
         if (error != null) {
@@ -26,7 +26,7 @@ public class PortalControlador {
             modelo.put("logout", "Has cerrado sesión exitosamente :)");
         }
 
-        return "login.html";
+        return "login-profesor.html";
     }
 
 }
