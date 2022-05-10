@@ -16,91 +16,103 @@
 <body>
 
   <div class="container">
-    <div class="navbar">
-      <img src="./logo.png" class="logo" alt="Main Logo">
+    <div class="bg2">
 
-      <ul>
-        <li><a href="#">QUIENES SOMOS</a></li>
-        <li><a href="#">CURSOS</a></li>
-        <li><a href="#">CONTACTO</a></li>
-        <li><a href="#">ALUMNO</a></li>
-        <li><a href="#">PROFESOR</a></li>
+      <div class="navbar">
+        <img src="./logo.png" class="logo" alt="Main Logo">
 
-      </ul>
+        <ul>
+          <li><a href="#">QUIENES SOMOS |</a></li>
+          <li><a href="#">CURSOS |</a></li>
+          <li><a href="#">CONTACTO |</a></li>
+          <li><a href="#">ALUMNO |</a></li>
+          <li><a href="#">PROFESOR |</a></li>
 
-    </div>
+        </ul>
 
-    <section class="banner">
+      </div>
 
-      <h2>¡DA EL PRIMER PASO!</h2>
+      <div class="banner">
 
-    </section>{
+        <h2>¡COMIENZA AHORA!</h2>
+
+      </div>
 
 
 
-    <div>
-      <button type="button" class="btn-neon" data-bs-toggle="modal" data-bs-target="#exampleModal"
-        data-bs-whatever="@mdo">
-        <a href="#" class="btn-dos">
-
-          <span id="span1"></span>
-          <span id="span2"></span>
-          <span id="span3"></span>
-          <span id="span4"></span>
-          INSCRÍBETE
-        </a>
-      </button>
-
-    </div>
-
-  </div>
+      <div>
+        <button type="button" class="btn-neon" data-bs-toggle="modal" data-bs-target="#exampleModal"
+          data-bs-whatever="@mdo">
+          Registrate</button>
 
 
 
 
-
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-
-           <!--  <section class="form-register">
-              <h4>Empieza a aprender tu idioma</h4>
-              <input class="controls" type="text" name="nombres" id="nombres" placeholder="Nombre">
-              <input class="controls" type="text" name="apellido" id="apellido" placeholder="Apellido">
-              <input class="controls" type="email" name="correo" id="correo" placeholder="Correo Electronico">
-              <form class="form-idioma">Elige el idioma:</form>
-              <select name="idioma" class="controls">
-                <option th:each="idioma : ${T(com.proyectoFinal.enums.Idioma).values()}" th:value="${idioma}"
-                  th:text="${idioma.displayValue}" </option>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
 
 
-              </select>
+              <section class="form-register">
+                <div class="modal-header">
 
-              <form class="form-idioma">País:</form>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <input class="controls" type="text" name="nombres" id="nombres" placeholder="Nombre">
+                <input class="controls" type="text" name="apellido" id="apellido" placeholder="Apellido">
+                <input class="controls" type="email" name="correo" id="correo" placeholder="Correo Electronico">
+                <form class="form-idioma">Elige el idioma:</form>
+                <select class="controls">
+                  <option>Ingles</option>
+                  <option>Frances</option>
+                  <option>Italiano</option>
+                  <option>Portugues</option>
+                  <option>Español</option>
+                  <option>Ruso</option>
+                  <option>Aleman</option>
+                  <option>Chino</option>
+                </select>
 
-              <select name="pais" class="controls">
-                <option th:each="pais : ${T(com.proyectoFinal.enums.Pais).values()}" th:value="${pais}"
-                  th:text="${pais.displayValue}" </option>
+                <form class="form-idioma">País:</form>
+                <select class="controls">
+                  <option>Reino Unido</option>
+                  <option>Argentina</option>
+                  <option>Italia</option>
+                  <option>Estados Unidos</option>
+                  <option>Francia</option>
+                  <option>Alemania</option>
+                  <option>Colombia</option>
+                  <option>Peru</option>
+                  <option>Uruguay</option>
+                  <option>Chile</option>
+                  <option>China</option>
+                  <option>España</option>
+                  <option>Ecuador</option>
+                  <option>Portugal</option>
+                  <option>Brasil</option>
+                </select>
+                <input class="controls" type="text" name="region" id="region" placeholder="Region">
 
-              </select> -->
+                <p><a href="#">Terminos y Condiciones</a></p>
+                <input class="botons" type="submit" value="Registrar">
+                <p><a href="#">¿Ya estas registrado? </a></p>
+
+              </section>
 
 
 
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+
+
+
+          </div>
         </div>
       </div>
+
     </div>
   </div>
+
 
 
 
@@ -120,50 +132,55 @@
     </div>
   </div>
 
-  <section class="aboutus">
+  <div class="contenedor-tres">
+    <section class="aboutus">
 
-    <img src="./ct.jpg">
+      <img src="./ct.jpg">
 
-    <p>Globalización y tecnología son dos conceptos íntimamente ligados. No podemos entender la globalización
-      solamente como un proceso económico, tiene también implicaciones sociales y culturales.
-      Internet es la gran herramienta que da sentido pleno a la globalización
-    </p>
+      <div class="fuente-aboutus">
+        <h3> Contactanos</h3>
+        <p> Globalización y tecnología son dos conceptos íntimamente ligados. No podemos entender la globalización
+          solamente como un proceso económico, tiene también implicaciones sociales y culturales.
+          Internet es la gran herramienta que da sentido pleno a la globalización
+        </p>
+      </div>
 
-    <div>
-      <a href="#" class="btn-neon2">
+      <div>
+        <a href="#" class="btn-neon0">
 
-        <span id="span1"></span>
-        <span id="span2"></span>
-        <span id="span3"></span>
-        <span id="span4"></span>
-        Leer más...
-      </a>
-    </div>
+          <span id="span1"></span>
+          <span id="span2"></span>
+          <span id="span3"></span>
+          <span id="span4"></span>
+          Leer más...
+        </a>
+      </div>
 
-  </section>
+    </section>
 
 
-  <section class="aboutus2">
+    <section class="aboutus2">
 
-    <img src="./qs.jpg">
+      <img src="./qs.jpg">
+      <h3>Sobre nosotros</h3>
+      <p>Globalización y tecnología son dos conceptos íntimamente ligados. No podemos entender la globalización
+        solamente como un proceso económico, tiene también implicaciones sociales y culturales.
+        Internet es la gran herramienta que da sentido pleno a la globalización
+      </p>
 
-    <p>Globalización y tecnología son dos conceptos íntimamente ligados. No podemos entender la globalización
-      solamente como un proceso económico, tiene también implicaciones sociales y culturales.
-      Internet es la gran herramienta que da sentido pleno a la globalización
-    </p>
+      <div>
+        <a href="#" class="btn-neon2">
 
-    <div>
-      <a href="#" class="btn-neon2">
+          <span id="span1"></span>
+          <span id="span2"></span>
+          <span id="span3"></span>
+          <span id="span4"></span>
+          Leer más...
+        </a>
+      </div>
 
-        <span id="span1"></span>
-        <span id="span2"></span>
-        <span id="span3"></span>
-        <span id="span4"></span>
-        Leer más...
-      </a>
-    </div>
-
-</section>
+    </section>
+  </div>
 
 
   <footer class="pie-pagina">
