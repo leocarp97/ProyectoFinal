@@ -19,14 +19,27 @@
     <div class="bg2">
 
       <div class="navbar">
-        <img src="./logo.png" class="logo" alt="Main Logo">
+        <a href="/index"><img src="./logo.png" class="logo" alt="Main Logo"></a>
 
         <ul>
-          <li><a href="quienesomos">QUIENES SOMOS |</a></li>
-          <li><a href="#">CURSOS |</a></li>
-          <li><a href="#">CONTACTO |</a></li>
-          <li><a href="#">ALUMNO |</a></li>
-          <li><a href="#">PROFESOR |</a></li>
+
+          <li><a href="#quienes-somos">QUIENES SOMOS |</a></li>
+          <li>
+            <div class="dropdown">
+              <a class="btn-dropdown dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                CURSOS
+              </a>
+              <ul class="dropdown-menu cursos-items" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Principiante</a></li>
+                <li><a class="dropdown-item" href="#">Intermedios</a></li>
+                <li><a class="dropdown-item" href="#">Avanzados</a></li>
+              </ul>
+            </div>
+          </li>
+          <li><a href="#contacto">CONTACTO |</a></li>
+          <li><a href="/login-alumno">ALUMNO |</a></li>
+          <li><a href="/login-profesor">PROFESOR |</a></li>
+
 
         </ul>
 
@@ -133,7 +146,7 @@
   </div>
 
   <div class="contenedor-tres">
-    <section class="aboutus">
+    <section class="aboutus" id="contacto">
 
       <img src="./ct.jpg">
 
@@ -159,7 +172,7 @@
     </section>
 
 
-    <section class="aboutus2">
+    <section class="aboutus2" id="quienes-somos">
 
       <img src="./qs.jpg">
       <h3>Sobre nosotros</h3>
