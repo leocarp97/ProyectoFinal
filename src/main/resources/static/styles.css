@@ -6,7 +6,7 @@
 
 body{
     background-color: rgba(253,246,234,0.8);
-    }
+}
 
 .container {
 
@@ -49,7 +49,7 @@ body{
     text-decoration: none;
     align-items: center;
     margin-bottom: 20em;
-     transition: 0.2s;
+    transition: 0.2s;
     background: mediumslateblue;
     border-radius: 40px;
 
@@ -338,7 +338,6 @@ body{
     width: 45px;
     height: 45px;
     line-height: 45px;
-    color white;
     margin-right: 10px;
     background: #5d3b7f;
     text-align: center;
@@ -378,3 +377,4 @@ body{
     to {
         transform: rotateY(360deg);
     }
+}
