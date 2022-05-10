@@ -49,6 +49,12 @@
     width: 100%
 }
 
+.cursos-items :hover::before {
+    background: white;
+    transition-duration:0s;
+    transition-delay: 1s;
+}
+
 .form-alumno {
     margin-top: 5%;
     margin-right: 15%;
@@ -64,12 +70,20 @@
     text-decoration: none;
 }
 
-.btn {
+.btn-dropdown {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.dropdown-menu .dropdown-item {
+    text-decoration: none;
+}
+
+.btn-login {
     background: #5d3b7f;
     color: white;
 }
 
-.btn:hover {
+.btn-login:hover {
     background: rgb(15, 188, 226);
 
     color: white;
