@@ -2,6 +2,7 @@ package com.proyectoFinal.entidades;
 
 import com.proyectoFinal.enums.Idioma;
 import com.proyectoFinal.enums.Nivel;
+import com.proyectoFinal.enums.Turno;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -47,19 +48,24 @@ public class Curso implements Serializable {
     @Column(name = "idioma_del_curso")
     private Idioma idioma;
     
+    @Enumerated(EnumType.STRING)
+    @Column(name = "turno_de_cursada")
+    private Turno turno;
+    
     @Temporal(TemporalType.TIMESTAMP)
     private Date alta;
     
     @Temporal(TemporalType.TIMESTAMP)
     private Date baja;
 
-    public Curso(String id, String nombre, Nivel nivel, List<Usuario> alumnos, Usuario profesor, Idioma idioma, Date alta, Date baja) {
+    public Curso(String id, String nombre, Nivel nivel, List<Usuario> alumnos, Usuario profesor, Idioma idioma, Turno turno, Date alta, Date baja) {
         this.id = id;
         this.nombre = nombre;
         this.nivel = nivel;
         this.alumnos = alumnos;
         this.profesor = profesor;
         this.idioma = idioma;
+        this.turno = turno;
         this.alta = alta;
         this.baja = baja;
     }
@@ -115,6 +121,14 @@ public class Curso implements Serializable {
         this.idioma = idioma;
     }
 
+    public Turno getTurno() {
+        return turno;
+    }
+
+    public void setTurno(Turno turno) {
+        this.turno = turno;
+    }
+
     public Date getAlta() {
         return alta;
     }
@@ -133,7 +147,7 @@ public class Curso implements Serializable {
 
     @Override
     public String toString() {
-        return "Curso{" + "id=" + id + ", nombre=" + nombre + ", nivel=" + nivel + ", alumnos=" + alumnos + ", profesor=" + profesor + ", idioma=" + idioma + ", alta=" + alta + ", baja=" + baja + '}';
+        return "Curso{" + "id=" + id + ", nombre=" + nombre + ", nivel=" + nivel + ", alumnos=" + alumnos + ", profesor=" + profesor + ", idioma=" + idioma + ", turno=" + turno + ", alta=" + alta + ", baja=" + baja + '}';
     }
     
 }
