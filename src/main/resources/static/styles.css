@@ -150,6 +150,19 @@ body {
     width: 100%
 }
 
+.cursos-items {
+    background-color: black;
+    text-decoration: none;
+    opacity: 0.8;
+    box-shadow: none;
+}
+
+.cursos-items :hover::before {
+    background: white;
+    transition-duration:0s;
+    transition-delay: 1s;
+}
+
 .contenedor-dos {
     
     width: 100px;
