@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+          <link rel="stylesheet" href="./styles.css">
+    </head>
+    <body>
+        <div th:fragment="piePagina" >
+
+            <footer class="pie-pagina">
+
+                <div class="grupo-1">
+                    <div class="box">
+                        <figure>
+                            <a href="/index">
+                                <img src="./logo.png" alt="logo1"> </a>
+                        </figure>
+                    </div>
+
+                    <div class="box">
+                        <h2>SOBRE NOSOTROS</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    </div>
+
+                    <div class="box">
+                        <h2>SIGUENOS</h2>
+                        <div class="red-social">
+                            <a href="#" class="fa fa-facebook"></a>
+                            <a href="#" class="fa fa-instagram"></a>
+                            <a href="#" class="fa fa-twitter"></a>
+                            <a href="#" class="fa fa-youtube"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="grupo-2">
+                    <samll>&copy; 2022 <b>Instituto Pepitox</b> - Todos los Derechos Reservados.</samll>
+
+
+                </div>
+            </footer>
+            <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        </div>
+
+        <div th:fragment="nav" >
+
+            <div class="navbar">
+                <a href="/index"><img src="./logo.png" class="logo" alt="Main Logo"></a>
+
+                <ul>
+                    <li><a href="#"><strong>QUIENES SOMOS</strong></a></li>
+                    <li>
+                        <div class="dropdown">
+                            <a class="btn-dropdown dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                                <strong>CURSOS</strong>
+                            </a>
+                            <ul class="dropdown-menu cursos-items" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">Principiantes</a></li>
+                                <li><a class="dropdown-item" href="#">Intermedios</a></li>
+                                <li><a class="dropdown-item" href="#">Avanzados</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="#"><strong>CONTACTO</strong></a></li>
+                    <li><a href="/login-alumno"><strong>ALUMNO</strong></a></li>
+                    <li><a href="/login-profesor"><strong>PROFESOR</strong></a></li>
+                </ul>
+            </div>
+        </div>
+
+    </body>
+</html>

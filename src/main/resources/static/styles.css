@@ -4,8 +4,10 @@
     box-sizing: border-box;
 }
 
+
 body {
         background-color:rgb(245, 225, 254);
+
 
 }
 
@@ -74,6 +76,7 @@ body {
     
     border: 1px;
     box-shadow: 0 0 10px rgb(243, 226, 205), 0 0 40px rgb(243, 226, 205), 0 0 80px rgb(243, 226, 205);
+
 
 }
 
@@ -449,9 +452,6 @@ padding:15px;
 
 }
 
-
-
-
 .modal-dialog{
     width: 400px;
 }
@@ -550,3 +550,4 @@ padding:15px;
     to {
         transform: rotateY(360deg);
     }
+}
