@@ -14,6 +14,11 @@ public class PortalControlador {
     public String index() {
         return "index";
     }
+    
+     @GetMapping("index-ingles")
+    public String indexIngles() {
+        return "index-ingles";
+    }
 
     @GetMapping("/login-profesor")
     public String login(ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) {
