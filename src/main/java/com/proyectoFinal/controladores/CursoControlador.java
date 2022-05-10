@@ -2,7 +2,6 @@
 package com.proyectoFinal.controladores;
 
 import com.proyectoFinal.entidades.Curso;
-import com.proyectoFinal.entidades.Usuario;
 import com.proyectoFinal.enums.Idioma;
 import com.proyectoFinal.enums.Nivel;
 import com.proyectoFinal.servicios.CursoServicio;
