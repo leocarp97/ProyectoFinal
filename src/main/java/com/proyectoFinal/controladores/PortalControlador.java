@@ -12,11 +12,16 @@ public class PortalControlador {
 
     @GetMapping("index")
     public String index() {
-        return "index";
+        return "index.html";
+    }
+    
+     @GetMapping("index-ingles")
+    public String indexIngles() {
+        return "index-ingles";
     }
 
-    @GetMapping("/login")
-    public String login(ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) {
+    @GetMapping("/login-profesor")
+    public String loginProfesor(ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) {
 
         if (error != null) {
             modelo.put("error", "Usuario o Clave incorrectos :(");
@@ -26,7 +31,21 @@ public class PortalControlador {
             modelo.put("logout", "Has cerrado sesión exitosamente :)");
         }
 
-        return "login.html";
+        return "login-profesor.html";
+    }
+    
+    @GetMapping("/login-alumno")
+    public String loginAlumno(ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) {
+
+        if (error != null) {
+            modelo.put("error", "Usuario o Clave incorrectos :(");
+        }
+
+        if (logout != null) {
+            modelo.put("logout", "Has cerrado sesión exitosamente :)");
+        }
+
+        return "login-alumno.html";
     }
 
 }
