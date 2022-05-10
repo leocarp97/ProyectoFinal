@@ -22,7 +22,18 @@
 
       <ul>
         <li><a href="#"><strong>QUIENES SOMOS</strong></a></li>
-        <li><a href="#"><strong>CURSOS</strong></a></li>
+        <li>
+          <div class="dropdown">
+            <a class="btn-dropdown dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+              <strong>CURSOS</strong>
+            </a>
+            <ul class="dropdown-menu cursos-items" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#">Principiente</a></li>
+              <li><a class="dropdown-item" href="#">Intermedios</a></li>
+              <li><a class="dropdown-item" href="#">Avanzados</a></li>
+            </ul>
+          </div>
+        </li>
         <li><a href="#"><strong>CONTACTO</strong></a></li>
         <li><a href="/login-alumno"><strong>ALUMNO</strong></a></li>
         <li><a href="#"><strong>PROFESOR</strong></a></li>
@@ -42,7 +53,7 @@
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1">Recordarme</label>
       </div>
-      <button type="submit" class="btn">Iniciar Sesión</button>
+      <button type="submit" class="btn btn-login">Iniciar Sesión</button>
       <div id="emailHelp" class="form-text"><a href="#" class="form-text">Olvidaste tu contraseña?</a></div>
     </form>
 
