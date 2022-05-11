@@ -5,6 +5,7 @@ import com.proyectoFinal.entidades.Usuario;
 import com.proyectoFinal.enums.Idioma;
 import com.proyectoFinal.enums.Nivel;
 import com.proyectoFinal.enums.Rol;
+import com.proyectoFinal.enums.Turno;
 import com.proyectoFinal.repositorios.CursoRepositorio;
 import java.util.Date;
 import java.util.List;
@@ -122,6 +123,17 @@ public class CursoServicio {
             return cursoRepositorio.buscarPorNivel(nivel);
         }
     }
+    
+    @Transactional(readOnly = true)
+    public List<Curso> listarXturno(Turno turno) throws Exception    {
+        if(turno == null)   {
+            throw new Exception("No leen los turnos");
+        }else   {
+            return cursoRepositorio.buscarPorTurno(turno);
+        }
+        
+    }
+    
 
     @Transactional(readOnly = true)
     public List<Curso> listarCursos() {

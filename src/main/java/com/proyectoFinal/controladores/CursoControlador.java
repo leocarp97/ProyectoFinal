@@ -3,6 +3,7 @@ package com.proyectoFinal.controladores;
 import com.proyectoFinal.entidades.Curso;
 import com.proyectoFinal.enums.Idioma;
 import com.proyectoFinal.enums.Nivel;
+import com.proyectoFinal.enums.Turno;
 import com.proyectoFinal.servicios.CursoServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,8 +85,19 @@ public class CursoControlador {
         return "index";
     }
 
-    @GetMapping("/nivel-cursos/{nivel}")
-    public String mostrarXnivel(ModelMap modelo, @PathVariable Nivel nivel) {
+    @GetMapping("/turno-crusos")
+    public String mostrarXturno(ModelMap modelo, @RequestParam Turno turno) throws Exception {
+        try {
+            List<Curso> listaCurso = cursoServicio.listarXturno(turno);
+            modelo.put("cursoXturno", listaCurso);
+        } catch (Exception e) {
+            modelo.put("error", e.getMessage());
+        }
+        return "index";
+    }
+
+    @GetMapping("/nivel-cursos")
+    public String mostrarXnivel(ModelMap modelo, @RequestParam Nivel nivel) {
         try {
             List<Curso> listaCurso = cursoServicio.listarXnivel(nivel);
             modelo.put("cursoXnivel", listaCurso);
