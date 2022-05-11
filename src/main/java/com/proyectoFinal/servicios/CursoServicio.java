@@ -113,6 +113,15 @@ public class CursoServicio {
             throw new Exception("No se pudo encontrar el curso solicitado");
         }
     }
+    
+    @Transactional(readOnly = true)
+    public List<Curso> listarXnivel(Nivel nivel) throws Exception   {
+        if(nivel == null )  {
+            throw new Exception("No leen los niveles");
+        }else   {
+            return cursoRepositorio.buscarPorNivel(nivel);
+        }
+    }
 
     @Transactional(readOnly = true)
     public List<Curso> listarCursos() {
