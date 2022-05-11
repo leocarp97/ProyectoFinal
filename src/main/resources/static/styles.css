@@ -4,41 +4,60 @@
     box-sizing: border-box;
 }
 
-body{
-    background-color: rgba(253,246,234,0.8);
+body {
+        background-color:rgb(245, 225, 254);
+
 }
 
-.container {
-
+.container{
     max-width: 100%;
-    max-height: 35em;
-    background: url(./bg.jpg);
+    padding:0 0;
+}
+
+.bg2 {
+    background: url(./bg2.jpg);
     background-repeat: no-repeat;
+    background-position: center;
+    max-width: 100%;
+    max-height: 40em;
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.15);
+   
 
 }
+
 
 
 .banner {
     width: 100%;
     min-height: 30vh;
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
+    padding:70px
 
 }
 
 
 .banner h2 {
-    color: #fff;
+    color: white;
     font-size: 50px;
     text-transform: uppercase;
     text-align: center;
     line-height: 1em;
+    
+    text-shadow: #666 2px 2px 2px;
+   
+    padding: 10px;
+    color: white;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgb(243, 226, 205), 0 0 40px rgb(243, 226, 205), 0 0 80px rgb(243, 226, 205);
+    
 
-}
+
+} 
 
 .btn-neon {
-    margin-left: 42%;
+    margin-left:75%;
     position: relative;
     display: inline-block;
     padding: 10px;
@@ -49,29 +68,35 @@ body{
     text-decoration: none;
     align-items: center;
     margin-bottom: 20em;
+    
     transition: 0.2s;
-    background: mediumslateblue;
-    border-radius: 40px;
+    background:crimson  ;;
+    
+    border: 1px;
+    box-shadow: 0 0 10px rgb(243, 226, 205), 0 0 40px rgb(243, 226, 205), 0 0 80px rgb(243, 226, 205);
 
 }
 
-.btn-dos{
+.btn-dos {
 
     text-decoration: none;
     outline: none;
     color: white;
     font-size: 24px;
+    border: none;
 
 
 }
 
 .btn-neon:hover {
-    background: rgb(15, 188, 226);
 
-    color: white;
-    border-radius: 40px;
-    box-shadow: 0 0 10px rgb(243, 226, 205), 0 0 40px rgb(243, 226, 205), 0 0 80px rgb(243, 226, 205);
+    text-decoration: none;
+    color:black;
+    outline: none;
 
+    
+    box-shadow: 0 0 10px rgb(240, 240, 237), 0 0 40px rgb(113, 105, 95), 0 0 80px rgb(124, 117, 108);
+    border: none;
 }
 
 .btn-neon span {
@@ -99,12 +124,14 @@ body{
     display: inline-block;
     margin: 0 20px;
     position: relative;
+    text-shadow: #666 2px 2px 2px;
 }
 
 .navbar ul li a {
     text-decoration: none;
     color: white;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: sans-serif;
+    font-weight: 100;
 
 }
 
@@ -123,7 +150,21 @@ body{
     width: 100%
 }
 
+.cursos-items {
+    background-color: black;
+    text-decoration: none;
+    opacity: 0.8;
+    box-shadow: none;
+}
+
+.cursos-items :hover::before {
+    background: white;
+    transition-duration:0s;
+    transition-delay: 1s;
+}
+
 .contenedor-dos {
+    
     width: 100px;
     margin: auto;
     perspective: 800px;
@@ -133,6 +174,8 @@ body{
 }
 
 .content-carrousel {
+    
+    margin-top: 40%;
     width: 100%;
     position: absolute;
     animation: rotar 10s infinite linear;
@@ -208,54 +251,113 @@ body{
 }
 
 .aboutus {
+    margin-bottom: 150px;    
     width: 600px;
     height: 300px;
     padding: 20px 20px;
     font-size: 15px;
     line-height: 1.5;
-    background: #fff;
     margin-right: 50%;
     margin-left: 20%;
-    margin-top: 20%;
-    padding: 30px;
-    background-color: rgba(253,246,234,0.8);
+    margin-top: 23%;
+    padding: 30px ;
+    
+   
+
 
 }
 
-.aboutus img {
-    width: 200px;
-    height: 200px;
-    border-radius: 5px;
-    float: left;
+.fuente-aboutus {
 
+margin-left: 20em;
+max-width: 100%;
+padding:15px;
+
+
+
+}
+
+
+.aboutus img {
+    width: 300px;
+    height: 250px;
+    border-radius: 10px;
+    
+    float:left;
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.15);
+
+
+}
+
+
+.contenedor-tres{
+    background-color:rgb(245, 225, 254);
+    max-width: 100%;
+    height: 50em;
+   
+    opacity: 1;
 
 }
 
 .aboutus2 {
     width: 600px;
     height: 200px;
-    margin-bottom: 100px;
+    margin-bottom: 150px;
     padding: 20px 20px;
     font-size: 15px;
     line-height: 1.5;
-    background: #fff;
     margin-right: 50%;
-    padding: 10px;
+
     margin-left: 40%;
-    background-color: rgba(253,246,234,0.8);
+
 
 
 }
 
 .aboutus2 img {
-    width: 300px;
+    width: 270px;
     height: 250px;
-    border-radius: 5px;
+    border-radius: 10px;
     float: right;
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.15);
 
 
 }
 
+.btn-neon0 {
+
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    color: white;
+    font-size: 15px;
+    font-family: arial;
+    text-decoration: none;
+    align-items: center;
+    margin-left:60%;
+    
+    transition: 0.2s;
+    background: mediumslateblue;
+
+    border-radius: 40px;
+
+}
+
+
+.btn-neon0:hover {
+    background: rgb(15, 188, 226);
+
+    color: white;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgb(243, 226, 205), 0 0 40px rgb(243, 226, 205), 0 0 80px rgb(243, 226, 205);
+
+}
+
+.btn-neon0 span {
+    position: absoulte;
+    display: block;
+
+}
 .btn-neon2 {
 
     position: relative;
@@ -266,13 +368,14 @@ body{
     font-family: arial;
     text-decoration: none;
     align-items: center;
-
+    
     transition: 0.2s;
     background: mediumslateblue;
 
     border-radius: 40px;
 
 }
+
 
 .btn-neon2:hover {
     background: rgb(15, 188, 226);
@@ -328,7 +431,7 @@ body{
 }
 
 .pie-pagina .grupo-1 .box p {
-    color: #efefef;
+    color: rgb(255, 255, 255);
     margin-bottom: 10px;
 }
 
@@ -338,8 +441,9 @@ body{
     width: 45px;
     height: 45px;
     line-height: 45px;
+    color: white;
     margin-right: 10px;
-    background: #5d3b7f;
+    background: rgb(48, 39, 99);
     text-align: center;
     border-radius: 10px;
     transition: all 300ms ease;
@@ -351,32 +455,90 @@ body{
 }
 
 .pie-pagina .grupo-2 {
-    background-color: #5d3b7f;
+    background-color: rgb(48, 39, 99);
     padding: 15px 10px;
     text-align: center;
     color: white;
 
 }
+.modal-dialog{
+    width: 400px;
+}
+.form-register {
 
-.cursos-items :hover::before {
-    background: white;
-    transition-duration:0s;
-    transition-delay: 1s;
+    position:fixed;
+    width: 400px;
+    background: #ffffff;
+    
+    padding: 30px;
+
+   z-index: 999;
+    border-radius: 4px;
+    font-family: 'calibri';
+    color: black; 
+
+
 }
 
-.btn-dropdown {
-    font-family: Arial, Helvetica, sans-serif;
+.form-register {
+    font-size: 15px;
+    font: 'calibri';
+
 }
 
-.dropdown-menu .dropdown-item {
+.form-idioma h4 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+
+
+.controls {
+    width: 100%;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    border: 1px solid #0a0f10;
+    font-family: 'calibri';
+    font-size: 14px;
+
+}
+
+.form-register p {
+    height: 10px;
+    text-align: center;
+    font-size: 18px;
+
+}
+
+
+
+.form-register a {
+
+
+    color: black;
     text-decoration: none;
+
+
 }
 
-.btn-login {
-    background: #5d3b7f;
+.form-register a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+.form-register .botons {
+    width: 100%;
+    background: #1f53c5;
+    border: none;
+    padding: 12px;
     color: white;
-}
+    margin: 16px 0;
+    font-size: 16px;
 
+
+}
 
 @media screen and (max-width:800px) {
     .pie-pagina .grupo-1 {
