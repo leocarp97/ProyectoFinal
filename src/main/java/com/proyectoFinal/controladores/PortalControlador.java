@@ -14,8 +14,6 @@ public class PortalControlador {
     public String index() {
         return "index.html";
     }
-    
-  
 
     @GetMapping("/login-profesor")
     public String loginProfesor(ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) {
@@ -50,6 +48,10 @@ public class PortalControlador {
         return "nivel-cursos.html";
     }
 
+    @GetMapping("/info-idiomas")
+    public String infoIdiomas() {
+        return "idiomas.html";
+    }
     
 //    @GetMapping("/login/{id}")
 //    public String loginProfesor(@PathVariable String id, ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) throws Exception {
