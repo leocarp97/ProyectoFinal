@@ -19,14 +19,16 @@
 
         <div th:include="fragments :: nav"></div>
 
-        <form class="form-alumno">
+        <form class="form-alumno" th:action="@{/logincheck}" method="POST">
+            <p th:text="${error}"  ></p>
+            <p th:text="${logout}" ></p>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Usuario</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingrese su usuario">
+                <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingrese su usuario">
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Constraseña</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Ingrese su contraseña">
+                <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Ingrese su contraseña">
             </div>
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
