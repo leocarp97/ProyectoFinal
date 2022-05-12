@@ -85,7 +85,7 @@ public class CursoControlador {
         return "index";
     }
 
-    @GetMapping("/turno-crusos")
+    @GetMapping("/turno-cursos")
     public String mostrarXturno(ModelMap modelo, @RequestParam Turno turno) throws Exception {
         try {
             List<Curso> listaCurso = cursoServicio.listarXturno(turno);

@@ -57,7 +57,7 @@ public class UsuarioControlador {
             return "redirect:/usuario/index";
         } catch (Exception e) {
 
-            return "list-usuario";
+            return "redirect : list-usuario";
         }
     }
 

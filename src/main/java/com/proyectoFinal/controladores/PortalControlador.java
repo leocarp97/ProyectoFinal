@@ -10,21 +10,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/")
 public class PortalControlador {
 
-    @GetMapping("index")
+    @GetMapping("/index")
     public String index() {
         return "index.html";
     }
     
-     @GetMapping("index-ingles")
-    public String indexIngles() {
-        return "index-ingles";
-    }
+  
 
     @GetMapping("/login-profesor")
     public String loginProfesor(ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) {
 
         if (error != null) {
-            modelo.put("error", "Usuario o Clave incorrectos :(");
+            modelo.put("error", "Usuario o Clave incorrectos dsadsadad: de profesor(");
         }
 
         if (logout != null) {
@@ -48,4 +45,25 @@ public class PortalControlador {
         return "login-alumno.html";
     }
 
+    
+//    @GetMapping("/login/{id}")
+//    public String loginProfesor(@PathVariable String id, ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) throws Exception {
+//
+//        Usuario u = usurioServicio.BuscarId(id);
+//        if (u.getRol().toString().equals("ROLE_PROFESOR") ) {
+//            if (error != null) {
+//                modelo.put("error", "Usuario o Clave incorrectos :(");
+//            }
+//
+//            if (logout != null) {
+//                modelo.put("logout", "Has cerrado sesión exitosamente :)");
+//            }
+//            return "login-profesor.html";
+//        } else {
+//            return "login-alumno.html";
+//        }
+//        
+//
+//    }
+    
 }
