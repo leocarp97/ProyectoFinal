@@ -40,7 +40,8 @@
             </ul>
         </div>
 
-        <form class="form-alumno" action="logincheck" method="POST">
+
+        <form class="form-alumno" th:action="@{/logincheck}" method="POST">
             <div class="mb-3">
                 <p th:text="${error}"></p>
                 <p th:text="${logout}"></p>
@@ -60,6 +61,7 @@
             <button type="submit" class="btn btn-login">Iniciar Sesión</button>
             <div id="emailHelp" class="form-text"><a href="#" class="form-text">Olvidaste tu contraseña?</a></div>
         </form>
+
 
         <footer class="pie-pagina">
             <div class="grupo-1">
