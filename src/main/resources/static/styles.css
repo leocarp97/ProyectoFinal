@@ -540,6 +540,16 @@ padding:15px;
 
 }
 
+input_container{
+  display: inline;
+
+  gap: 12px;
+}
+
+.input_container input{
+  width: 49.5%;
+}
+
 @media screen and (max-width:800px) {
     .pie-pagina .grupo-1 {
 

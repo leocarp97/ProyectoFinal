@@ -1,6 +1,7 @@
 package com.proyectoFinal.controladores;
 
 import com.proyectoFinal.entidades.Usuario;
+import com.proyectoFinal.enums.Pais;
 import com.proyectoFinal.servicios.UsuarioServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,6 @@ public class UsuarioControlador {
         return "list-usuario";
     }
 
-
     @GetMapping("/list-usuario-activos")
     public String listarUsuariosActivos(ModelMap model) {
 
@@ -41,18 +41,16 @@ public class UsuarioControlador {
         return "list-usuario";
     }
 
-
-
     @GetMapping("/form-usuario")
     public String formulario() {
         return "form-usuario";
     }
 
     @PostMapping("/form-usuario")
-    public String guardar(ModelMap model, MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region) {
+    public String guardar(ModelMap model, MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region, @RequestParam Pais pais) {
 
         try {
-            usuarioServicio.registrar(archivo,nombre, apellido, dni, email, telefono, password, region);
+            usuarioServicio.registrar(archivo, nombre, apellido, dni, email, telefono, password, region, pais);
 
             return "redirect:/usuario/index";
         } catch (Exception e) {
@@ -87,9 +85,9 @@ public class UsuarioControlador {
     }
 
     @PostMapping("/update")
-    public String updatePost(ModelMap modelo,MultipartFile archivo, @RequestParam String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region) {
+    public String updatePost(ModelMap modelo, MultipartFile archivo, @RequestParam String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region, @RequestParam Pais pais) {
         try {
-            usuarioServicio.modificar(archivo,id, nombre, apellido, dni, email, telefono, password, region);
+            usuarioServicio.modificar(archivo, id, nombre, apellido, dni, email, telefono, password, region, pais);
             modelo.put("exito", "se pudo actualizar");
         } catch (Exception e) {
             modelo.put("error", e.getMessage());

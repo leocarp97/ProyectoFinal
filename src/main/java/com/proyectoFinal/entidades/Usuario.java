@@ -1,5 +1,6 @@
 package com.proyectoFinal.entidades;
 
+import com.proyectoFinal.enums.Pais;
 import com.proyectoFinal.enums.Rol;
 import java.io.Serializable;
 import java.util.Date;
@@ -26,39 +27,41 @@ public class Usuario implements Serializable {
 
     @Column(name = "nombre")
     private String nombre;
-    
+
     @Column(name = "apellido")
     private String apellido;
 
     @Enumerated(EnumType.STRING)
     private Rol rol;
-    
+
     @Column(unique = true)
     private Integer dni;
-    
+
     @Column(name = "email", unique = true)
     private String email;
-    
+
     @Column(name = "telefono", unique = true)
     private Integer telefono;
-    
+
     @Column(name = "contraseña")
     private String password;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date alta;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date baja;
-   @OneToOne
+    @OneToOne
     private Foto foto;
-   
-   private String region;
+    @Enumerated(EnumType.STRING)
+    private Pais pais;
+
+    private String region;
 
     public Usuario() {
     }
 
-    public Usuario(String id, String nombre, String apellido, Rol rol, Integer dni, String email, Integer telefono, String password, Date alta, Date baja, Foto foto, String region) {
+    public Usuario(String id, String nombre, String apellido, Rol rol, Integer dni, String email, Integer telefono, String password, Date alta, Date baja, Foto foto, Pais pais, String region) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -70,6 +73,7 @@ public class Usuario implements Serializable {
         this.alta = alta;
         this.baja = baja;
         this.foto = foto;
+        this.pais = pais;
         this.region = region;
     }
 
@@ -161,6 +165,14 @@ public class Usuario implements Serializable {
         this.foto = foto;
     }
 
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
+    }
+
     public String getRegion() {
         return region;
     }
@@ -171,11 +183,9 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", rol=" + rol + ", dni=" + dni + ", email=" + email + ", telefono=" + telefono + ", password=" + password + ", alta=" + alta + ", baja=" + baja + ", foto=" + foto + ", region=" + region + '}';
+        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", rol=" + rol + ", dni=" + dni + ", email=" + email + ", telefono=" + telefono + ", password=" + password + ", alta=" + alta + ", baja=" + baja + ", foto=" + foto + ", pais=" + pais + ", region=" + region + '}';
     }
 
-    
-    
-    
-    }
  
+
+}
