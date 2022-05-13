@@ -54,8 +54,11 @@
 
 
                 <div>
+
                     <button type="button" class="btn-neon" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            data-bs-whatever="@mdo" >
+                            data-bs-whatever="@mdo" 
+                            >
+
                         Registrate</button>
 
 
@@ -66,34 +69,41 @@
                             <div class="modal-content">
 
 
-                                <section class="form-register">
+                                <section class="form-register" >
                                     <div class="modal-header">
 
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
+                                    <form th:action="@{/usuario/index}" method="POST" enctype="multipart/form-data">
 
-                                    <div class="input_container">
-                                        <input class="controls" type="text" name="nombre"  placeholder="Nombre">
-                                        <input class="controls" type="text" name="apellido"  placeholder="Apellido"> 
-                                    </div>
-                                    <div class="input_container">
-                                        <input class="controls" type="email" name="email"  placeholder="Correo Electronico">
+                                        <div class="input_container">
+                                            <input class="controls" type="text" name="nombre"  placeholder="Nombre">
+                                            <input class="controls" type="text" name="apellido"  placeholder="Apellido"> 
+                                        </div>
+                                        <div class="input_container">
+                                            <input class="controls" type="email" name="email"  placeholder="Correo Electronico">
+                                            <input class="controls" type="password" name="password"  placeholder="Contraseña">
+                                        </div>
+
+                                        <div class="input_container">
+                                            <input class="controls" type="text" name="telefono"  placeholder="Telefono"> 
+                                            <input class="controls" type="text" name="dni"  placeholder="Documento">
+                                        </div>
+
+                                        <label class="form-idioma">País:</label>
+                                        <select name="pais" class="controls">
+                                            <option th:each="pais : ${T(com.proyectoFinal.enums.Pais).values()}"    th:value="${pais}"
+                                                    th:text="${pais.displayValue}" </option>
+                                        </select>
+
                                         <input class="controls" type="text" name="region" id="region" placeholder="Region">
-                                    </div>
-                                    <div class="input_container">
-                                        <input class="controls" type="text" name="telefono"  placeholder="Telefono"> 
-                                        <input class="controls" type="text" name="dni"  placeholder="Documento">
-                                    </div>
-                                    <form class="form-idioma">País:</form>
-                                    <select class="controls">
-                                        <option th:each="pais : ${T(com.proyectoFinal.enums.Pais).values()}" th:value="${pais}"
-                                                th:text="${pais.displayValue}" </option>
-                                    </select>
+                                        <p><a href="#">Terminos y Condiciones</a></p>
+                                        <div class="d-grid gap-2 col-6 mx-auto">
+                                            <button type="submit" class="btn btn-primary">Registrar</button>
+                                        </div>
+                                        <p><a href="#">¿Ya estas registrado? </a></p>
 
-                                    <p><a href="#">Terminos y Condiciones</a></p>
-                                    <input  class="botons" type="submit" value="Registrar">
-                                    <p><a href="#">¿Ya estas registrado? </a></p>
-
+                                    </form>
                                 </section>
 
 

@@ -186,17 +186,17 @@ public class UsuarioServicio implements UserDetailsService {
         if (apellido == null || apellido.trim().isEmpty()) {
             throw new Exception("Debe ingresar su apellido");
         }
-        if (dni == null || dni < 8) {
-            throw new Exception("El dni no puede ser nulo y/o menor a 8 caracteres");
-        }
+//        if (dni == null || dni < 8) {
+//            throw new Exception("El dni no puede ser nulo y/o menor a 8 caracteres");
+//        }
         if (email == null || email.trim().isEmpty()) {
             throw new Exception("Debe ingresar su correo electrónico");
         }
-        if (telefono == null || dni < 10) {
-            throw new Exception("El numero de telefono ingresado no es correcto");
-        }
-        if (password == null || password.trim().isEmpty() || password.length() < 10) {
-            throw new Exception("La contraseña debe tener 10 o más caracteres");
-        }
+//        if (telefono == null || telefono < 10) {
+//            throw new Exception("El numero de telefono ingresado no es correcto");
+//        }
+//        if (password == null || password.trim().isEmpty() || password.length() < 10) {
+//            throw new Exception("La contraseña debe tener 10 o más caracteres");
+//        }
     }
 }
