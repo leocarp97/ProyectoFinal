@@ -32,7 +32,7 @@ public class CursoServicio {
         curso.setNombre(nombre);
         curso.setNivel(nivel);
         curso.setIdioma(idioma);
-        curso.setAlumnos(usuarioServicio.buscarAlumnos(Rol.ALUMNO));
+        curso.setAlumnos(usuarioServicio.buscarAlumnos());
 
         Usuario profesor = usuarioServicio.buscarProfesor(idProfesor, Rol.PROFESOR);
         if (profesor != null) {
