@@ -1,10 +1,13 @@
 package com.proyectoFinal.controladores;
 
 import com.proyectoFinal.entidades.Curso;
+import com.proyectoFinal.entidades.Usuario;
 import com.proyectoFinal.enums.Idioma;
 import com.proyectoFinal.enums.Nivel;
+import com.proyectoFinal.enums.Rol;
 import com.proyectoFinal.enums.Turno;
 import com.proyectoFinal.servicios.CursoServicio;
+import com.proyectoFinal.servicios.UsuarioServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,9 @@ public class CursoControlador {
 
     @Autowired
     CursoServicio cursoServicio;
+
+    @Autowired
+    UsuarioServicio usuarioServicio;
 
     @GetMapping("/list-curso")
     public String listarCursos(ModelMap model) {
@@ -43,7 +49,16 @@ public class CursoControlador {
     }
 
     @GetMapping("/form-curso")
-    public String formulario() {
+    public String formulario(ModelMap model) {
+
+        List<Usuario> profesores = usuarioServicio.listarProfesores();
+
+        model.addAttribute("profesores", profesores);
+
+        List<Usuario> alumnos = usuarioServicio.buscarAlumnos();
+
+        model.addAttribute("alumnos", alumnos);
+
         return "form-curso";
     }
 
@@ -53,7 +68,7 @@ public class CursoControlador {
         try {
             cursoServicio.crear(nombre, nivel, idioma, idProfesor);
 
-            return "redirect:/curso/index";
+            return "redirect:/curso/list-curso";
         } catch (Exception e) {
 
             return "list-curso";
@@ -96,17 +111,17 @@ public class CursoControlador {
         return "index";
     }
 
-    @GetMapping("/nivel-cursos")
-    public String mostrarXnivel(ModelMap modelo, @RequestParam Nivel nivel) {
-        try {
-            List<Curso> listaCurso = cursoServicio.listarXnivel(nivel);
-            modelo.put("cursoXnivel", listaCurso);
-
-        } catch (Exception e) {
-            modelo.put("error", e.getMessage());
-        }
-        return "index";
-    }
+//    @GetMapping("/nivel-cursos")
+//    public String mostrarXnivel(ModelMap modelo) {
+//        try {
+//            List<Curso> cursos = cursoServicio.listarCursos();
+//            modelo.put("cursos", cursos);
+//
+//        } catch (Exception e) {
+//            modelo.put("error", e.getMessage());
+//        }
+//        return "nivel-cursos";
+//    }
 
     @PostMapping("/update")
     public String updatePost(ModelMap modelo, @RequestParam String id, @RequestParam String nombre, @RequestParam Nivel nivel, @RequestParam Idioma idioma, @RequestParam String idProfesor) {

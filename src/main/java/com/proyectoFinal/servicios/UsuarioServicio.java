@@ -100,6 +100,11 @@ public class UsuarioServicio implements UserDetailsService {
         return usuarioRepositorio.findAll();
     }
 
+     @Transactional(readOnly = true)
+    public List<Usuario> listarProfesores() {
+        return usuarioRepositorio.listarProfesor(Rol.PROFESOR);
+    }
+    
     @Transactional(readOnly = true)
     public List<Usuario> buscarUsuariosActivos() {
         return usuarioRepositorio.buscarActivos();
@@ -120,10 +125,15 @@ public class UsuarioServicio implements UserDetailsService {
     public Usuario buscarProfesor(String id, Rol rol) {
         return usuarioRepositorio.buscarProfesor(id, rol);
     }
+    
+    @Transactional(readOnly = true)
+    public Usuario listarProfesor(String id, Rol rol) {
+        return usuarioRepositorio.buscarProfesor(id, rol);
+    }
 
     @Transactional(readOnly = true)
-    public List<Usuario> buscarAlumnos(Rol rol) {
-        return usuarioRepositorio.buscarAlumnos(rol);
+    public List<Usuario> buscarAlumnos() {
+        return usuarioRepositorio.buscarAlumnos(Rol.ALUMNO);
     }
 
     @Transactional(rollbackFor = Exception.class)
