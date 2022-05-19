@@ -48,7 +48,7 @@ public class UsuarioServicio implements UserDetailsService {
         String claveEncriptada = new BCryptPasswordEncoder().encode(password);
         usuario.setPassword(claveEncriptada);
         usuario.setRegion(region);
-        usuario.setRol(Rol.ALUMNO);
+        usuario.setRol(Rol.PROFESOR);
         usuario.setPais(pais);
         usuario.setAlta(new Date());
         usuario.setBaja(null);
