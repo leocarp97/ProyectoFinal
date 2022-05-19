@@ -41,21 +41,21 @@ public class UsuarioControlador {
         return "list-usuario";
     }
 
-    @GetMapping("/form-usuario")
+    @GetMapping("/index")
     public String formulario() {
-        return "form-usuario";
+        return "index";
     }
 
-    @PostMapping("/form-usuario")
-    public String guardar(ModelMap model, MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region, @RequestParam Pais pais) {
+    @PostMapping("/index")
+    public String guardar(ModelMap model, @RequestParam(required = false) MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region, @RequestParam Pais pais) {
 
         try {
             usuarioServicio.registrar(archivo, nombre, apellido, dni, email, telefono, password, region, pais);
 
-            return "redirect:/usuario/index";
+            return "redirect:/usuario/list-usuario/";
         } catch (Exception e) {
-
-            return "redirect : list-usuario";
+            model.put("error", e.getMessage());
+            return "index";
         }
     }
 
@@ -77,26 +77,23 @@ public class UsuarioControlador {
 
     }
 
-    @GetMapping("/update/{id}")
-    public String update(@PathVariable String id, ModelMap modelo) throws Exception {
+    @GetMapping("/editar-perfil/{id}")
+    public String editar(@PathVariable String id, ModelMap modelo) throws Exception {
         Usuario u = usuarioServicio.BuscarId(id);
         modelo.put("usuario", u);
-        return "index";
+        return "editar-perfil";
     }
 
-    @PostMapping("/update")
-    public String updatePost(ModelMap modelo, MultipartFile archivo, @RequestParam String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region, @RequestParam Pais pais) {
+    @PostMapping("/actualizar-usuario")
+    public String editar(ModelMap modelo, MultipartFile archivo, @RequestParam String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region, @RequestParam Pais pais) {
         try {
             usuarioServicio.modificar(archivo, id, nombre, apellido, dni, email, telefono, password, region, pais);
             modelo.put("exito", "se pudo actualizar");
+              return "redirect:/usuario/list-usuario/";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
         }
         return "index";
     }
 
-    @GetMapping("index")
-    public String index() {
-        return "index";
-    }
 }
