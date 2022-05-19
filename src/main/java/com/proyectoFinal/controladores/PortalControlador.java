@@ -44,6 +44,11 @@ public class PortalControlador {
 
         return "login-alumno.html";
     }
+    
+    @GetMapping("/nivel-cursos")
+    public String cursosXniveles() {
+        return "nivel-cursos.html";
+    }
 
     
 //    @GetMapping("/login/{id}")

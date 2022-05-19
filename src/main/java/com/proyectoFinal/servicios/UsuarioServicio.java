@@ -2,6 +2,7 @@ package com.proyectoFinal.servicios;
 
 import com.proyectoFinal.entidades.Foto;
 import com.proyectoFinal.entidades.Usuario;
+import com.proyectoFinal.enums.Pais;
 import com.proyectoFinal.enums.Rol;
 import com.proyectoFinal.repositorios.UsuarioRepositorio;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class UsuarioServicio implements UserDetailsService {
     FotoServicio fotoServicio;
 
     @Transactional(rollbackFor = {Exception.class})
-    public Usuario registrar(MultipartFile archivo, String nombre, String apellido, Integer dni, String email, Integer telefono, String password, String region) throws Exception {
+    public Usuario registrar(MultipartFile archivo, String nombre, String apellido, Integer dni, String email, Integer telefono, String password, String region, Pais pais) throws Exception {
 
         validar(nombre, apellido, dni, email, telefono, password);
 
@@ -48,6 +49,7 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setPassword(claveEncriptada);
         usuario.setRegion(region);
         usuario.setRol(Rol.ALUMNO);
+        usuario.setPais(pais);
         usuario.setAlta(new Date());
         usuario.setBaja(null);
 
@@ -59,7 +61,7 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional(rollbackFor = {Exception.class})
-    public void modificar(MultipartFile archivo, String id, String nombre, String apellido, Integer dni, String email, Integer telefono, String password, String region) throws Exception {
+    public void modificar(MultipartFile archivo, String id, String nombre, String apellido, Integer dni, String email, Integer telefono, String password, String region, Pais pais) throws Exception {
 
         validar(nombre, apellido, dni, email, telefono, password);
 
@@ -76,7 +78,7 @@ public class UsuarioServicio implements UserDetailsService {
             String claveEncriptada = new BCryptPasswordEncoder().encode(password);
             usuario.setPassword(claveEncriptada);
             usuario.setRegion(region);
-
+            usuario.setPais(pais);
             String idFoto = null;
             if (usuario.getFoto() != null) {
 
@@ -168,7 +170,7 @@ public class UsuarioServicio implements UserDetailsService {
 
         GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_" + u.getRol().toString());
         permisos.add(p1);
-
+        
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 
         HttpSession session = attr.getRequest().getSession(true);
