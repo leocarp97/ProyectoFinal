@@ -1,6 +1,7 @@
 package com.proyectoFinal.servicios;
 
 import com.proyectoFinal.entidades.Curso;
+import com.proyectoFinal.entidades.Foto;
 import com.proyectoFinal.entidades.Usuario;
 import com.proyectoFinal.enums.Idioma;
 import com.proyectoFinal.enums.Nivel;
@@ -13,6 +14,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class CursoServicio {
@@ -23,7 +25,10 @@ public class CursoServicio {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    public Curso crear(String nombre, Nivel nivel, Idioma idioma, String idProfesor) throws Exception {
+    @Autowired
+    FotoServicio fotoServicio;
+
+    public Curso crear(MultipartFile archivo, String nombre, Nivel nivel, Idioma idioma, Turno turno, String idProfesor) throws Exception {
 
         validar(nombre, nivel, idioma, idProfesor);
 
@@ -32,6 +37,7 @@ public class CursoServicio {
         curso.setNombre(nombre);
         curso.setNivel(nivel);
         curso.setIdioma(idioma);
+        curso.setTurno(turno);
         curso.setAlumnos(usuarioServicio.buscarAlumnos());
 
         Usuario profesor = usuarioServicio.buscarProfesor(idProfesor, Rol.PROFESOR);
@@ -43,6 +49,8 @@ public class CursoServicio {
 
         curso.setAlta(new Date());
         curso.setBaja(null);
+        Foto foto = fotoServicio.guardar(archivo);
+        curso.setFoto(foto);
 
         return cursoRepositorio.save(curso);
     }
@@ -58,7 +66,7 @@ public class CursoServicio {
 
     }
 
-    public Curso modificar(String id, String nombre, Nivel nivel, Idioma idioma, String idProfesor) throws Exception {
+    public Curso modificar(MultipartFile archivo, String id, String nombre, Nivel nivel, Idioma idioma, Turno turno, String idProfesor) throws Exception {
 
         validar(nombre, nivel, idioma, idProfesor);
 
@@ -69,14 +77,23 @@ public class CursoServicio {
             curso.setNombre(nombre);
             curso.setNivel(nivel);
             curso.setIdioma(idioma);
-
+            curso.setTurno(turno);
             Usuario profesor = usuarioServicio.buscarProfesor(idProfesor, Rol.PROFESOR);
             if (profesor != null) {
                 curso.setProfesor(profesor);
             } else {
                 throw new Exception("No se pudo encontrar el profesor solicitado");
             }
+            
+            String idFoto = null;
+            if (curso.getFoto() != null) {
 
+                idFoto = curso.getFoto().getId();
+
+            }
+            Foto foto = fotoServicio.modificar(archivo, idFoto);
+            curso.setFoto(foto);
+            
             return cursoRepositorio.save(curso);
         } else {
             throw new Exception("No se pudo encontrar el curso solicitado");
@@ -114,26 +131,25 @@ public class CursoServicio {
             throw new Exception("No se pudo encontrar el curso solicitado");
         }
     }
-    
+
     @Transactional(readOnly = true)
-    public List<Curso> listarXnivel(Nivel nivel) throws Exception   {
-        if(nivel == null )  {
+    public List<Curso> listarXnivel(Nivel nivel) throws Exception {
+        if (nivel == null) {
             throw new Exception("No leen los niveles");
-        }else   {
+        } else {
             return cursoRepositorio.buscarPorNivel(nivel);
         }
     }
-    
+
     @Transactional(readOnly = true)
-    public List<Curso> listarXturno(Turno turno) throws Exception    {
-        if(turno == null)   {
+    public List<Curso> listarXturno(Turno turno) throws Exception {
+        if (turno == null) {
             throw new Exception("No leen los turnos");
-        }else   {
+        } else {
             return cursoRepositorio.buscarPorTurno(turno);
         }
-        
+
     }
-    
 
     @Transactional(readOnly = true)
     public List<Curso> listarCursos() {

@@ -43,8 +43,8 @@
                 <div th:each="cursos, i : ${cursosBy3}"  th:class="carousel-item + ${i.index == 0 ? ' active' : ''}" >
                     <div class="contenedor">
                         <div th:each="curso: ${cursos}" class="card" style="width: 18rem;">
-                            <!--<span th:text="${j.index + i.index * 3}"></span>-->
-                            <img src="./German-flag.png" class="card-img-top" alt="bandera de alemania">
+                        
+                            <img  th:if="${curso.foto != null}"    th:src="${'/foto/curso?id=' + curso.id}" class="card-img-top" >
                             <div class="card-body">
                                 <li th:text="${curso.nombre}"></li>
                                 <li th:text="${curso.nivel}"></li>

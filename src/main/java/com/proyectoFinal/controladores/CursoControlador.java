@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/curso")
@@ -63,14 +64,14 @@ public class CursoControlador {
     }
 
     @PostMapping("/form-curso")
-    public String guardar(ModelMap model, @RequestParam String nombre, @RequestParam Nivel nivel, @RequestParam Idioma idioma, @RequestParam String idProfesor) {
+    public String guardar(ModelMap model, @RequestParam MultipartFile archivo, @RequestParam String nombre, @RequestParam Nivel nivel, @RequestParam Turno turno, @RequestParam Idioma idioma, @RequestParam String idProfesor) {
 
         try {
-            cursoServicio.crear(nombre, nivel, idioma, idProfesor);
+            cursoServicio.crear(archivo, nombre, nivel, idioma, turno, idProfesor);
 
             return "redirect:/curso/list-curso";
         } catch (Exception e) {
-
+            System.out.println(e.getMessage());
             return "list-curso";
         }
     }
@@ -93,11 +94,11 @@ public class CursoControlador {
 
     }
 
-    @GetMapping("/update/{id}")
-    public String update(@PathVariable String id, ModelMap modelo) throws Exception {
+    @GetMapping("/editar-curso/{id}")
+    public String editar(@PathVariable String id, ModelMap modelo) throws Exception {
         Curso c = cursoServicio.BuscarId(id);
         modelo.put("curso", c);
-        return "index";
+        return "editar-curso";
     }
 
     @GetMapping("/turno-cursos")
@@ -122,16 +123,18 @@ public class CursoControlador {
 //        }
 //        return "nivel-cursos";
 //    }
-
-    @PostMapping("/update")
-    public String updatePost(ModelMap modelo, @RequestParam String id, @RequestParam String nombre, @RequestParam Nivel nivel, @RequestParam Idioma idioma, @RequestParam String idProfesor) {
+    @PostMapping("/actualizar-curso")
+    public String editar(ModelMap modelo, @RequestParam(required = false) MultipartFile archivo, @RequestParam String id, @RequestParam String nombre, @RequestParam Nivel nivel, @RequestParam Idioma idioma, @RequestParam Turno turno, @RequestParam(required = false) String idProfesor) {
         try {
-            cursoServicio.modificar(id, nombre, nivel, idioma, idProfesor);
+            cursoServicio.modificar(archivo, id, nombre, nivel, idioma, turno, idProfesor);
             modelo.put("exito", "se pudo actualizar");
+              return "redirect:/curso/list-curso/";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
+            System.out.println(e.getMessage());
+            return "redirect:/curso/form-curso/";
         }
-        return "index";
+    
     }
 
     @GetMapping("index")
