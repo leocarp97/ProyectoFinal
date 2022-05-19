@@ -25,7 +25,7 @@ public class PortalControlador {
         return "index.html";
     }
 
-    @GetMapping("/login-profesor")
+    @GetMapping("/login")
     public String loginProfesor(ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) {
 
         if (error != null) {
@@ -36,21 +36,7 @@ public class PortalControlador {
             modelo.put("logout", "Has cerrado sesión exitosamente :)");
         }
 
-        return "login-profesor.html";
-    }
-
-    @GetMapping("/login-alumno")
-    public String loginAlumno(ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) {
-
-        if (error != null) {
-            modelo.put("error", "Usuario o Clave incorrectos :(");
-        }
-
-        if (logout != null) {
-            modelo.put("logout", "Has cerrado sesión exitosamente :)");
-        }
-
-        return "login-alumno.html";
+        return "login.html";
     }
 
     @GetMapping("/nivel-cursos")
