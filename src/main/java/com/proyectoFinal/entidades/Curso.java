@@ -31,34 +31,41 @@ public class Curso implements Serializable {
 
     @Column(name = "nombre_del_curso")
     private String nombre;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(name = "nivel_del_curso")
     private Nivel nivel;
-    
+
     @OneToMany
     @JoinColumn(name = "alumnos")
     private List<Usuario> alumnos;
-    
+
     @OneToOne
     @JoinColumn(name = "profesor")
     private Usuario profesor;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(name = "idioma_del_curso")
     private Idioma idioma;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(name = "turno_de_cursada")
     private Turno turno;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date alta;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date baja;
 
-    public Curso(String id, String nombre, Nivel nivel, List<Usuario> alumnos, Usuario profesor, Idioma idioma, Turno turno, Date alta, Date baja) {
+    @OneToOne
+    private Foto foto;
+
+  
+    public Curso() {
+    }
+
+    public Curso(String id, String nombre, Nivel nivel, List<Usuario> alumnos, Usuario profesor, Idioma idioma, Turno turno, Date alta, Date baja, Foto foto) {
         this.id = id;
         this.nombre = nombre;
         this.nivel = nivel;
@@ -68,9 +75,7 @@ public class Curso implements Serializable {
         this.turno = turno;
         this.alta = alta;
         this.baja = baja;
-    }
-
-    public Curso() {
+        this.foto = foto;
     }
 
     public String getId() {
@@ -145,9 +150,18 @@ public class Curso implements Serializable {
         this.baja = baja;
     }
 
+    public Foto getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Foto foto) {
+        this.foto = foto;
+    }
+
     @Override
     public String toString() {
-        return "Curso{" + "id=" + id + ", nombre=" + nombre + ", nivel=" + nivel + ", alumnos=" + alumnos + ", profesor=" + profesor + ", idioma=" + idioma + ", turno=" + turno + ", alta=" + alta + ", baja=" + baja + '}';
+        return "Curso{" + "id=" + id + ", nombre=" + nombre + ", nivel=" + nivel + ", alumnos=" + alumnos + ", profesor=" + profesor + ", idioma=" + idioma + ", turno=" + turno + ", alta=" + alta + ", baja=" + baja + ", foto=" + foto + '}';
     }
+
     
 }
