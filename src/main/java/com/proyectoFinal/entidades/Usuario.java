@@ -10,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -51,8 +52,11 @@ public class Usuario implements Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date baja;
+    
     @OneToOne
+    @JoinColumn(name = "foto")
     private Foto foto;
+    
     @Enumerated(EnumType.STRING)
     private Pais pais;
 

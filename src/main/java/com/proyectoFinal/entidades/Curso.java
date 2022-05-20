@@ -59,6 +59,7 @@ public class Curso implements Serializable {
     private Date baja;
 
     @OneToOne
+    @JoinColumn(name = "foto")
     private Foto foto;
 
   
