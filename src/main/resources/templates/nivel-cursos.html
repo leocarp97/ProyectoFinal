@@ -43,8 +43,11 @@
                 <div th:each="cursos, i : ${cursosBy3}"  th:class="carousel-item + ${i.index == 0 ? ' active' : ''}" >
                     <div class="contenedor">
                         <div th:each="curso: ${cursos}" class="card" style="width: 18rem;">
+                            <input type="hidden" th:value="${curso.id}" name="id">
+
+                            <img  th:if="${curso.foto != null}"    th:src="${'/foto/'} + ${curso.foto.id}" class="card-img-top" >
                         
-                            <img  th:if="${curso.foto != null}"    th:src="${'/foto/curso?id=' + curso.id}" class="card-img-top" >
+                            
                             <div class="card-body">
                                 <li th:text="${curso.nombre}"></li>
                                 <li th:text="${curso.nivel}"></li>
@@ -52,7 +55,7 @@
                                 <li th:text="${curso.turno}"></li>
                                 <li th:text="${curso.profesor}"></li>
 
-                                <a href="/index" class="btn btn-login">Me interesa</a>
+                                <a href="@{/index/}+ ${usuario.id}" class="btn btn-login">Inscribirse</a>
                             </div>
                         </div>
                     </div>

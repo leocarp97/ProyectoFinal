@@ -4,11 +4,12 @@ import com.proyectoFinal.entidades.Curso;
 import com.proyectoFinal.entidades.Usuario;
 import com.proyectoFinal.enums.Idioma;
 import com.proyectoFinal.enums.Nivel;
-import com.proyectoFinal.enums.Rol;
 import com.proyectoFinal.enums.Turno;
 import com.proyectoFinal.servicios.CursoServicio;
 import com.proyectoFinal.servicios.UsuarioServicio;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -112,6 +113,20 @@ public class CursoControlador {
         return "index";
     }
 
+    @GetMapping("/nivel-cursos/{idAlumno}")
+    public String añadirAlumno(ModelMap modelo, @RequestParam String id, @PathVariable String idAlumno) {
+
+        try {
+            Usuario usuario = usuarioServicio.BuscarId(idAlumno);
+            modelo.put("usuario", idAlumno);
+            Curso curso = cursoServicio.añadirAlumno(id, idAlumno);
+
+        } catch (Exception ex) {
+            Logger.getLogger(CursoControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "index";
+    }
+
 //    @GetMapping("/nivel-cursos")
 //    public String mostrarXnivel(ModelMap modelo) {
 //        try {
@@ -128,13 +143,13 @@ public class CursoControlador {
         try {
             cursoServicio.modificar(archivo, id, nombre, nivel, idioma, turno, idProfesor);
             modelo.put("exito", "se pudo actualizar");
-              return "redirect:/curso/list-curso/";
+            return "redirect:/curso/list-curso/";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
             System.out.println(e.getMessage());
             return "redirect:/curso/form-curso/";
         }
-    
+
     }
 
     @GetMapping("index")

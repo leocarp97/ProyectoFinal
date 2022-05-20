@@ -22,13 +22,15 @@ public class FotoServicio {
                 foto.setNombre(archivo.getName());
                 foto.setMime(archivo.getContentType());
                 foto.setContenido(archivo.getBytes());
+              
+                return fotoRepositorio.save(foto);
+            } catch (Exception e) {
 
-                fotoRepositorio.save(foto);
-            } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
 
         }
+        
         return null;
     }
 
@@ -51,14 +53,19 @@ public class FotoServicio {
                 foto.setMime(archivo.getContentType());
                 foto.setContenido(archivo.getBytes());
 
-                fotoRepositorio.save(foto);
-            } catch (IOException e) {
+                return fotoRepositorio.save(foto);
+            } catch (Exception e) {
+
                 System.out.println(e.getMessage());
             }
 
         }
         return null;
 
+    }
+    
+    public Foto buscarPorId(String id) {
+        return fotoRepositorio.getById(id);
     }
 
 }

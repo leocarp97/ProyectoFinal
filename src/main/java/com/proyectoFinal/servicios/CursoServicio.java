@@ -8,6 +8,8 @@ import com.proyectoFinal.enums.Nivel;
 import com.proyectoFinal.enums.Rol;
 import com.proyectoFinal.enums.Turno;
 import com.proyectoFinal.repositorios.CursoRepositorio;
+import com.proyectoFinal.repositorios.UsuarioRepositorio;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +26,9 @@ public class CursoServicio {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
+
+    @Autowired
+    private UsuarioRepositorio usuarioRepositorio;
 
     @Autowired
     FotoServicio fotoServicio;
@@ -84,7 +89,7 @@ public class CursoServicio {
             } else {
                 throw new Exception("No se pudo encontrar el profesor solicitado");
             }
-            
+
             String idFoto = null;
             if (curso.getFoto() != null) {
 
@@ -93,7 +98,7 @@ public class CursoServicio {
             }
             Foto foto = fotoServicio.modificar(archivo, idFoto);
             curso.setFoto(foto);
-            
+
             return cursoRepositorio.save(curso);
         } else {
             throw new Exception("No se pudo encontrar el curso solicitado");
@@ -148,6 +153,23 @@ public class CursoServicio {
         } else {
             return cursoRepositorio.buscarPorTurno(turno);
         }
+
+    }
+     @Transactional(rollbackFor = Exception.class)
+    public Curso añadirAlumno(String id, String idAlumno) throws Exception {
+
+        if (id != null ) {
+            Curso curso = cursoRepositorio.getById(id);
+
+            Usuario usuario = usuarioRepositorio.getById(idAlumno);
+
+            curso.getAlumnos().add(usuario);
+            return curso;
+        }else   {
+            throw  new Exception("No existe el curso");
+        }
+
+        
 
     }
 
