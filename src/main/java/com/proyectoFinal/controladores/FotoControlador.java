@@ -1,7 +1,7 @@
 package com.proyectoFinal.controladores;
 
 import com.proyectoFinal.entidades.Curso;
-import com.proyectoFinal.entidades.Usuario;
+import com.proyectoFinal.entidades.Foto;
 import com.proyectoFinal.servicios.CursoServicio;
 import com.proyectoFinal.servicios.FotoServicio;
 import com.proyectoFinal.servicios.UsuarioServicio;
@@ -26,23 +26,23 @@ public class FotoControlador {
 
     @Autowired
     UsuarioServicio usuarioServicio;
+    
+    @Autowired
+    private FotoServicio fotoServicio;
 
-    @GetMapping("/usuario{id}")
-    public ResponseEntity<byte[]> fotoUsuario(@PathVariable String id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<byte[]> foto(@PathVariable String id) {
 
         try {
-            Usuario usuario = usuarioServicio.BuscarId(id);
             
-            if (usuario.getFoto()==null) {
-                throw new Exception("El usuario no tiene una foto asignada");
-            }
+            Foto foto = fotoServicio.buscarPorId(id);
             
-            byte[] foto = usuario.getFoto().getContenido();
+            byte[] contenido = foto.getContenido();
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_PNG);
 
-            return new ResponseEntity<>(foto, headers, HttpStatus.OK);
+            return new ResponseEntity<>(contenido, headers, HttpStatus.OK);
 
         } catch (Exception ex) {
             Logger.getLogger(FotoControlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -53,29 +53,6 @@ public class FotoControlador {
     }
 
     
-    @GetMapping("/curso{id}")
-    public ResponseEntity<byte[]> fotoCurso(@PathVariable String id) {
 
-        try {
-            Curso curso = cursoServicio.BuscarId(id);
-            
-            if (curso.getFoto()==null) {
-                throw new Exception("El curso no tiene una foto asignada");
-            }
-            
-            byte[] foto = curso.getFoto().getContenido();
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.IMAGE_PNG);
-
-            return new ResponseEntity<>(foto, headers, HttpStatus.OK);
-
-        } catch (Exception ex) {
-            Logger.getLogger(FotoControlador.class.getName()).log(Level.SEVERE, null, ex);
-
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-    }
     
 }
