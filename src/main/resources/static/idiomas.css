@@ -1,0 +1,336 @@
+
+
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+   background :url(./bg.jpg);
+   opacity: 1;
+   
+
+}
+.container {
+    max-width: 100%;
+    padding: 0 0;
+}
+
+
+
+.navbar {
+    width: 100%;
+    background: linear-gradient(180deg, rgba(46,23,84,1) 0%, rgba(52,18,82,1) 43%, rgba(54,13,78,1) 57%, rgba(35,2,40,1) 100%);
+    padding: 20px 110px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20vh;
+
+}
+
+.logo {
+    width: 100px;
+    cursor: pointer;
+}
+
+.navbar ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-family: sans-serif;
+    font-weight: 100;
+    text-shadow: rgb(255, 255, 255);
+    font-weight: bolder;
+
+}
+
+.navbar ul li::before {
+    content: "";
+    height: 2.5px;
+    width: 0%;
+    color: rgb(255, 255, 255);
+    background: rgb(255, 255, 255);
+    position: absolute;
+    left: 0;
+    bottom: -12px;
+    transition: 0.4s ease-out;
+    text-shadow: none;
+}
+
+.navbar ul li:hover::before {
+    width: 100%;
+    text-decoration: black;
+    text-shadow: none;
+}
+
+.boton-registro {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-family: sans-serif;
+    font-weight: 100;
+    text-shadow: rgb(255, 255, 255);
+    font-weight: bolder;
+    background-color: rgba(52,18,82,1);
+    border: none;
+}
+
+.dropidiomas {
+    color: rgb(255, 255, 255);
+    font-family: sans-serif;
+    background-color: rgba(52,18,82,1);
+    border: none;
+}
+
+.cursos-items {
+    background-color: white;
+    text-decoration: none;
+    opacity: 0.8;
+    color: black;
+    text-shadow: none;
+}
+
+.cursos-items :hover::before {
+    color: black;
+
+    transition-duration: 0s;
+    transition-delay: 1s;
+    text-decoration: none;
+    text-shadow: none;
+}
+
+
+
+
+.body-card{
+    font-family: 'Roboto', sans-serif;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+    width: 100%;
+}
+
+.container-all{
+    display:grid;
+    /* le indicamso uqe queremos 4 columnas de 1 fraccion c/u */
+    grid-template-columns: repeat(4, 1fr);
+    width: 2000px ;
+    /* el gap indica la separacion entre las colmnas */
+    gap: 15px;
+    
+    justify-items: center;
+    align-items: center;
+}
+
+.card{
+    
+    height: 260px;
+    width: 300px;
+    overflow: hidden;
+    margin:auto;
+    padding: 15px 30px;
+    border-radius: 5%;
+    border: 1px solid white;
+    transition: all .4s ease-in-out;
+    box-shadow: 0px 1px 5px 0px blueviolet;
+    background: radial-gradient(circle, rgba(0,0,0,1) 4%, rgba(180,93,255,1) 100%);
+
+}
+
+.card:hover{
+    height: 650px;
+    width: 300px;
+    border-radius: 5px;
+    box-shadow: 0px 2p 10px white;
+}
+
+
+.card-encabezado img{
+
+position:relative;
+border-radius: 50%;
+/* con dsp block ocupa todo el espacio disponible */
+display: block;
+height: 200px;
+width: 200px;
+border-top:2px solid white;
+border-bottom: 2px solid white;
+object-fit: cover;
+transition: all 0.3s ease;
+
+
+}
+
+.card-encabezado{
+    position:relative;
+
+}
+
+.desplazar{
+    opacity: 1;
+    transform: scale(1);
+}
+
+.agrandar{
+    transform: scale(0);
+    opacity: 0;
+    transition: all .4s ease;
+}
+.card:hover .agrandar{
+    
+    opacity: 1;
+    transform: scale(1);
+}
+
+.card:hover .desplazar{
+    transform: translateY(0px);
+    opacity: 1;
+}
+
+.desplazar::nth-child(1){
+    transition-delay: -1s;
+}
+
+
+.desplazar::nth-child(2){
+    transition-delay: -2s;
+}
+
+.desplazar::nth-child(3){
+    transition-delay: -4s;
+}
+
+.desplazar::nth-child(4){
+    transition-delay: -6s;
+}
+
+
+.info-desplazar{
+
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    line-height: 25px;
+    color: white;
+}
+
+.info-texto {
+    font-size: 14px;
+    color: white;
+    font-family: arial;
+    
+    
+}
+
+.botones{
+    color:white;
+    border:none;
+    border-radius: 30px;
+    box-shadow: 0 0 4px black;
+    padding: 8px 15px;
+    font-size: 16px;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:#117083;
+    font-family: arial;
+    font-weight: bolder;
+
+}
+
+.botones:hover{
+    box-shadow: 0 0 8px white;
+    color:aqua;
+}
+
+.registro {
+    text-decoration: none;
+    color: white;
+}
+
+
+.pie-pagina {
+    margin-top: 20vh;
+    width: 100%;
+    background: rgb(10,15,16);
+background: linear-gradient(180deg, rgba(10,15,16,1) 0%, rgba(21,6,34,1) 59%, rgba(35,2,40,1) 100%);
+
+
+}
+
+.pie-pagina .grupo-1 {
+
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 50px;
+    padding: 45px 0px;
+}
+
+.pie-pagina .grupo-1 .box figure {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pie-pagina .grupo-1 .box figure img {
+
+    width: 250px;
+
+}
+
+.pie-pagina .grupo-1 .box h2 {
+    color: white;
+    margin-bottom: 25px;
+    font-size: 20px;
+}
+
+.pie-pagina .grupo-1 .box p {
+    color: rgb(255, 255, 255);
+    margin-bottom: 10px;
+}
+
+.pie-pagina .grupo-1 .red-social a {
+    display: inline-block;
+    text-decoration: none;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    color: white;
+    margin-right: 10px;
+    background: rgb(48, 9, 56);
+    text-align: center;
+    border-radius: 10px;
+    transition: all 300ms ease;
+}
+
+.pie-pagina .grupo-1 .red-social a:hover {
+    color: rgb(50, 220, 220);
+
+}
+
+.pie-pagina .grupo-2 {
+    background-color: rgb(48, 9, 56);
+    padding: 15px 10px;
+    text-align: center;
+    color: white;
+
+}
+
+
+

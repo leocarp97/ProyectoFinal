@@ -2,6 +2,7 @@ package com.proyectoFinal.servicios;
 
 import com.proyectoFinal.entidades.Foto;
 import com.proyectoFinal.repositorios.FotoRepositorio;
+import java.io.IOException;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,9 +22,10 @@ public class FotoServicio {
                 foto.setNombre(archivo.getName());
                 foto.setMime(archivo.getContentType());
                 foto.setContenido(archivo.getBytes());
-
+              
                 return fotoRepositorio.save(foto);
             } catch (Exception e) {
+
                 System.out.println(e.getMessage());
             }
 
@@ -53,6 +55,7 @@ public class FotoServicio {
 
                 return fotoRepositorio.save(foto);
             } catch (Exception e) {
+
                 System.out.println(e.getMessage());
             }
 

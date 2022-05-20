@@ -1,7 +1,7 @@
 package com.proyectoFinal.enums;
 
 public enum Idioma {
-    INGLES("Ingles"), ESPAÑOL("Español"), PORTUGUES("Portugués"), FRANCES("Frances"), ITALIANO("Italiano"), RUSO("Ruso"), ALEMAN("Aleman"), CHINO("Chino");
+    INGLES("Ingles"), ESPAÑOL("Español"), PORTUGUES("Portugués"), FRANCES("Frances"), ITALIANO("Italiano"), RUSO("Ruso"), ALEMAN("Aleman"), CHINO("Chino"), JAPONES("Japones");
 
     private String displayValue;
 
