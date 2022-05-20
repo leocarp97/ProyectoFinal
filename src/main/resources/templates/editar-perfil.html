@@ -19,7 +19,7 @@ and open the template in the editor.
         <div class="col-lg-6 order-lg-2">
             <div class="p-5">
 
-                <img   class="img-fluid rounded-circle" th:if="${usuario.foto != null}"    th:src="${'/foto/usuario?id=' + usuario.id}"  >
+                  <img  th:if="${usuario.foto != null}"    th:src="${'/foto/'} + ${usuario.foto.id}" class="card-img-top" >
 
 
                 <img   th:if="${usuario.foto == null}" class="img-fluid rounded-circle" src="/foto-perfil.png">
