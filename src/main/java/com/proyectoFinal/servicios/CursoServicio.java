@@ -155,21 +155,20 @@ public class CursoServicio {
         }
 
     }
-     @Transactional(rollbackFor = Exception.class)
-    public Curso añadirAlumno(String id, String idAlumno) throws Exception {
 
-        if (id != null ) {
+    @Transactional(rollbackFor = Exception.class)
+    public void añadirAlumno(String id, String idAlumno) throws Exception {
+
+        if (id != null) {
             Curso curso = cursoRepositorio.getById(id);
 
             Usuario usuario = usuarioRepositorio.getById(idAlumno);
 
             curso.getAlumnos().add(usuario);
-            return curso;
-        }else   {
-            throw  new Exception("No existe el curso");
-        }
 
-        
+        } else {
+            throw new Exception("No existe el curso");
+        }
 
     }
 
@@ -178,6 +177,11 @@ public class CursoServicio {
         return cursoRepositorio.findAll();
     }
 
+    @Transactional(readOnly = true)
+    public List<Usuario> listarAlumnos(String id) {
+        return cursoRepositorio.buscarAlumnos(id);
+    }
+    
     @Transactional(readOnly = true)
     public List<Curso> buscarCursosActivos() {
         return cursoRepositorio.buscarActivos();

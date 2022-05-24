@@ -53,7 +53,7 @@
                         <div class="col-auto">
                             <label> Profesor</label> 
                             <select class="form-control" name="idProfesor" placeholder=" ">
-                                <option th:each="usuario : ${profesores}" th:value="${usuario.id}" th:text="${usuario.nombre} + ${usuario.apellido}"></option>
+                                <option th:each="usuario : ${profesores}" th:value="${usuario.id}" th:text="${usuario.nombre} + ' ' + ${usuario.apellido}"></option>
                             </select>
                         </div>
                     </div>

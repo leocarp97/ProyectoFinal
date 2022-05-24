@@ -1,5 +1,6 @@
 package com.proyectoFinal.controladores;
 
+import aj.org.objectweb.asm.Attribute;
 import com.proyectoFinal.entidades.Curso;
 import com.proyectoFinal.entidades.Usuario;
 import com.proyectoFinal.enums.Idioma;
@@ -10,7 +11,9 @@ import com.proyectoFinal.servicios.UsuarioServicio;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/curso")
@@ -38,6 +42,17 @@ public class CursoControlador {
         model.addAttribute("cursos", cursos);
 
         return "list-curso";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_PROFESOR')")
+    @GetMapping("/list-alumnos/{id}")
+    public String listarAlumnos(ModelMap model, @PathVariable String id) {
+
+        List<Usuario> alumnos = cursoServicio.listarAlumnos(id);
+
+        model.addAttribute("alumnos", alumnos);
+
+        return "list-alumnos";
     }
 
     @GetMapping("/list-curso-activos")
@@ -103,23 +118,28 @@ public class CursoControlador {
     }
 
     @GetMapping("/turno-cursos")
-    public String mostrarXturno(ModelMap modelo, @RequestParam Turno turno) throws Exception {
+    public String mostrarXturno(RedirectAttributes attr, ModelMap modelo, @RequestParam Turno turno) throws Exception {
         try {
             List<Curso> listaCurso = cursoServicio.listarXturno(turno);
-            modelo.put("cursoXturno", listaCurso);
+
+            attr.addAttribute("cursoXturno", listaCurso);
+
         } catch (Exception e) {
-            modelo.put("error", e.getMessage());
+            attr.addAttribute("error", e.getMessage());
         }
-        return "index";
+        return "redirect:/curso/list-cursos";
     }
 
-    @GetMapping("/nivel-cursos/{idAlumno}")
-    public String añadirAlumno(ModelMap modelo, @RequestParam String id, @PathVariable String idAlumno) {
+    @GetMapping("/nivel-cursos/{id}")
+    public String añadirAlumno(ModelMap modelo, @PathVariable String id, HttpSession session) {
 
         try {
-            Usuario usuario = usuarioServicio.BuscarId(idAlumno);
-            modelo.put("usuario", idAlumno);
-            Curso curso = cursoServicio.añadirAlumno(id, idAlumno);
+            Usuario login = (Usuario) session.getAttribute("usuariosession");
+
+            System.out.println("id de curso " + id + "   id usuario " + login.getId());
+            cursoServicio.añadirAlumno(id, login.getId());
+
+            return "redirect:/";
 
         } catch (Exception ex) {
             Logger.getLogger(CursoControlador.class.getName()).log(Level.SEVERE, null, ex);
