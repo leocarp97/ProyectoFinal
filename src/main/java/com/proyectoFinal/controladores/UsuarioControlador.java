@@ -41,7 +41,7 @@ public class UsuarioControlador {
         return "list-usuario";
     }
 
-    @GetMapping("/index")
+     @GetMapping("/index")
     public String formulario() {
         return "index";
     }
@@ -55,7 +55,7 @@ public class UsuarioControlador {
             return "redirect:/usuario/list-usuario/";
         } catch (Exception e) {
             model.put("error", e.getMessage());
-            return "index";
+            return "redirect:/";
         }
     }
 

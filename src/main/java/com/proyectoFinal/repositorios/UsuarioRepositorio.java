@@ -1,5 +1,6 @@
 package com.proyectoFinal.repositorios;
 
+import com.proyectoFinal.entidades.Curso;
 import com.proyectoFinal.entidades.Usuario;
 import com.proyectoFinal.enums.Rol;
 import java.util.List;
@@ -28,5 +29,5 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
 
     @Query("SELECT u FROM Usuario u WHERE u.baja IS NULL")
     public List<Usuario> buscarActivos();
-
+    
 }

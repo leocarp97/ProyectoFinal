@@ -43,24 +43,29 @@
                 <div th:each="cursos, i : ${cursosBy3}"  th:class="carousel-item + ${i.index == 0 ? ' active' : ''}" >
                     <div class="contenedor">
                         <div th:each="curso: ${cursos}" class="card" style="width: 18rem;">
-                            <input type="hidden" th:value="${curso.id}" name="id">
+
 
                             <img  th:if="${curso.foto != null}"    th:src="${'/foto/'} + ${curso.foto.id}" class="card-img-top" >
-                        
-                            
+
+                            <input type="hidden" th:value="${curso.id}" name="id">
                             <div class="card-body">
+                             
                                 <li th:text="${curso.nombre}"></li>
                                 <li th:text="${curso.nivel}"></li>
                                 <li th:text="${curso.idioma}"></li>
                                 <li th:text="${curso.turno}"></li>
                                 <li th:text="${curso.profesor}"></li>
 
-                                <a href="@{/index/}+ ${usuario.id}" class="btn btn-login">Inscribirse</a>
+                                <a th:if="${session.usuariosession !=null}" th:href="@{/curso/nivel-cursos/}+ ${curso.id} " class="btn btn-login">Inscribirse</a>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
+
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
