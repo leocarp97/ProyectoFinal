@@ -192,7 +192,7 @@ public class CursoServicio {
             throw new Exception("Debe ingresar su nombre");
         }
         if (idProfesor == null || idProfesor.trim().isEmpty()) {
-            throw new Exception("El ID no puede ser nulo");
+            throw new Exception("El ID del profesor no puede ser nulo");
         }
         if (nivel == null || nivel.toString().trim().isEmpty()) {
             throw new Exception("Debe indicar el nivel del curso");

@@ -36,8 +36,7 @@ public class UsuarioServicio implements UserDetailsService {
     @Transactional(rollbackFor = {Exception.class})
     public Usuario registrar(MultipartFile archivo, String nombre, String apellido, Integer dni, String email, Integer telefono, String password, String region, Pais pais) throws Exception {
 
-        validar(nombre, apellido, dni, email, telefono, password);
-
+//        validar(nombre, apellido, dni, email, telefono, password);
         Usuario usuario = new Usuario();
 
         usuario.setNombre(nombre);
@@ -63,8 +62,7 @@ public class UsuarioServicio implements UserDetailsService {
     @Transactional(rollbackFor = {Exception.class})
     public void modificar(MultipartFile archivo, String id, String nombre, String apellido, Integer dni, String email, Integer telefono, String password, String region, Pais pais) throws Exception {
 
-        validar(nombre, apellido, dni, email, telefono, password);
-
+//        validar(nombre, apellido, dni, email, telefono, password);
         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
 
         if (respuesta.isPresent()) {
@@ -100,11 +98,11 @@ public class UsuarioServicio implements UserDetailsService {
         return usuarioRepositorio.findAll();
     }
 
-     @Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public List<Usuario> listarProfesores() {
         return usuarioRepositorio.listarProfesor(Rol.PROFESOR);
     }
-    
+
     @Transactional(readOnly = true)
     public List<Usuario> buscarUsuariosActivos() {
         return usuarioRepositorio.buscarActivos();
@@ -125,7 +123,7 @@ public class UsuarioServicio implements UserDetailsService {
     public Usuario buscarProfesor(String id, Rol rol) {
         return usuarioRepositorio.buscarProfesor(id, rol);
     }
-    
+
     @Transactional(readOnly = true)
     public Usuario listarProfesor(String id, Rol rol) {
         return usuarioRepositorio.buscarProfesor(id, rol);
@@ -170,43 +168,53 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
         Usuario u = usuarioRepositorio.buscarPorEmail(email);
 
-        if (u == null) {
+//        if (u == null) {
+//            return null;
+//        }
+        if (u != null) {
+            List<GrantedAuthority> permisos = new ArrayList<>();
+
+//            GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_" + u.getRol().toString());
+            GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_" + u.getRol());
+            permisos.add(p1);
+
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+            HttpSession session = attr.getRequest().getSession(true);
+            session.setAttribute("usuariosession", u);
+
+            return new User(u.getEmail(), u.getPassword(), permisos);
+        } else {
             return null;
         }
 
-        List<GrantedAuthority> permisos = new ArrayList<>();
-
-        GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_" + u.getRol().toString());
-        permisos.add(p1);
-        
-        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-
-        HttpSession session = attr.getRequest().getSession(true);
-        session.setAttribute("usuariosession", u);
-
-        return new User(u.getEmail(), u.getPassword(), permisos);
     }
 
-    private void validar(String nombre, String apellido, Integer dni, String email, Integer telefono, String password) throws Exception {
-        if (nombre == null || nombre.trim().isEmpty()) {
-            throw new Exception("Debe ingresar su nombre");
-        }
-        if (apellido == null || apellido.trim().isEmpty()) {
-            throw new Exception("Debe ingresar su apellido");
-        }
-//        if (dni == null || dni < 8) {
-//            throw new Exception("El dni no puede ser nulo y/o menor a 8 caracteres");
+    private void validar(String nombre, String apellido, String email, String password) throws Exception {
+//        if (nombre == null || nombre.trim().isEmpty()) {
+//            throw new Exception("Debe ingresar su nombre");
 //        }
-        if (email == null || email.trim().isEmpty()) {
-            throw new Exception("Debe ingresar su correo electrónico");
-        }
-//        if (telefono == null || telefono < 10) {
-//            throw new Exception("El numero de telefono ingresado no es correcto");
+//        if (apellido == null || apellido.trim().isEmpty()) {
+//            throw new Exception("Debe ingresar su apellido");
 //        }
+////        if (dni == null || dni < 8) {
+////            throw new Exception("El dni no puede ser nulo y/o menor a 8 caracteres");
+////        }
+//        if (email == null || email.trim().isEmpty()) {
+//            throw new Exception("Debe ingresar su correo electrónico");
+//        }
+////        if (telefono == null || telefono < 10) {
+////            throw new Exception("El numero de telefono ingresado no es correcto");
+////        }
 //        if (password == null || password.trim().isEmpty() || password.length() < 10) {
 //            throw new Exception("La contraseña debe tener 10 o más caracteres");
 //        }
+        Usuario u = usuarioRepositorio.buscarPorEmail(email);
+        if (!u.getPassword().equals(password) || !email.equals(u.getEmail())) {
+            throw new Exception("El usuario o password son incorrectos ");
+        }
     }
 }

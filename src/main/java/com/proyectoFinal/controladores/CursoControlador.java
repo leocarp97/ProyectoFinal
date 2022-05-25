@@ -44,7 +44,7 @@ public class CursoControlador {
         return "list-curso";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_PROFESOR')")
+
     @GetMapping("/list-alumnos/{id}")
     public String listarAlumnos(ModelMap model, @PathVariable String id) {
 
@@ -139,12 +139,12 @@ public class CursoControlador {
             System.out.println("id de curso " + id + "   id usuario " + login.getId());
             cursoServicio.añadirAlumno(id, login.getId());
 
-            return "redirect:/";
+       
 
         } catch (Exception ex) {
             Logger.getLogger(CursoControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "index";
+        return "redirect:/";
     }
 
 //    @GetMapping("/nivel-cursos")
