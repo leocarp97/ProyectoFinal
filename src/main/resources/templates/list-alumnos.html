@@ -8,29 +8,32 @@ and open the template in the editor.
     <head>
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-      
-                <table class="table table-dark table-borderless  table table-hover" >
+
+        <table class="table table-dark table-borderless  table table-hover" >
             <thead>
                 <tr>
 
                     <th scope="col">Alumnos</th>
-                 <th scope="col">Alumnos</th> 
-                 <th scope="col">Alumnos</th>
+                    <th scope="col">Alumnos</th> 
+                    <th scope="col">Alumnos</th>
                 </tr>
             </thead>
             <tbody>      
                 <tr th:each="alumno:${alumnos}">
 
                     <td th:text="${alumno.nombre}"></td>
-     
-             
-               
-               
-                   
+                    <td th:text="${alumno.notas}"></td>
+
+
+
+
+
                 </tr>
-        
-    </body>
-</html>
+
+                </body>
+                </html>

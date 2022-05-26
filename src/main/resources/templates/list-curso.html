@@ -43,7 +43,7 @@ and open the template in the editor.
                     <th scope="col">Idioma</th>
                     <th scope="col">Turno</th>
                     <th scope="col">Profesor</th>
-                    <th scope="col">Foto</th>
+                    <th scope="col">Alumnos</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -55,7 +55,10 @@ and open the template in the editor.
                     <td th:text="${curso.idioma}"></td>
                     <td th:text="${curso.turno}"></td>
                     <td th:text="${curso.profesor}"></td>
-                    <td th:text="${curso.foto}"></td>
+                    <td >
+                        <a th:href="@{/curso/list-alumnos/}+${curso.id}" class="btn btn-outline-success">Ver Alumnos</a>
+                    </td>
+
                     <td>
                         <a th:href="@{/curso/editar-curso/}+${curso.id}" class="btn btn-outline-warning">Editar</a>
 
@@ -69,8 +72,8 @@ and open the template in the editor.
 
             <option   th:each="turno : ${T(com.proyectoFinal.enums.Turno).values()}" th:value="${turno}"
                       th:text="${turno.displayValue}" </option>
-   
-  
+
+
         </select>
     </body>
 

@@ -5,6 +5,7 @@ import com.proyectoFinal.enums.Pais;
 import com.proyectoFinal.servicios.UsuarioServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ public class UsuarioControlador {
     UsuarioServicio usuarioServicio;
 
     @GetMapping("/list-usuario")
-    public String listarUsuarios(ModelMap model) {
+    public String listarUsuarios(ModelMap model) throws Exception {
 
         List<Usuario> usuarios = usuarioServicio.listarUsuarios();
 
@@ -30,6 +31,16 @@ public class UsuarioControlador {
 
         return "list-usuario";
     }
+/////terminar
+//    @GetMapping("/list-alumnos")
+//    public String listAlumnos(ModelMap model) {
+//        List<Usuarios> usuarios = 
+//        
+//        List<Double> notas = usuarioServicio.BuscarId(id).getNotas();
+//        model.addAttribute("notas", notas);
+//         model.addAttribute("usuarios", usuarios);
+//
+//    }
 
     @GetMapping("/list-usuario-activos")
     public String listarUsuariosActivos(ModelMap model) {
@@ -41,7 +52,7 @@ public class UsuarioControlador {
         return "list-usuario";
     }
 
-     @GetMapping("/index")
+    @GetMapping("/index")
     public String formulario() {
         return "index";
     }
@@ -77,6 +88,7 @@ public class UsuarioControlador {
 
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ALUMNO','ROLE_USUARIO')")
     @GetMapping("/editar-perfil/{id}")
     public String editar(@PathVariable String id, ModelMap modelo) throws Exception {
         Usuario u = usuarioServicio.BuscarId(id);
@@ -89,7 +101,7 @@ public class UsuarioControlador {
         try {
             usuarioServicio.modificar(archivo, id, nombre, apellido, dni, email, telefono, password, region, pais);
             modelo.put("exito", "se pudo actualizar");
-              return "redirect:/usuario/list-usuario/";
+            return "redirect:/usuario/list-usuario/";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
         }

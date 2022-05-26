@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 
     <head>
         <meta charset="UTF-8">
@@ -88,255 +90,255 @@
 
             </div>
             <div>
-            <h1 th:if="${session.usuariosession !=null}" th:text="${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h1>
-            <a th:href="@{/logout}">Cerrar Sesión</a>
-            <a th:if="${session.usuariosession !=null}" th:href="@{/usuario/editar-perfil/} + ${session.usuariosession.id}" class="btn-primary">Editar Perfil</a>
-<!--            <a th:if="${session.usuariosession !=null}" th:href="@{/usuario/editar-perfil/{id=__${session.usuariosession.id}__}}" class="btn-primary">Editar Perfil</a>-->
-        </div>
-    </div>
-
-    <div class="slidershow middle">
-
-        <div class="slides">
-            <input type="radio" name="r" id="r1" checked>
-            <input type="radio" name="r" id="r2">
-            <input type="radio" name="r" id="r3">
-
-            <div class="slide s1">
-                <img src="p1.png" alt="">
+                <h1 sec:authorize="isAuthenticated()" th:text="${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h1>
+                <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Cerrar Sesión</a>
+                <a th:if="${session.usuariosession !=null}" th:href="@{/usuario/editar-perfil/} + ${session.usuariosession.id}" class="btn-primary">Editar Perfil</a>
+                <!--            <a th:if="${session.usuariosession !=null}" th:href="@{/usuario/editar-perfil/{id=__${session.usuariosession.id}__}}" class="btn-primary">Editar Perfil</a>-->
             </div>
-            <div class="slide">
-                <img src="p2.png" alt="">
-            </div>
-            <div class="slide">
-                <img src="p3.png" alt="">
-            </div>
-
         </div>
 
-        <div class="navigation">
-            <label for="r1" class="bar"></label>
-            <label for="r2" class="bar"></label>
-            <label for="r3" class="bar"></label>
+        <div class="slidershow middle">
 
-        </div>
-    </div>
+            <div class="slides">
+                <input type="radio" name="r" id="r1" checked>
+                <input type="radio" name="r" id="r2">
+                <input type="radio" name="r" id="r3">
 
-    <div class="texto-uno">
-        <span>T</span>
-        <span>u</span>
-        <span>&nbsp</span>
-        <span>L</span>
-        <span>u</span>
-        <span>g</span>
-        <span>a</span>
-        <span>r</span>
-        <span>&nbsp</span>
-        <span>e</span>
-        <span>s</span>
-        <span>&nbsp</span>
-        <span>e</span>
-        <span>l</span>
-        <span>&nbsp</span>
-        <span>M</span>
-        <span>u</span>
-        <span>n</span>
-        <span>d</span>
-        <span>o</span>
-        <span>.</span>
-    </div>
+                <div class="slide s1">
+                    <img src="p1.png" alt="">
+                </div>
+                <div class="slide">
+                    <img src="p2.png" alt="">
+                </div>
+                <div class="slide">
+                    <img src="p3.png" alt="">
+                </div>
 
-    <div class="contenedor-dos">
-        <div class="content-carrousel">
-            <figure><img src="./aleman.png"></figure>
-            <figure><img src="./frances.png"></figure>
-            <figure><img src="./ingles.png"></figure>
-            <figure><img src="./español.png"></figure>
-            <figure><img src="./chino.png"></figure>
-            <figure><img src="./italiano.png"></figure>
-            <figure><img src="./portugues.png"></figure>
-            <figure><img src="./ruso.png"></figure>
-            <figure><img src="./japones.png"></figure>
-        </div>
-    </div>
-
-
-
-    <div class="marquesina">
-        <marquee direction="leftt">
-            <p>Inscribiéndote desde el 16/05 hasta el 10/06 inclusive, obtendras un %40 OFF en el costo
-                de la matrícula. Contactate con nosotros al (+54911)5253-992288 o al (+54911)5253-903248. No te pierdas
-                el Beneficio!!! </p>
-        </marquee>
-    </div>
-
-    <div class="contenedor-tres">
-
-        <section class="aboutus" id="quienes-somos">
-
-            <img src="./ct.jpg">
-
-            <div class="fuente-aboutus">
-                <h3> Sobre Nosotros</h3>
-                <p> En I SPEAK somos un equipo que ama los idiomas.
-                    En Europa creció nuestro interés por otras culturas, idiomas y mentalidades.
-                    Nuestro equipo comprende 8 idiomas desde el chino hasta el español.
-
-                    Contamos con un amplio Staff de profesores nativos, titulados, altamente calificados
-                    y certificados para que la experiencia de nuestros alumnos sea con resultados comprobables.
-                    En I SPEAK ofrecemos clases individuales y grupales en varios idiomas ya sea:
-                    inglés, español, portugués, alemán, italiano, ruso, chino y francés,
-                    enfocado 100% en las necesidades de desarrollo personal, laboral o académico.
-                </p>
             </div>
 
+            <div class="navigation">
+                <label for="r1" class="bar"></label>
+                <label for="r2" class="bar"></label>
+                <label for="r3" class="bar"></label>
+
+            </div>
+        </div>
+
+        <div class="texto-uno">
+            <span>T</span>
+            <span>u</span>
+            <span>&nbsp</span>
+            <span>L</span>
+            <span>u</span>
+            <span>g</span>
+            <span>a</span>
+            <span>r</span>
+            <span>&nbsp</span>
+            <span>e</span>
+            <span>s</span>
+            <span>&nbsp</span>
+            <span>e</span>
+            <span>l</span>
+            <span>&nbsp</span>
+            <span>M</span>
+            <span>u</span>
+            <span>n</span>
+            <span>d</span>
+            <span>o</span>
+            <span>.</span>
+        </div>
+
+        <div class="contenedor-dos">
+            <div class="content-carrousel">
+                <figure><img src="./aleman.png"></figure>
+                <figure><img src="./frances.png"></figure>
+                <figure><img src="./ingles.png"></figure>
+                <figure><img src="./español.png"></figure>
+                <figure><img src="./chino.png"></figure>
+                <figure><img src="./italiano.png"></figure>
+                <figure><img src="./portugues.png"></figure>
+                <figure><img src="./ruso.png"></figure>
+                <figure><img src="./japones.png"></figure>
+            </div>
+        </div>
+
+
+
+        <div class="marquesina">
+            <marquee direction="leftt">
+                <p>Inscribiéndote desde el 16/05 hasta el 10/06 inclusive, obtendras un %40 OFF en el costo
+                    de la matrícula. Contactate con nosotros al (+54911)5253-992288 o al (+54911)5253-903248. No te pierdas
+                    el Beneficio!!! </p>
+            </marquee>
+        </div>
+
+        <div class="contenedor-tres">
+
+            <section class="aboutus" id="quienes-somos">
+
+                <img src="./ct.jpg">
+
+                <div class="fuente-aboutus">
+                    <h3> Sobre Nosotros</h3>
+                    <p> En I SPEAK somos un equipo que ama los idiomas.
+                        En Europa creció nuestro interés por otras culturas, idiomas y mentalidades.
+                        Nuestro equipo comprende 8 idiomas desde el chino hasta el español.
+
+                        Contamos con un amplio Staff de profesores nativos, titulados, altamente calificados
+                        y certificados para que la experiencia de nuestros alumnos sea con resultados comprobables.
+                        En I SPEAK ofrecemos clases individuales y grupales en varios idiomas ya sea:
+                        inglés, español, portugués, alemán, italiano, ruso, chino y francés,
+                        enfocado 100% en las necesidades de desarrollo personal, laboral o académico.
+                    </p>
+                </div>
+
+
+            </section>
+
+            <div class="card">
+                <div class="face front">
+                    <img src="./gr.png" alt="">
+                    <h3>Graduados</h3>
+                </div>
+                <div class="face back">
+                    <h3>Graduados</h3>
+                    <p>Enterate en qué ciudad del mundo están trabajando nuestros Graduados!
+                    </p>
+                    <div class="link">
+                        <a href="#">Leer mas...</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="face front">
+                    <img src="./it.png" alt="">
+                    <h3>Inglés Técnico</h3>
+                </div>
+                <div class="face back">
+                    <h3>Inglés Técnico</h3>
+                    <p>Estaremos ofreciendo cursos de inglés técnico para nuestros estudiantes.
+
+                    </p>
+                    <div class="link">
+                        <a href="#">Leer mas...</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="contenedor-cuatro">
+            <section class="aboutus" id="quienes-somos">
+
+                <img src="./nv.jfif">
+                <div class="fuente-aboutus">
+                    <h3> Nuestra Misión</h3>
+                    <p> Somos un Instituto de Estudios Avanzados impulsado por la exigencia y una plataforma para el cambio. 
+                        Nuestra misión es desarrollar visiones para sociedades fundamentalmente reconfiguradas. 
+                        Combinamos el rigor académico y la práctica innovadora para inspirar, promover e implementar el cambio
+                        social. Cerraremos la brecha entre la comprensión y la acción, reuniendo a académicos de diferentes
+                        disciplinas y profesionales como activistas, políticos, periodistas, artistas y empresarios.
+                        <br>
+                        I SPEAK INSTITUTE, donde sentirás que tu lugar es el Mundo.
+                    </p>
+                </div>
+
+
+            </section>
+
+            <div class="card">
+                <div class="face front">
+                    <img src="./becas.jfif" alt="">
+                    <h3>Becas</h3>
+                </div>
+                <div class="face back">
+                    <h3>Becas</h3>
+                    <p>I SPEAK INSTITUTE te ofrece Becas 
+                        para estudiar idiomas en el exterior.
+                    </p>
+                    <div class="link">
+                        <a href="#">Leer mas...</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="face front">
+                    <img src="./inst.jfif" alt="">
+                    <h3>Nueva Sede</h3>
+                </div>
+                <div class="face back">
+                    <h3>Nueva Sede</h3>
+                    <p>Estamos por Inaugurar la nueva Sede en USA.
+                        <br>
+                        Enterate de las Novedades!
+
+                    </p>
+                    <div class="link">
+                        <a href="#">Leer mas...</a>
+                    </div>
+                </div>
+            </div>
+            <!--   <div>
+                  <a href="#" class="btn-neon2">
+    
+                      <span id="span1"></span>
+                      <span id="span2"></span>
+                      <span id="span3"></span>
+                      <span id="span4"></span>
+                      Leer mÃ¡s...
+                  </a>
+              </div> -->
 
         </section>
-
-        <div class="card">
-            <div class="face front">
-                <img src="./gr.png" alt="">
-                <h3>Graduados</h3>
-            </div>
-            <div class="face back">
-                <h3>Graduados</h3>
-                <p>Enterate en qué ciudad del mundo están trabajando nuestros Graduados!
-                </p>
-                <div class="link">
-                    <a href="#">Leer mas...</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="face front">
-                <img src="./it.png" alt="">
-                <h3>Inglés Técnico</h3>
-            </div>
-            <div class="face back">
-                <h3>Inglés Técnico</h3>
-                <p>Estaremos ofreciendo cursos de inglés técnico para nuestros estudiantes.
-
-                </p>
-                <div class="link">
-                    <a href="#">Leer mas...</a>
-                </div>
-            </div>
-        </div>
-
-
-
     </div>
 
-    <div class="contenedor-cuatro">
-        <section class="aboutus" id="quienes-somos">
 
-            <img src="./nv.jfif">
-            <div class="fuente-aboutus">
-                <h3> Nuestra Misión</h3>
-                <p> Somos un Instituto de Estudios Avanzados impulsado por la exigencia y una plataforma para el cambio. 
-                    Nuestra misión es desarrollar visiones para sociedades fundamentalmente reconfiguradas. 
-                    Combinamos el rigor académico y la práctica innovadora para inspirar, promover e implementar el cambio
-                    social. Cerraremos la brecha entre la comprensión y la acción, reuniendo a académicos de diferentes
-                    disciplinas y profesionales como activistas, políticos, periodistas, artistas y empresarios.
-                    <br>
-                    I SPEAK INSTITUTE, donde sentirás que tu lugar es el Mundo.
-                </p>
+    <footer class="pie-pagina">
+
+        <div class="grupo-1">
+            <div class="box">
+                <figure>
+                    <a href="#">
+                        <img src="./logo.png" alt="logo1"> </a>
+                </figure>
             </div>
 
+            <div class="box" id="contacto">
+                <h2>DONDE ESTAMOS</h2>
+                <p>Av. de Los Idiomas 803 - CABA - ARGENTINA </p>
+                <h2>CONTACTANOS</h2>
+                <p>(+54911)5253-992288</p>
+                <h2>SECRETARIA ACADEMICA</h2>
+                <p>(+54911)5253-903248</p>
 
-        </section>
-
-        <div class="card">
-            <div class="face front">
-                <img src="./becas.jfif" alt="">
-                <h3>Becas</h3>
             </div>
-            <div class="face back">
-                <h3>Becas</h3>
-                <p>I SPEAK INSTITUTE te ofrece Becas 
-                    para estudiar idiomas en el exterior.
-                </p>
-                <div class="link">
-                    <a href="#">Leer mas...</a>
+
+            <div class="box">
+                <h2>SEGUINOS</h2>
+                <div class="red-social">
+                    <a href="#" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-instagram"></a>
+                    <a href="#" class="fa fa-twitter"></a>
+                    <a href="#" class="fa fa-youtube"></a>
                 </div>
             </div>
         </div>
+        <div class="grupo-2">
+            <samll>&copy; 2022 <b>I SPEAK INSTITUTE ® </b> - Todos los Derechos Reservados.</samll>
 
-        <div class="card">
-            <div class="face front">
-                <img src="./inst.jfif" alt="">
-                <h3>Nueva Sede</h3>
-            </div>
-            <div class="face back">
-                <h3>Nueva Sede</h3>
-                <p>Estamos por Inaugurar la nueva Sede en USA.
-                    <br>
-                    Enterate de las Novedades!
-
-                </p>
-                <div class="link">
-                    <a href="#">Leer mas...</a>
-                </div>
-            </div>
-        </div>
-        <!--   <div>
-              <a href="#" class="btn-neon2">
-
-                  <span id="span1"></span>
-                  <span id="span2"></span>
-                  <span id="span3"></span>
-                  <span id="span4"></span>
-                  Leer mÃ¡s...
-              </a>
-          </div> -->
-
-    </section>
-</div>
-
-
-<footer class="pie-pagina">
-
-    <div class="grupo-1">
-        <div class="box">
-            <figure>
-                <a href="#">
-                    <img src="./logo.png" alt="logo1"> </a>
-            </figure>
-        </div>
-
-        <div class="box" id="contacto">
-            <h2>DONDE ESTAMOS</h2>
-            <p>Av. de Los Idiomas 803 - CABA - ARGENTINA </p>
-            <h2>CONTACTANOS</h2>
-            <p>(+54911)5253-992288</p>
-            <h2>SECRETARIA ACADEMICA</h2>
-            <p>(+54911)5253-903248</p>
 
         </div>
-
-        <div class="box">
-            <h2>SEGUINOS</h2>
-            <div class="red-social">
-                <a href="#" class="fa fa-facebook"></a>
-                <a href="#" class="fa fa-instagram"></a>
-                <a href="#" class="fa fa-twitter"></a>
-                <a href="#" class="fa fa-youtube"></a>
-            </div>
-        </div>
-    </div>
-    <div class="grupo-2">
-        <samll>&copy; 2022 <b>I SPEAK INSTITUTE ® </b> - Todos los Derechos Reservados.</samll>
+    </footer>
 
 
-    </div>
-</footer>
-
-
-<script src="
-        https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-</script>
+    <script src="
+            https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
 
 </body>
 

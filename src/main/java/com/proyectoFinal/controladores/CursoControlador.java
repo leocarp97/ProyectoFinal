@@ -44,7 +44,7 @@ public class CursoControlador {
         return "list-curso";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_PROFESOR')")
+   
     @GetMapping("/list-alumnos/{id}")
     public String listarAlumnos(ModelMap model, @PathVariable String id) {
 
