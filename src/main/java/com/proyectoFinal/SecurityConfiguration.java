@@ -28,6 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+//                .antMatchers("/usuario/*").hasRole("ADMIN") // Puedo dar acceso a un controlador completo, con rol especifoc
                 .antMatchers("/css/*", "/js/*", "/img/*", "/**", "/main/**", "/usuario/**", "/actividad/**", "/login/**", "/glosario/**").permitAll()
                 .and().formLogin()
                 .loginPage("/login")

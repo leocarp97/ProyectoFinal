@@ -3,7 +3,9 @@ package com.proyectoFinal.entidades;
 import com.proyectoFinal.enums.Pais;
 import com.proyectoFinal.enums.Rol;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -47,11 +49,16 @@ public class Usuario implements Serializable {
     @Column(name = "contraseña")
     private String password;
 
+    
+    private Double notas;
+   
+    
     @Temporal(TemporalType.TIMESTAMP)
     private Date alta;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date baja;
+    
     
     @OneToOne
     @JoinColumn(name = "foto")
@@ -63,9 +70,10 @@ public class Usuario implements Serializable {
     private String region;
 
     public Usuario() {
+        
     }
 
-    public Usuario(String id, String nombre, String apellido, Rol rol, Integer dni, String email, Integer telefono, String password, Date alta, Date baja, Foto foto, Pais pais, String region) {
+    public Usuario(String id, String nombre, String apellido, Rol rol, Integer dni, String email, Integer telefono, String password, Double notas, Date alta, Date baja, Foto foto, Pais pais, String region) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -74,6 +82,7 @@ public class Usuario implements Serializable {
         this.email = email;
         this.telefono = telefono;
         this.password = password;
+        this.notas = notas;
         this.alta = alta;
         this.baja = baja;
         this.foto = foto;
@@ -145,6 +154,14 @@ public class Usuario implements Serializable {
         this.password = password;
     }
 
+    public Double getNotas() {
+        return notas;
+    }
+
+    public void setNotas(Double notas) {
+        this.notas = notas;
+    }
+
     public Date getAlta() {
         return alta;
     }
@@ -185,6 +202,9 @@ public class Usuario implements Serializable {
         this.region = region;
     }
 
+    
+
+    
     @Override
     public String toString() {
         return nombre + " " + apellido;
