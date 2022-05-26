@@ -60,9 +60,9 @@ public class UsuarioControlador {
     @PostMapping("/index")
     public String guardar(ModelMap model, @RequestParam(required = false) MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region, @RequestParam Pais pais) {
 
-        try {
+        try {       
             usuarioServicio.registrar(archivo, nombre, apellido, dni, email, telefono, password, region, pais);
-
+            
             return "redirect:/usuario/list-usuario/";
         } catch (Exception e) {
             model.put("error", e.getMessage());

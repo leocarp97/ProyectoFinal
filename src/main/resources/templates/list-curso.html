@@ -54,27 +54,32 @@ and open the template in the editor.
                     <td th:text="${curso.nivel}"></td>
                     <td th:text="${curso.idioma}"></td>
                     <td th:text="${curso.turno}"></td>
-                    <td th:text="${curso.profesor}"></td>
+
+
+
+                     <td th:text="${curso.profesor}"></td>
                     <td >
                         <a th:href="@{/curso/list-alumnos/}+${curso.id}" class="btn btn-outline-success">Ver Alumnos</a>
                     </td>
 
                     <td>
                         <a th:href="@{/curso/editar-curso/}+${curso.id}" class="btn btn-outline-warning">Editar</a>
-
+                     
                 </tr>
                 <tr>
             </tbody>
         </table>
 
 
-        <select name="turno"  class="form-select" id="inputGroupSelect01">
 
-            <option   th:each="turno : ${T(com.proyectoFinal.enums.Turno).values()}" th:value="${turno}"
-                      th:text="${turno.displayValue}" </option>
+        <!--        <select name="turno"  class="form-select" id="inputGroupSelect01">
+        
+                    <option   th:each="turno : ${T(com.proyectoFinal.enums.Turno).values()}" th:value="${turno}"
+                              th:text="${turno.displayValue}" </option>
+           
+          
+                </select>-->
 
-
-        </select>
     </body>
 
 

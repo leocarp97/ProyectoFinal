@@ -1,6 +1,8 @@
 package com.proyectoFinal.controladores;
 
 import com.proyectoFinal.entidades.Curso;
+import com.proyectoFinal.entidades.Usuario;
+import com.proyectoFinal.repositorios.UsuarioRepositorio;
 import com.proyectoFinal.servicios.CursoServicio;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,8 @@ public class PortalControlador {
     @Autowired
     CursoServicio cursoServicio;
 
+    @Autowired
+    UsuarioRepositorio usuarioRepositorio;
     private final int COURSES_PER_VIEW = 3;
 
     @GetMapping("/index")
@@ -26,8 +30,8 @@ public class PortalControlador {
     }
 
     @GetMapping("/login")
-    public String login(ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) {
-
+    public String login(ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) throws Exception {
+        
         if (error != null) {
             modelo.put("error", "Usuario o Clave incorrectos");
         }
@@ -73,5 +77,5 @@ public class PortalControlador {
         return "idiomas.html";
     }
 
-    
+     
 }
