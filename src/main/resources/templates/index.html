@@ -27,11 +27,12 @@
                     <li><a href="#quienes-somos">QUIENES SOMOS </a></li>
                     <li><a href="/info-idiomas">NUESTROS IDIOMAS </a></li>
                     <li><a href="#contacto">CONTACTO </a></li>
-                    <li><a href="/login">INICIAR SESIÓN </a></li>
+                    <li><a sec:authorize="!isAuthenticated()" href="/login">INICIAR SESIÓN </a></li>
+                    <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">CERRAR SESIÓN</a></li>
                     <li>
                         <div>
 
-                            <button   class="boton-registro" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            <button   sec:authorize="!isAuthenticated()" class="boton-registro" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                       data-bs-whatever="@mdo"
                                       >REGISTRARSE</button>
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -89,12 +90,11 @@
 
 
             </div>
-            <div>
+<!--            <div>
                 <h1 sec:authorize="isAuthenticated()" th:text="${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h1>
-                <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Cerrar Sesión</a>
                 <a th:if="${session.usuariosession !=null}" th:href="@{/usuario/editar-perfil/} + ${session.usuariosession.id}" class="btn-primary">Editar Perfil</a>
-                <!--            <a th:if="${session.usuariosession !=null}" th:href="@{/usuario/editar-perfil/{id=__${session.usuariosession.id}__}}" class="btn-primary">Editar Perfil</a>-->
-            </div>
+                            <a th:if="${session.usuariosession !=null}" th:href="@{/usuario/editar-perfil/{id=__${session.usuariosession.id}__}}" class="btn-primary">Editar Perfil</a>
+            </div>-->
         </div>
 
         <div class="slidershow middle">

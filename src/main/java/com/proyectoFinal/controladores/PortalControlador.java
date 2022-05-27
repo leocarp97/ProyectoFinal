@@ -22,12 +22,17 @@ public class PortalControlador {
 
     @Autowired
     UsuarioRepositorio usuarioRepositorio;
-    private final int COURSES_PER_VIEW = 3;
+    private final int COURSES_PER_VIEW = 2;
 
     @GetMapping("/index")
     public String index() {
         return "index.html";
     }
+    
+//    @GetMapping("/campus-alumno")
+//    public String campusAlumno() {
+//        return "campus-alumno.html";
+//    }
 
     @GetMapping("/login")
     public String login(ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) throws Exception {
@@ -43,7 +48,7 @@ public class PortalControlador {
         return "login.html";
     }
 
-    @GetMapping("/nivel-cursos")
+    @GetMapping("/campus-alumno")
     public String mostrarXnivel(ModelMap modelo
     ) {
         try {
@@ -69,7 +74,7 @@ public class PortalControlador {
             System.out.println(e.getMessage());
             modelo.put("error", e.getMessage());
         }
-        return "nivel-cursos";
+        return "campus-alumno.html";
     }
 
     @GetMapping("/info-idiomas")
