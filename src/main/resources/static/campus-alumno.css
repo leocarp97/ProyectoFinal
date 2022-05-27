@@ -1,15 +1,17 @@
 .navbar {
-    width: 80%;
-    margin: auto;
-    padding: 35px 0;
+    width: 100%;
+
+    padding: 20px 110px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 2em;
+
 }
 
+
+
 .logo {
-    width: 130px;
+    width: 100px;
     cursor: pointer;
 }
 
@@ -18,38 +20,178 @@
     display: inline-block;
     margin: 0 20px;
     position: relative;
+
 }
 
 .navbar ul li a {
     text-decoration: none;
-    color: black;
-    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    font-family: sans-serif;
+    font-weight: 100;
+    text-shadow: white;
+    font-weight: bolder;
+
 }
 
 .navbar ul li::before {
     content: "";
     height: 2.5px;
     width: 0%;
-    background: black;
+    color: white;
+    background: white;
     position: absolute;
     left: 0;
     bottom: -12px;
     transition: 0.4s ease-out;
+    text-shadow: none;
 }
 
 .navbar ul li:hover::before {
-    width: 100%
+    width: 100%;
+    text-decoration: white;
+    text-shadow: none;
+}
+
+.cursos-items {
+    background-color: white;
+    text-decoration: none;
+    opacity: 0.8;
+    color: white;
+    text-shadow: none;
 }
 
 .cursos-items :hover::before {
-    background: white;
-    transition-duration:0s;
+    color: black;
+
+    transition-duration: 0s;
     transition-delay: 1s;
+    text-decoration: none;
+    text-shadow: none;
+}
+
+
+
+
+.container {
+    max-width: 100%;
+    padding: 25px 0;
+    height: 15vh;
+    background-color: rgb(48, 9, 56);
+}
+
+ .slidershow {
+    width: 100%;
+    height: 10vh;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+
+
+}
+
+
+.middle {
+    position: absolute;
+    width: 100%;
+    height: 90vh;
+    align-items: center;
+
+}
+
+.navigation {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+}
+
+
+
+.contenedor-uno nav{
+    position:absolute;
+    border-radius: 20px;
+    width: 300px;
+    height: 90%;
+    margin-left: 16vh;
+    background-color: #2d2d3d;
+    box-shadow: 8px 8px 8px  rgb(26, 1, 43);
+
+}
+
+
+.contenedor-uno ul{
+    margin-top: 130px;
+    list-style: none;
+   /*  con list-style le sacamos los puntos de la lista */
+   display: block;
+}
+
+.contenedor-uno li{
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #323232;
+    overflow: hidden;
+    
+}
+
+ p.menu{
+
+    position:relative;
+    padding: 16px;
+    padding-right: 25px;
+    
+    color:white;
+    opacity: .6;
+    font-size: 1.2em;
+
+}
+
+
+div.barra{
+    position: absolute;
+    height: 50px;
+    width: 0px;
+    background-color: #aaa;
+    opacity: 0.1;
+    -webkit-transition: width .2s;
+    -mozkit-transition: width .2s;
+    -mskit-transition: width .2s;
+    
+
+}
+
+
+
+li:hover div.barra{
+    width: 240px;
+    
+   
+
+
+
+}
+
+.carousel{
+    width: 800px;
+    margin-left: 35%;
 }
 
 .contenedor {
+    width: 80%;
+    height: 30%;
     display: flex;
-    margin-left: 10em;
+    margin-left: 15%;
+    margin-bottom: 20vh;
+    
+}
+
+.contenedor-uno{
+    display:flex;
+    flex-wrap: wrap;   
+    margin-top: 10vh;
+    margin-bottom: 30vh;
+    
 }
 
 .card {
@@ -77,11 +219,13 @@
     box-shadow: 0 0 10px rgb(243, 226, 205), 0 0 40px rgb(243, 226, 205), 0 0 80px rgb(243, 226, 205);
 
 }
-
 .pie-pagina {
+    margin-top: 20vh;
     width: 100%;
-    background-color: mediumslateblue;
-    margin-top: 7em;
+    background: rgb(10,15,16);
+background: linear-gradient(180deg, rgba(10,15,16,1) 0%, rgba(21,6,34,1) 59%, rgba(35,2,40,1) 100%);
+
+
 }
 
 .pie-pagina .grupo-1 {
@@ -128,7 +272,7 @@
     line-height: 45px;
     color: white;
     margin-right: 10px;
-    background: rgb(48, 39, 99);
+    background: rgb(48, 9, 56);
     text-align: center;
     border-radius: 10px;
     transition: all 300ms ease;
@@ -140,27 +284,29 @@
 }
 
 .pie-pagina .grupo-2 {
-    background-color: rgb(48, 39, 99);
+    background-color: rgb(48, 9, 56);
     padding: 15px 10px;
     text-align: center;
     color: white;
 
 }
-.modal-dialog{
+
+.modal-dialog {
     width: 400px;
 }
+
 .form-register {
 
-    position:fixed;
+    position: fixed;
     width: 400px;
     background: #ffffff;
-    
+
     padding: 30px;
 
-   z-index: 999;
+    z-index: 999;
     border-radius: 4px;
     font-family: 'calibri';
-    color: black; 
+    color: black;
 
 
 }
