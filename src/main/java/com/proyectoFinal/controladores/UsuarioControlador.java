@@ -38,7 +38,12 @@ public class UsuarioControlador {
        
         List<Usuario> usuarios = usuarioServicio.listarUsuarios();
         
-    
+//        List<String> notas = new ArrayList();
+//        
+//        for (Usuario usuario : usuarios) {
+//            notas.add(usuario.getNotas());
+//        }
+//            model.put("notas", notas);
          model.addAttribute("usuarios", usuarios);
 
          return "list-alumnos";

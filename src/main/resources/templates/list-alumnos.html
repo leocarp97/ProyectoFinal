@@ -30,8 +30,8 @@ and open the template in the editor.
                 </tr>
             </thead>
             <tbody>      
-                <tr th:each="alumno:${usuarios}" >
-
+                <tr th:each="alumno:${alumnos}"  >
+<!--            <div th:each="nota:${notas}" ></div>-->
                     <td th:text="${alumno.nombre}"></td>
                     <td th:text="${alumno.notas}"></td>
                     <td th:text="${alumno.apellido}"></td>
