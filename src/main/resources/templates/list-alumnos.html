@@ -23,24 +23,20 @@ and open the template in the editor.
 
 
                     <th scope="col">Nombre</th>
+                    <th scope="col">Notas</th>
                     <th scope="col">Apellido</th> 
                     <th scope="col">Email</th>
-              
+
                 </tr>
             </thead>
             <tbody>      
-                <tr th:each="alumno:${alumnos}">
+                <tr th:each="alumno:${usuarios}" >
 
                     <td th:text="${alumno.nombre}"></td>
-
                     <td th:text="${alumno.notas}"></td>
-
-
-
-
                     <td th:text="${alumno.apellido}"></td>
                     <td th:text="${alumno.email}"></td>
-         
+
 
 
 

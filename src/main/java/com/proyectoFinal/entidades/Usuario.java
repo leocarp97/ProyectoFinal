@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -49,8 +50,8 @@ public class Usuario implements Serializable {
     @Column(name = "contraseña")
     private String password;
 
-    
-    private Double notas;
+    @ElementCollection(targetClass = String.class)
+    private List<String> notas;
    
     
     @Temporal(TemporalType.TIMESTAMP)
@@ -70,10 +71,10 @@ public class Usuario implements Serializable {
     private String region;
 
     public Usuario() {
-        
+       notas= new ArrayList();
     }
 
-    public Usuario(String id, String nombre, String apellido, Rol rol, Integer dni, String email, Integer telefono, String password, Double notas, Date alta, Date baja, Foto foto, Pais pais, String region) {
+    public Usuario(String id, String nombre, String apellido, Rol rol, Integer dni, String email, Integer telefono, String password, List<String> notas, Date alta, Date baja, Foto foto, Pais pais, String region) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -154,11 +155,11 @@ public class Usuario implements Serializable {
         this.password = password;
     }
 
-    public Double getNotas() {
+    public List<String> getNotas() {
         return notas;
     }
 
-    public void setNotas(Double notas) {
+    public void setNotas(List<String> notas) {
         this.notas = notas;
     }
 
@@ -202,7 +203,7 @@ public class Usuario implements Serializable {
         this.region = region;
     }
 
-    
+   
 
     
     @Override

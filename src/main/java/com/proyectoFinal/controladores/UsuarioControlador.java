@@ -3,6 +3,7 @@ package com.proyectoFinal.controladores;
 import com.proyectoFinal.entidades.Usuario;
 import com.proyectoFinal.enums.Pais;
 import com.proyectoFinal.servicios.UsuarioServicio;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,16 +32,17 @@ public class UsuarioControlador {
 
         return "list-usuario";
     }
-/////terminar
-//    @GetMapping("/list-alumnos")
-//    public String listAlumnos(ModelMap model) {
-//        List<Usuarios> usuarios = 
-//        
-//        List<Double> notas = usuarioServicio.BuscarId(id).getNotas();
-//        model.addAttribute("notas", notas);
-//         model.addAttribute("usuarios", usuarios);
-//
-//    }
+///terminar
+    @GetMapping("/list-alumnos")
+    public String listAlumnos(ModelMap model, @RequestParam String id) throws Exception {
+       
+        List<Usuario> usuarios = usuarioServicio.listarUsuarios();
+        
+    
+         model.addAttribute("usuarios", usuarios);
+
+         return "list-alumnos";
+    }
 
     @GetMapping("/list-usuario-activos")
     public String listarUsuariosActivos(ModelMap model) {
