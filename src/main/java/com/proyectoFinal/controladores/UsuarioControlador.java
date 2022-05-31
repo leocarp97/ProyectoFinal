@@ -124,17 +124,19 @@ public class UsuarioControlador {
     }
 
     @PostMapping("/actualizar-usuario")
-    public String editar(ModelMap modelo, MultipartFile archivo, @RequestParam String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region, @RequestParam Pais pais) {
+    public String editar(ModelMap modelo, MultipartFile archivo, @RequestParam String id, @RequestParam(required = false) String nombre, @RequestParam(required = false) String apellido, @RequestParam(required = false) Integer dni, @RequestParam(required = false) String email, @RequestParam(required = false) Integer telefono, @RequestParam(required = false) String region, @RequestParam(required = false) Pais pais) {
         try {
-            usuarioServicio.modificar(archivo, id, nombre, apellido, dni, email, telefono, password, region, pais);
+            usuarioServicio.modificar(archivo, id, nombre, apellido, dni, email, telefono,  region, pais);
             modelo.put("exito", "se pudo actualizar");
 
             return "redirect:/usuario/editar-perfil/"+ id;
 
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
+            System.out.println(e.getMessage());
+              return "redirect:/usuario/editar-perfil/"+ id;
         }
-        return "index";
+        
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ALUMNO','ROLE_USUARIO')")
