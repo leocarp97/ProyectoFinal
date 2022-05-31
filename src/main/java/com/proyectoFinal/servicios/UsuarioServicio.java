@@ -60,7 +60,7 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional(rollbackFor = {Exception.class})
-    public void modificar(MultipartFile archivo, String id, String nombre, String apellido, Integer dni, String email, Integer telefono, String password, String region, Pais pais) throws Exception {
+    public void modificar(MultipartFile archivo, String id, String nombre, String apellido, Integer dni, String email, Integer telefono, String region, Pais pais) throws Exception {
 
 //        validar(nombre, apellido, dni, telefono, email, password);
         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
@@ -73,8 +73,8 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setDni(dni);
             usuario.setEmail(email);
             usuario.setTelefono(telefono);
-            String claveEncriptada = new BCryptPasswordEncoder().encode(password);
-            usuario.setPassword(claveEncriptada);
+//            String claveEncriptada = new BCryptPasswordEncoder().encode(password);
+//            usuario.setPassword(claveEncriptada);
             usuario.setRegion(region);
             usuario.setPais(pais);
             String idFoto = null;
