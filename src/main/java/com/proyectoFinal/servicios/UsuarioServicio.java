@@ -36,7 +36,7 @@ public class UsuarioServicio implements UserDetailsService {
     @Transactional(rollbackFor = {Exception.class})
     public Usuario registrar(MultipartFile archivo, String nombre, String apellido, Integer dni, String email, Integer telefono, String password, String region, Pais pais) throws Exception {
 
-//        validar(nombre, apellido, dni, email, telefono, password);
+//        validar(nombre, apellido, dni, telefono, email, password);
         Usuario usuario = new Usuario();
 
         usuario.setNombre(nombre);
@@ -62,7 +62,7 @@ public class UsuarioServicio implements UserDetailsService {
     @Transactional(rollbackFor = {Exception.class})
     public void modificar(MultipartFile archivo, String id, String nombre, String apellido, Integer dni, String email, Integer telefono, String password, String region, Pais pais) throws Exception {
 
-//        validar(nombre, apellido, dni, email, telefono, password);
+//        validar(nombre, apellido, dni, telefono, email, password);
         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
 
         if (respuesta.isPresent()) {
@@ -150,6 +150,18 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
+    public Usuario agregarNota(String idAlumno, String nota) throws Exception {
+     
+        Usuario usuario = BuscarId(idAlumno);
+        usuario.getNotas().add(nota);
+     
+        return usuarioRepositorio.save(usuario);
+    }
+
+//    public List<String> traerNotas(String id, List<String> notas) {
+//
+//        return usuarioRepositorio.buscarNotas(id);
+//    }
     @Transactional(rollbackFor = Exception.class)
     public Usuario habilitar(String id) throws Exception {
         if (id == null || id.trim().isEmpty()) {
@@ -166,6 +178,22 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
+//        @Transactional(rollbackFor = Exception.class)
+//    public void añadirNota(String id) throws Exception {
+//
+//        if (id != null) {
+//         
+//            Usuario usuario = usuarioRepositorio.getById(id);
+//
+//       List<String> notas = new ArrayList();
+//      
+//           usuario.getNotas().add(notas);
+//
+//        } else {
+//            throw new Exception("No existe el alumno");
+//        }
+//
+//    }
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
@@ -193,28 +221,25 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
-    private void validar(String nombre, String apellido, String email, String password) throws Exception {
-//        if (nombre == null || nombre.trim().isEmpty()) {
-//            throw new Exception("Debe ingresar su nombre");
-//        }
-//        if (apellido == null || apellido.trim().isEmpty()) {
-//            throw new Exception("Debe ingresar su apellido");
-//        }
-////        if (dni == null || dni < 8) {
-////            throw new Exception("El dni no puede ser nulo y/o menor a 8 caracteres");
-////        }
-//        if (email == null || email.trim().isEmpty()) {
-//            throw new Exception("Debe ingresar su correo electrónico");
-//        }
-////        if (telefono == null || telefono < 10) {
-////            throw new Exception("El numero de telefono ingresado no es correcto");
-////        }
-//        if (password == null || password.trim().isEmpty() || password.length() < 10) {
-//            throw new Exception("La contraseña debe tener 10 o más caracteres");
-//        }
-        Usuario u = usuarioRepositorio.buscarPorEmail(email);
-        if (!u.getPassword().equals(password) || !email.equals(u.getEmail())) {
-            throw new Exception("El usuario o password son incorrectos ");
+    private void validar(String nombre, String apellido, Integer dni, Integer telefono, String email, String password) throws Exception {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new Exception("Debe ingresar su nombre");
         }
+        if (apellido == null || apellido.trim().isEmpty()) {
+            throw new Exception("Debe ingresar su apellido");
+        }
+        if (dni == null || dni < 8) {
+            throw new Exception("El dni no puede ser nulo y/o menor a 8 caracteres");
+        }
+        if (email == null || email.trim().isEmpty()) {
+            throw new Exception("Debe ingresar su correo electrónico");
+        }
+        if (telefono == null || telefono < 10) {
+            throw new Exception("El numero de telefono ingresado no es correcto");
+        }
+        if (password == null || password.trim().isEmpty() || password.length() < 10) {
+            throw new Exception("La contraseña debe tener 10 o más caracteres");
+        }
+
     }
 }

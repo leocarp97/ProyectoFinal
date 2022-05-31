@@ -50,31 +50,29 @@ public class Usuario implements Serializable {
     @Column(name = "contraseña")
     private String password;
 
-//    @ElementCollection(targetClass = String.class)
-    private String notas;
-   
-    
+    @ElementCollection(targetClass = String.class)
+    private List<String> notas;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date alta;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date baja;
-    
-    
+
     @OneToOne
     @JoinColumn(name = "foto")
     private Foto foto;
-    
+
     @Enumerated(EnumType.STRING)
     private Pais pais;
 
     private String region;
 
     public Usuario() {
-   
+        notas = new ArrayList();
     }
 
-    public Usuario(String id, String nombre, String apellido, Rol rol, Integer dni, String email, Integer telefono, String password, String notas, Date alta, Date baja, Foto foto, Pais pais, String region) {
+    public Usuario(String id, String nombre, String apellido, Rol rol, Integer dni, String email, Integer telefono, String password, List<String> notas, Date alta, Date baja, Foto foto, Pais pais, String region) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -155,11 +153,11 @@ public class Usuario implements Serializable {
         this.password = password;
     }
 
-    public String getNotas() {
+    public List<String> getNotas() {
         return notas;
     }
 
-    public void setNotas(String notas) {
+    public void setNotas(List<String> notas) {
         this.notas = notas;
     }
 
@@ -203,12 +201,16 @@ public class Usuario implements Serializable {
         this.region = region;
     }
 
-   
 
-    
     @Override
     public String toString() {
-        return nombre + " " + apellido;
+        return nombre + " " + apellido ;
     }
+
+//    @Override
+//    public String toString() {
+//        return "Usuario{" + "notas=" + notas + '}';
+//    }
+
 
 }

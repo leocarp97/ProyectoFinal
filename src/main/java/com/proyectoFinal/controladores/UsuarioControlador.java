@@ -3,7 +3,6 @@ package com.proyectoFinal.controladores;
 import com.proyectoFinal.entidades.Usuario;
 import com.proyectoFinal.enums.Pais;
 import com.proyectoFinal.servicios.UsuarioServicio;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -33,21 +32,42 @@ public class UsuarioControlador {
         return "list-usuario";
     }
 ///terminar
-    @GetMapping("/list-alumnos")
-    public String listAlumnos(ModelMap model, @RequestParam String id) throws Exception {
-       
-        List<Usuario> usuarios = usuarioServicio.listarUsuarios();
-        
-//        List<String> notas = new ArrayList();
-//        
-//        for (Usuario usuario : usuarios) {
-//            notas.add(usuario.getNotas());
-//        }
-//            model.put("notas", notas);
-         model.addAttribute("usuarios", usuarios);
 
-         return "list-alumnos";
-    }
+//    @GetMapping("/añadir-nota/{id}")
+//    public String añadirNota(ModelMap model, @PathVariable String id) throws Exception {
+//
+//        List<String> notas = new ArrayList();
+//        notas.add("10");
+//        notas.add("10");
+//        notas.add("10");
+//        notas.add("10");
+//
+//           model.addAttribute("notas", notas);
+//        
+//        usuarioServicio.añadirNota(id);
+//    
+//        return "añadir-nota";
+//    }
+//    @GetMapping("/list-alumnos")
+//    public String listAlumnos(ModelMap model, @RequestParam String id) throws Exception {
+//
+//        List<Usuario> usuarios = usuarioServicio.listarUsuarios();
+//
+//        
+//        
+////        List<Integer> nota = usuarioServicio.traerNotas(id);
+////      
+//
+////        for (Usuario usuario : usuarios) {
+////          usuario.getNotas();
+////        }
+////        usuarioServicio.añadirNota(id);
+//
+////        model.addAttribute("nota", nota);
+//        model.addAttribute("usuarios", usuarios);
+//
+//        return "list-alumnos";
+//    }
 
     @GetMapping("/list-usuario-activos")
     public String listarUsuariosActivos(ModelMap model) {
@@ -67,9 +87,9 @@ public class UsuarioControlador {
     @PostMapping("/index")
     public String guardar(ModelMap model, @RequestParam(required = false) MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region, @RequestParam Pais pais) {
 
-        try {       
+        try {
             usuarioServicio.registrar(archivo, nombre, apellido, dni, email, telefono, password, region, pais);
-            
+
             return "redirect:/usuario/list-usuario/";
         } catch (Exception e) {
             model.put("error", e.getMessage());
@@ -108,9 +128,31 @@ public class UsuarioControlador {
         try {
             usuarioServicio.modificar(archivo, id, nombre, apellido, dni, email, telefono, password, region, pais);
             modelo.put("exito", "se pudo actualizar");
-            return "redirect:/usuario/list-usuario/";
+            return "redirect:/usuario/editar-perfil/"+ id;
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
+        }
+        return "index";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ALUMNO','ROLE_USUARIO')")
+    @GetMapping("/añadir-nota/{id}")
+    public String añadirNota(@PathVariable String id, ModelMap modelo) throws Exception {
+        Usuario u = usuarioServicio.BuscarId(id);
+        modelo.put("usuario", u);
+        return "añadir-nota";
+    }
+
+    @PostMapping("/añadir-notas")
+    public String añadirNota(ModelMap modelo, @RequestParam String id, @RequestParam String notas) {
+        try {
+            usuarioServicio.agregarNota(id, notas);
+       
+            modelo.put("exito", "se pudo actualizar");
+            return "redirect:/curso/list-curso";
+        } catch (Exception e) {
+            modelo.put("error", e.getMessage());
+            e.printStackTrace();
         }
         return "index";
     }

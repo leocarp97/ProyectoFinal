@@ -23,24 +23,29 @@ and open the template in the editor.
 
 
                     <th scope="col">Nombre</th>
-                    <th scope="col">Notas</th>
                     <th scope="col">Apellido</th> 
                     <th scope="col">Email</th>
-
+                    <th scope="col">Notas</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>      
                 <tr th:each="alumno:${alumnos}"  >
-<!--            <div th:each="nota:${notas}" ></div>-->
-                    <td th:text="${alumno.nombre}"></td>
-                    <td th:text="${alumno.notas}"></td>
-                    <td th:text="${alumno.apellido}"></td>
-                    <td th:text="${alumno.email}"></td>
+          
+            <td th:text="${alumno.nombre}"></td>
+            <td th:text="${alumno.apellido}"></td>
+            <td th:text="${alumno.email}"></td>
+<!--              <div th:each="nota:${alumno.notas}" >
+                <td th:text="${nota}"></td>
+            </div>-->
+                                <td th:text="${alumno.notas}"></td>
+            <td >
+                <a th:href="@{/usuario/añadir-nota/}+${alumno.id}" class="btn btn-outline-success">Añadir notas</a>
+            </td>
 
 
 
+        </tr>
 
-                </tr>
-
-                </body>
-                </html>
+</body>
+</html>

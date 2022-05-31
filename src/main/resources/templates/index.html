@@ -46,7 +46,7 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <form th:action="@{/usuario/index}" method="POST" enctype="multipart/form-data">
-
+                                                <p th:text="${error}" class="text-danger"></p>
                                                 <div class="input_container">
                                                     <input class="controls" type="text" name="nombre"  placeholder="Nombre">
                                                     <input class="controls" type="text" name="apellido"  placeholder="Apellido"> 
@@ -90,11 +90,11 @@
 
 
             </div>
-<!--            <div>
-                <h1 sec:authorize="isAuthenticated()" th:text="${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h1>
-                <a th:if="${session.usuariosession !=null}" th:href="@{/usuario/editar-perfil/} + ${session.usuariosession.id}" class="btn-primary">Editar Perfil</a>
-                            <a th:if="${session.usuariosession !=null}" th:href="@{/usuario/editar-perfil/{id=__${session.usuariosession.id}__}}" class="btn-primary">Editar Perfil</a>
-            </div>-->
+            <!--            <div>
+                            <h1 sec:authorize="isAuthenticated()" th:text="${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h1>
+                            <a th:if="${session.usuariosession !=null}" th:href="@{/usuario/editar-perfil/} + ${session.usuariosession.id}" class="btn-primary">Editar Perfil</a>
+                                        <a th:if="${session.usuariosession !=null}" th:href="@{/usuario/editar-perfil/{id=__${session.usuariosession.id}__}}" class="btn-primary">Editar Perfil</a>
+                        </div>-->
         </div>
 
         <div class="slidershow middle">
