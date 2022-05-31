@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -39,39 +41,40 @@
     <div class="contenedor-uno">
       <nav>
         <ul>
-          <li>
+          <li sec:authorize="isAuthenticated()">
             <div class="barra"></div>
-            <p class="menu">Editar Perfil</p>
+            <a th:href="@{/usuario/editar-perfil/} + ${session.usuariosession.id}"
+            ><p class="menu btn">Editar Perfil</p></a>
           </li>
 
           <li>
             <div class="barra"></div>
-            <p class="menu">Editar Cursos</p>
+            <a href=""><p class="menu btn">Editar Cursos</p></a>
           </li>
 
           <li>
             <div class="barra"></div>
-            <p class="menu">Calendario Academico</p>
+            <a href=""><p class="menu btn">Calendario Academico</p></a>
           </li>
 
           <li>
             <div class="barra"></div>
-            <p class="menu">Trabajos Practicos</p>
+            <a href=""><p class="menu btn">Trabajos Practicos</p></a>
           </li>
 
           <li>
             <div class="barra"></div>
-            <p class="menu">Mis Apuntes</p>
+            <a href=""><p class="menu btn">Mis Apuntes</p></a>
           </li>
 
           <li>
             <div class="barra"></div>
-            <p class="menu">Becas</p>
+            <a href=""><p class="menu btn">Becas</p></a>
           </li>
 
           <li>
             <div class="barra"></div>
-            <p class="menu">Suscripciones</p>
+            <a href=""><p class="menu btn">Suscripciones</p></a>
           </li>
         </ul>
       </nav>

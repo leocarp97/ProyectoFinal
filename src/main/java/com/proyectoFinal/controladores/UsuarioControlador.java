@@ -108,7 +108,7 @@ public class UsuarioControlador {
         try {
             usuarioServicio.modificar(archivo, id, nombre, apellido, dni, email, telefono, password, region, pais);
             modelo.put("exito", "se pudo actualizar");
-            return "redirect:/usuario/list-usuario/";
+            return "redirect:/usuario/editar-perfil/" + id;
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
         }
