@@ -135,12 +135,12 @@
     
 }
 
- p.menu{
+.menu{
 
+    text-decoration: none;
     position:relative;
     padding: 16px;
     padding-right: 25px;
-    
     color:white;
     opacity: .6;
     font-size: 1.2em;
