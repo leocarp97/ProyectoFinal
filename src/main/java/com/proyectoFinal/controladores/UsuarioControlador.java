@@ -131,8 +131,6 @@ public class UsuarioControlador {
 
             return "redirect:/usuario/editar-perfil/"+ id;
 
-     
-
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
         }
@@ -154,6 +152,7 @@ public class UsuarioControlador {
        
             modelo.put("exito", "se pudo actualizar");
             return "redirect:/curso/list-curso";
+
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
             e.printStackTrace();
