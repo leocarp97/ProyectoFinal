@@ -130,6 +130,7 @@ public class UsuarioControlador {
             modelo.put("exito", "se pudo actualizar");
 
             return "redirect:/usuario/editar-perfil/"+ id;
+
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
         }
