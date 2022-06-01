@@ -12,11 +12,30 @@ and open the template in the editor.
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../../campus-alumno.css" />
     </head>
     <body>
 
+        <div class="container">
+            <div class="navbar">
+                <a href="/index"
+                   ><img src="../../logo.png" class="logo" alt="Main Logo"
+                      /></a>
 
-        <table class="table table-dark table-borderless  table table-hover" >
+
+                <ul>
+                    <li><a href="#quienes-somos">QUIENES SOMOS </a></li>
+                    <li></li>
+                    <li><a href="#cursos">CURSOS </a></li>
+                    <li><a href="#contacto">CONTACTO </a></li>
+                    <li><a href="/login">INGRESAR </a></li>
+
+                </ul>
+            </div>
+        </div>
+
+
+        <table class="table table-bordered " >
             <thead>
                 <tr>
 
@@ -28,7 +47,8 @@ and open the template in the editor.
                     <th scope="col">Rol</th>
                     <th scope="col">Pais</th>
                     <th scope="col">Region</th>
-                    <th scope="col">Notas</th>
+                    <th scope="col">Baja</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>      
@@ -43,34 +63,74 @@ and open the template in the editor.
                     <td th:text="${usuario.rol}"></td>
                     <td th:text="${usuario.pais}"></td>
                     <td th:text="${usuario.region}"></td>
+                    <td th:text="${usuario.baja}"></td>
+                    <!--                    <td th:text="${usuario.notas}"></td>-->
 
-                    <td th:text="${usuario.notas}"></td>
-
-<!--            <div th:each="nota : ${notas}">
-                <td th:text="${nota}"></td>
-            </div>-->
+                    <!--            <div th:each="nota : ${notas}">
+                                    <td th:text="${nota}"></td>
+                                </div>-->
 
 
-            <td>
-                <!--                        <a th:href="@{/usuario/editar-perfil/}+${usuario.id}" class="btn btn-outline-warning">Editar</a>-->
+                
+                        <!--                        <a th:href="@{/usuario/editar-perfil/}+${usuario.id}" class="btn btn-outline-warning">Editar</a>-->
 
                     <td>
                         <a th:href="@{/usuario/editar-perfil/}+${usuario.id}" class="btn btn-outline-warning">Editar</a>
-
+                         <a th:href="@{/usuario/eliminar-usuario/}+${usuario.id}" class="btn btn-outline-danger">Baja</a>
 
 
                 </tr>
-            <tr>
-                </tbody>
+                <tr>
+            </tbody>
         </table>
 
 
+        <footer class="pie-pagina">
 
+            <div class="grupo-1">
+                <div class="box">
+                    <figure>
+                        <a href="#">
+                            <img src="../../logo.png" alt="logo1"> </a>
+                    </figure>
+                </div>
+
+                <div class="box" id="contacto">
+                    <h2>DONDE ESTAMOS</h2>
+                    <p>Av. de Los Idiomas 803 - CABA - ARGENTINA </p>
+                    <h2>CONTACTANOS</h2>
+                    <p>(+54911)5253-992288</p>
+                    <h2>SECRETARIA ACADEMICA</h2>
+                    <p>(+54911)5253-903248</p>
+
+                </div>
+
+                <div class="box">
+                    <h2>SEGUINOS</h2>
+                    <div class="red-social">
+                        <a href="#" class="fa fa-facebook"></a>
+                        <a href="#" class="fa fa-instagram"></a>
+                        <a href="#" class="fa fa-twitter"></a>
+                        <a href="#" class="fa fa-youtube"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="grupo-2">
+                <samll>&copy; 2022 <b>I SPEAK INSTITUTE ®️ </b> - Todos los Derechos Reservados.</samll>
+
+
+            </div>
+        </footer>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        <script src="
+                https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+        </script>
     </body>
 </html>

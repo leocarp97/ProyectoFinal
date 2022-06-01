@@ -8,6 +8,7 @@ import com.proyectoFinal.enums.Nivel;
 import com.proyectoFinal.enums.Turno;
 import com.proyectoFinal.servicios.CursoServicio;
 import com.proyectoFinal.servicios.UsuarioServicio;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,7 +44,6 @@ public class CursoControlador {
 
         return "list-curso";
     }
-
 
     @GetMapping("/list-alumnos/{id}")
     public String listarAlumnos(ModelMap model, @PathVariable String id) {
@@ -139,12 +139,21 @@ public class CursoControlador {
             System.out.println("id de curso " + id + "   id usuario " + login.getId());
             cursoServicio.añadirAlumno(id, login.getId());
 
-       
-
         } catch (Exception ex) {
             Logger.getLogger(CursoControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "redirect:/";
+    }
+
+    @GetMapping("mis-cursos/{id}")
+    public String misCursos(ModelMap modelo, @PathVariable String id, HttpSession session) throws Exception {
+
+        List<Curso> cursos = cursoServicio.listarCursosPorProfesor(id);
+
+        modelo.addAttribute("cursos", cursos);
+
+        return "list-curso";
+
     }
 
 //    @GetMapping("/nivel-cursos")

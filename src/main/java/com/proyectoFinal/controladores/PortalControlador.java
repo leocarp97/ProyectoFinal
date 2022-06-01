@@ -28,15 +28,49 @@ public class PortalControlador {
     public String index() {
         return "index.html";
     }
-    
+
+    @GetMapping("/campus-profesor")
+    public String campusProfesor(ModelMap modelo) {
+
+        try {
+            List<Curso> cursos = cursoServicio.listarCursos();
+
+            List<List<Curso>> cursosGroupedBy3 = new ArrayList<>();
+
+            for (int i = 0; i < cursos.size(); i += COURSES_PER_VIEW) {
+                List<Curso> courses = new ArrayList();
+                for (int j = i; j < COURSES_PER_VIEW + i; j++) {
+                    if (j == cursos.size()) {
+                        break;
+                    }
+                    Curso curso = cursos.get(j);
+                    courses.add(curso);
+                }
+                cursosGroupedBy3.add(courses);
+            }
+
+            modelo.put("cursosBy3", cursosGroupedBy3);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            modelo.put("error", e.getMessage());
+        }
+
+        return "campus-profesor.html";
+    }
+
+    @GetMapping("/campus-admin")
+    public String campusAdmin() {
+        return "campus-admin.html";
+    }
+
 //    @GetMapping("/campus-alumno")
 //    public String campusAlumno() {
 //        return "campus-alumno.html";
 //    }
-
     @GetMapping("/login")
     public String login(ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) throws Exception {
-        
+
         if (error != null) {
             modelo.put("error", "Usuario o Clave incorrectos");
         }
@@ -82,5 +116,4 @@ public class PortalControlador {
         return "idiomas.html";
     }
 
-     
 }
