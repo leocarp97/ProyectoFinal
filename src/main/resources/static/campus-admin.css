@@ -244,9 +244,7 @@ li:hover div.barra{
     margin-top: 20vh;
     width: 100%;
     background: rgb(10,15,16);
-background: linear-gradient(180deg, rgba(10,15,16,1) 0%, rgba(21,6,34,1) 59%, rgba(35,2,40,1) 100%);
-
-
+    background: linear-gradient(180deg, rgba(10,15,16,1) 0%, rgba(21,6,34,1) 59%, rgba(35,2,40,1) 100%);
 }
 
 .pie-pagina .grupo-1 {
@@ -312,40 +310,33 @@ background: linear-gradient(180deg, rgba(10,15,16,1) 0%, rgba(21,6,34,1) 59%, rg
 
 }
 
-.modal-dialog {
+li .modal-dialog {
     width: 400px;
 }
 
-.form-register {
-
+li .form-register {
     position: fixed;
     width: 400px;
-    background: #ffffff;
-
+    background: #2d2d3d;
+    opacity: 0.8;
     padding: 30px;
-
     z-index: 999;
     border-radius: 4px;
     font-family: 'calibri';
     color: black;
-
-
 }
 
-.form-register {
+li .form-register {
     font-size: 15px;
     font: 'calibri';
-
 }
 
-.form-idioma h4 {
+li .form-idioma h4 {
     font-size: 22px;
     margin-bottom: 20px;
 }
 
-
-
-.controls {
+li .controls {
     width: 100%;
     background: #ffffff;
     padding: 10px;
@@ -354,33 +345,25 @@ background: linear-gradient(180deg, rgba(10,15,16,1) 0%, rgba(21,6,34,1) 59%, rg
     border: 1px solid #0a0f10;
     font-family: 'calibri';
     font-size: 14px;
-
 }
 
-.form-register p {
+li .form-register p {
     height: 10px;
     text-align: center;
     font-size: 18px;
-
 }
 
-
-
-.form-register a {
-
-
-    color: black;
+li .form-register a {
+    color: white;
     text-decoration: none;
-
-
 }
 
-.form-register a:hover {
+li .form-register a:hover {
     color: black;
     text-decoration: underline;
 }
 
-.form-register .botons {
+li .form-register .botons {
     width: 100%;
     background: #1f53c5;
     border: none;
@@ -388,8 +371,16 @@ background: linear-gradient(180deg, rgba(10,15,16,1) 0%, rgba(21,6,34,1) 59%, rg
     color: white;
     margin: 16px 0;
     font-size: 16px;
+}
 
+li input_container {
+    display: inline;
 
+    gap: 12px;
+}
+
+li .input_container input {
+    width: 49.5%;
 }
 
 @media screen and (max-width:800px) {

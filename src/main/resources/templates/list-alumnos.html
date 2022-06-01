@@ -40,7 +40,7 @@ and open the template in the editor.
             </div>-->
                                 <td th:text="${alumno.notas}"></td>
             <td >
-                <a th:href="@{/usuario/añadir-nota/}+${alumno.id}" class="btn btn-outline-success">Añadir notas</a>
+                <a sec:authorize="hasAnyRole('ROLE_PROFESOR')"th:href="@{/usuario/añadir-nota/}+${alumno.id}" class="btn btn-outline-success">Añadir notas</a>
             </td>
 
 

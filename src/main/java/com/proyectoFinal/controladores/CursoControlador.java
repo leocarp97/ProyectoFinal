@@ -65,6 +65,7 @@ public class CursoControlador {
         return "list-curso";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/form-curso")
     public String formulario(ModelMap model) {
 
@@ -169,6 +170,17 @@ public class CursoControlador {
             System.out.println(e.getMessage());
             return "redirect:/curso/form-curso/";
         }
+
+    }
+    
+    @GetMapping("mis-cursos/{id}")
+    public String misCursos(ModelMap modelo, @PathVariable String id, HttpSession session) throws Exception {
+
+        List<Curso> cursos = cursoServicio.listarCursosPorProfesor(id);
+
+        modelo.addAttribute("cursos", cursos);
+
+        return "list-curso";
 
     }
 
