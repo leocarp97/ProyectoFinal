@@ -7,6 +7,7 @@ import com.proyectoFinal.servicios.CursoServicio;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,45 +30,8 @@ public class PortalControlador {
         return "index.html";
     }
 
-    @GetMapping("/campus-profesor")
-    public String campusProfesor(ModelMap modelo) {
 
-        try {
-            List<Curso> cursos = cursoServicio.listarCursos();
 
-            List<List<Curso>> cursosGroupedBy3 = new ArrayList<>();
-
-            for (int i = 0; i < cursos.size(); i += COURSES_PER_VIEW) {
-                List<Curso> courses = new ArrayList();
-                for (int j = i; j < COURSES_PER_VIEW + i; j++) {
-                    if (j == cursos.size()) {
-                        break;
-                    }
-                    Curso curso = cursos.get(j);
-                    courses.add(curso);
-                }
-                cursosGroupedBy3.add(courses);
-            }
-
-            modelo.put("cursosBy3", cursosGroupedBy3);
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            modelo.put("error", e.getMessage());
-        }
-
-        return "campus-profesor.html";
-    }
-
-    @GetMapping("/campus-admin")
-    public String campusAdmin() {
-        return "campus-admin.html";
-    }
-
-//    @GetMapping("/campus-alumno")
-//    public String campusAlumno() {
-//        return "campus-alumno.html";
-//    }
     @GetMapping("/login")
     public String login(ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) throws Exception {
 
@@ -81,10 +45,10 @@ public class PortalControlador {
 
         return "login.html";
     }
-
+    
+    @PreAuthorize("hasAnyRole('ROLE_ALUMNO')")
     @GetMapping("/campus-alumno")
-    public String mostrarXnivel(ModelMap modelo
-    ) {
+    public String campusAlumno(ModelMap modelo) {
         try {
             List<Curso> cursos = cursoServicio.listarCursos();
 
@@ -109,6 +73,64 @@ public class PortalControlador {
             modelo.put("error", e.getMessage());
         }
         return "campus-alumno.html";
+    }
+    
+    @PreAuthorize("hasAnyRole('ROLE_PROFESOR')")
+    @GetMapping("/campus-profesor")
+    public String campusProfesor(ModelMap modelo) {
+        try {
+            List<Curso> cursos = cursoServicio.listarCursos();
+
+            List<List<Curso>> cursosGroupedBy3 = new ArrayList<>();
+
+            for (int i = 0; i < cursos.size(); i += COURSES_PER_VIEW) {
+                List<Curso> courses = new ArrayList();
+                for (int j = i; j < COURSES_PER_VIEW + i; j++) {
+                    if (j == cursos.size()) {
+                        break;
+                    }
+                    Curso curso = cursos.get(j);
+                    courses.add(curso);
+                }
+                cursosGroupedBy3.add(courses);
+            }
+
+            modelo.put("cursosBy3", cursosGroupedBy3);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            modelo.put("error", e.getMessage());
+        }
+        return "campus-profesor.html";
+    }
+    
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @GetMapping("/campus-admin")
+    public String campusAdmin(ModelMap modelo) {
+        try {
+            List<Curso> cursos = cursoServicio.listarCursos();
+
+            List<List<Curso>> cursosGroupedBy3 = new ArrayList<>();
+
+            for (int i = 0; i < cursos.size(); i += COURSES_PER_VIEW) {
+                List<Curso> courses = new ArrayList();
+                for (int j = i; j < COURSES_PER_VIEW + i; j++) {
+                    if (j == cursos.size()) {
+                        break;
+                    }
+                    Curso curso = cursos.get(j);
+                    courses.add(curso);
+                }
+                cursosGroupedBy3.add(courses);
+            }
+
+            modelo.put("cursosBy3", cursosGroupedBy3);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            modelo.put("error", e.getMessage());
+        }
+        return "campus-admin.html";
     }
 
     @GetMapping("/info-idiomas")

@@ -195,7 +195,7 @@ public class CursoServicio {
     public List<Usuario> listarAlumnos(String id) {
         return cursoRepositorio.buscarAlumnos(id);
     }
-    
+      
     @Transactional(readOnly = true)
     public List<Curso> buscarCursosActivos() {
         return cursoRepositorio.buscarActivos();

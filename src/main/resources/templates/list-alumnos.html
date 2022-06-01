@@ -52,18 +52,18 @@ and open the template in the editor.
             <tbody>      
                 <tr th:each="alumno:${alumnos}"  >
 
-                    <td th:text="${alumno.nombre}"></td>
-                    <td th:text="${alumno.apellido}"></td>
-                    <td th:text="${alumno.email}"></td>
-                    <!--              <div th:each="nota:${alumno.notas}" >
-                                    <td th:text="${nota}"></td>
-                                </div>-->
-                    <td th:text="${alumno.notas}"></td>
-                        <td th:text="${alumno.baja}"></td>
-                    <td >
-                        <a th:href="@{/usuario/añadir-nota/}+${alumno.id}" class="btn btn-outline-success">Añadir notas</a>
-                        <a th:href="@{/usuario/eliminar-usuario/}+${alumno.id}" class="btn btn-outline-danger">Baja</a>
-                    </td>
+          
+            <td th:text="${alumno.nombre}"></td>
+            <td th:text="${alumno.apellido}"></td>
+            <td th:text="${alumno.email}"></td>
+<!--              <div th:each="nota:${alumno.notas}" >
+                <td th:text="${nota}"></td>
+            </div>-->
+                                <td th:text="${alumno.notas}"></td>
+            <td >
+                <a sec:authorize="hasAnyRole('ROLE_PROFESOR')"th:href="@{/usuario/añadir-nota/}+${alumno.id}" class="btn btn-outline-success">Añadir notas</a>
+            </td>
+
 
 
 

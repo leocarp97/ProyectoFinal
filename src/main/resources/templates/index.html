@@ -28,6 +28,17 @@
                     <li><a href="/info-idiomas">NUESTROS IDIOMAS </a></li>
                     <li><a href="#contacto">CONTACTO </a></li>
                     <li><a sec:authorize="!isAuthenticated()" href="/login">INICIAR SESIÓN </a></li>
+                   <li>
+                       <a sec:authorize="hasAnyRole('ROLE_ALUMNO')" th:href="@{/campus-alumno}" 
+                            >CAMPUS VIRTUAL
+                        </a>
+                       <a  sec:authorize="hasAnyRole('ROLE_PROFESOR')" th:href="@{/campus-profesor}" 
+                            >CAMPUS VIRTUAL
+                        </a>
+                       <a  sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/campus-admin}" 
+                            >CAMPUS VIRTUAL
+                        </a>
+                    </li>
                     <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">CERRAR SESIÓN</a></li>
                     <li>
                         <div>
