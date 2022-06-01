@@ -197,6 +197,11 @@ public class CursoServicio {
     }
     
     @Transactional(readOnly = true)
+    public List<Curso> listarCursosPorProfesor(String idProfesor) {
+        return cursoRepositorio.buscarCursosPorProfesor(idProfesor);
+    }
+    
+    @Transactional(readOnly = true)
     public List<Curso> buscarCursosActivos() {
         return cursoRepositorio.buscarActivos();
     }
