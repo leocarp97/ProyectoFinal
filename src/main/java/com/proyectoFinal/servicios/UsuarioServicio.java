@@ -34,7 +34,7 @@ public class UsuarioServicio implements UserDetailsService {
     FotoServicio fotoServicio;
 
     @Transactional(rollbackFor = {Exception.class})
-    public Usuario registrar(MultipartFile archivo, String nombre, String apellido, Integer dni, String email, Integer telefono, String password, String region, Pais pais) throws Exception {
+    public Usuario registrar(MultipartFile archivo, String nombre, String apellido, Integer dni, String email, Integer telefono, String password, String region, Pais pais, Rol rol) throws Exception {
 
 //        validar(nombre, apellido, dni, telefono, email, password);
         Usuario usuario = new Usuario();
@@ -47,7 +47,7 @@ public class UsuarioServicio implements UserDetailsService {
         String claveEncriptada = new BCryptPasswordEncoder().encode(password);
         usuario.setPassword(claveEncriptada);
         usuario.setRegion(region);
-        usuario.setRol(Rol.ALUMNO);
+        usuario.setRol(rol);
         usuario.setPais(pais);
         usuario.setAlta(new Date());
         usuario.setBaja(null);
