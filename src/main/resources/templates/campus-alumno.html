@@ -119,6 +119,7 @@
                               <li> <strong>Turno:</strong> <td th:text="${curso.turno.displayValue}"></td></li>
 
                                 <a   sec:authorize="hasAnyRole('ROLE_ALUMNO')"
+
                                     th:if="${session.usuariosession !=null}"
                                     th:href="@{/curso/nivel-cursos/}+ ${curso.id} "
                                     class="btn btn-login">Inscribirse</a>
@@ -126,6 +127,7 @@
                           </div>
                       </div>
                     </div>
+
               </div>
           </div>
 
@@ -175,6 +177,7 @@
 
 
 
+
                 <button
                     class="carousel-control-prev"
                     type="button"
@@ -211,4 +214,5 @@
   </body>
 
 </html>
+
 

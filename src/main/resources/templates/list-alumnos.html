@@ -53,6 +53,7 @@ and open the template in the editor.
                 <tr th:each="alumno:${alumnos}"  >
 
 
+
                     <td th:text="${alumno.nombre}"></td>
                     <td th:text="${alumno.apellido}"></td>
                     <td th:text="${alumno.email}"></td>
@@ -65,6 +66,7 @@ and open the template in the editor.
                         <a sec:authorize="hasAnyRole('ROLE_PROFESOR')" th:href="@{/usuario/añadir-nota/}+${alumno.id}" class="btn btn-outline-success">Añadir notas</a>
                         <a th:href="@{/usuario/eliminar-usuario/}+${alumno.id}" class="btn btn-outline-danger">Baja</a>
                     </td>
+
 
 
 

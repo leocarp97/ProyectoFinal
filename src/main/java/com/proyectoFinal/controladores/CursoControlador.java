@@ -146,17 +146,7 @@ public class CursoControlador {
         return "redirect:/";
     }
 
-    @GetMapping("mis-cursos/{id}")
-    public String misCursos(ModelMap modelo, @PathVariable String id, HttpSession session) throws Exception {
-
-        List<Curso> cursos = cursoServicio.listarCursosPorProfesor(id);
-
-        modelo.addAttribute("cursos", cursos);
-
-        return "list-curso";
-
-    }
-
+ 
 //    @GetMapping("/nivel-cursos")
 //    public String mostrarXnivel(ModelMap modelo) {
 //        try {
