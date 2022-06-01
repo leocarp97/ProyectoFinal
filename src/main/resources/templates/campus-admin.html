@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org"  
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
@@ -133,12 +134,13 @@
             </ul>
   
         </nav>
-  
+
         <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div th:each="cursos, i : ${cursosBy3}" th:class="carousel-item + ${i.index == 0 ? ' active' : ''}">
                     <div class="contenedor">
                         <div th:each="curso: ${cursos}" class="card" style="width: 18rem;">
+
   
                             <img th:if="${curso.foto != null}" th:src="${'/foto/'} + ${curso.foto.id}"
                                 class="card-img-top">
@@ -165,19 +167,24 @@
   
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
                 data-bs-slide="prev">
+
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+
                 data-bs-slide="next">
+
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
     </div>
+
   
     <footer class="pie-pagina">
   
+
         <div class="grupo-1">
             <div class="box">
                 <figure>
@@ -185,7 +192,7 @@
                         <img src="./logo.png" alt="logo1"> </a>
                 </figure>
             </div>
-  
+
             <div class="box" id="contacto">
                 <h2>DONDE ESTAMOS</h2>
                 <p>Av. de Los Idiomas 803 - CABA - ARGENTINA </p>
@@ -195,6 +202,7 @@
                 <p>(+54911)5253-903248</p>
 
             </div>
+
   
             <div class="box">
                   <h2>SEGUINOS</h2>
@@ -211,13 +219,16 @@
               <samll>&copy; 2022 <b>I SPEAK INSTITUTE ® </b> - Todos los Derechos Reservados.</samll>
   
   
+
         </div>
     </footer>
 
     <script src="
+
         https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous">
     </script>
 </body>
+
 </html>

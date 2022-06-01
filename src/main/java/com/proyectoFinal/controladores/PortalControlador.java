@@ -30,9 +30,11 @@ public class PortalControlador {
         return "index.html";
     }
 
+
+
     @GetMapping("/login")
     public String login(ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) throws Exception {
-        
+
         if (error != null) {
             modelo.put("error", "Usuario o Clave incorrectos");
         }
@@ -135,5 +137,5 @@ public class PortalControlador {
     public String infoIdiomas() {
         return "idiomas.html";
     }
-    
+
 }

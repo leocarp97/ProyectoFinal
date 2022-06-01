@@ -32,7 +32,7 @@ public class UsuarioControlador {
 
         return "list-usuario";
     }
-    
+
     @GetMapping("/list-alumnos")
     public String listarAlumnos(ModelMap model) throws Exception {
 
@@ -42,7 +42,7 @@ public class UsuarioControlador {
 
         return "list-usuario";
     }
-    
+
     @GetMapping("/list-profesores")
     public String listarProfesores(ModelMap model) throws Exception {
 
@@ -52,6 +52,8 @@ public class UsuarioControlador {
 
         return "list-usuario";
     }
+
+
 
     @GetMapping("/list-usuario-activos")
     public String listarUsuariosActivos(ModelMap model) {
@@ -87,7 +89,7 @@ public class UsuarioControlador {
         try {
             usuarioServicio.registrar(archivo, nombre, apellido, dni, email, telefono, password, region, pais, Rol.PROFESOR);
 
-            return "redirect:/usuario/list-usuario/";
+            return "redirect:/";
         } catch (Exception e) {
             model.put("error", e.getMessage());
             return "redirect:/";
@@ -99,7 +101,7 @@ public class UsuarioControlador {
 
         usuarioServicio.deshabilitar(id);
 
-        return "redirect:/usuario/list-usuario/";
+        return "redirect:/curso/list-alumnos/" + id;
 
     }
 
@@ -108,7 +110,7 @@ public class UsuarioControlador {
 
         usuarioServicio.habilitar(id);
 
-        return "redirect:/usuario/list-usuario/";
+        return "redirect:/curso/list-alumnos/" + id;
 
     }
 
@@ -123,17 +125,17 @@ public class UsuarioControlador {
     @PostMapping("/actualizar-usuario")
     public String editar(ModelMap modelo, MultipartFile archivo, @RequestParam String id, @RequestParam(required = false) String nombre, @RequestParam(required = false) String apellido, @RequestParam(required = false) Integer dni, @RequestParam(required = false) String email, @RequestParam(required = false) Integer telefono, @RequestParam(required = false) String region, @RequestParam(required = false) Pais pais) {
         try {
-            usuarioServicio.modificar(archivo, id, nombre, apellido, dni, email, telefono,  region, pais);
+            usuarioServicio.modificar(archivo, id, nombre, apellido, dni, email, telefono, region, pais);
             modelo.put("exito", "se pudo actualizar");
 
-            return "redirect:/usuario/editar-perfil/"+ id;
+            return "redirect:/usuario/editar-perfil/" + id;
 
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
             System.out.println(e.getMessage());
-              return "redirect:/usuario/editar-perfil/"+ id;
+            return "redirect:/usuario/editar-perfil/" + id;
         }
-        
+
     }
 
     @PreAuthorize("hasAnyRole('ROLE_PROFESOR')")
@@ -148,7 +150,7 @@ public class UsuarioControlador {
     public String añadirNota(ModelMap modelo, @RequestParam String id, @RequestParam String notas) {
         try {
             usuarioServicio.agregarNota(id, notas);
-       
+
             modelo.put("exito", "se pudo actualizar");
             return "redirect:/curso/list-curso";
 
