@@ -11,8 +11,8 @@
               integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="./styles.css">
-        <link rel="shortcut icon" href="./logo.png">
-        <title>ProyectoFinal</title>
+        <link rel="shortcut icon" href="./logo-final2.png">
+        <title>I Speak</title>
     </head>
 
     <body>
@@ -20,7 +20,7 @@
         <div class="container">
 
             <div class="navbar">
-                <a href="/index"><img src="./logo.png" class="logo" alt="Main Logo"></a>
+                <a href="/index"><img src="./logo-final2.png" class="logo" alt="Main Logo"></a>
 
                 <ul>
 
@@ -57,7 +57,11 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <form th:action="@{/usuario/index}" method="POST" enctype="multipart/form-data">
-                                                <h1 th:if="${error != null}" th:text="${error}" class="text-danger"></h1>
+
+
+                                                <p th:if="${error != null}" th:text="${error}" class="text-danger"></p>
+                                                
+
                                                 <div class="input_container">
                                                     <input class="controls" type="text" name="nombre"  placeholder="Nombre">
                                                     <input class="controls" type="text" name="apellido"  placeholder="Apellido"> 
@@ -314,7 +318,7 @@
             <div class="box">
                 <figure>
                     <a href="#">
-                        <img src="./logo.png" alt="logo1"> </a>
+                        <img src="./logo-final.png" alt="logo1"> </a>
                 </figure>
             </div>
 
