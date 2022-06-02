@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <head>
         <meta charset="UTF-8">
@@ -9,9 +10,9 @@
               integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="./idiomas.css">
-        <link rel="shortcut icon" href="./logo.png">
+        <link rel="shortcut icon" href="./logo-final2.png">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-        <title>ProyectoFinal</title>
+        <title>I Speak</title>
     </head>
 
     <body>
@@ -19,10 +20,10 @@
         <div class="container">
 
             <div class="navbar">
-                <a href="/index"><img src="./logo.png" class="logo" alt="Main Logo"></a>
+                <a href="/index"><img src="./logo-final2.png" class="logo" alt="Main Logo"></a>
 
                 <ul>
-
+                    <li><a href="/index">INICIO </a></li>
                     <li><a href="/index#quienes-somos">QUIENES SOMOS </a></li>
                     <li><a href="#contacto">CONTACTO </a></li>
                     <li><a sec:authorize="!isAuthenticated()" href="/login">INICIAR SESIÓN </a></li>
@@ -31,6 +32,9 @@
                            >CAMPUS VIRTUAL
                         </a>
                         <a  sec:authorize="hasAnyRole('ROLE_PROFESOR')" th:href="@{/campus-profesor}" 
+                            >CAMPUS VIRTUAL
+                        </a>
+                        <a  sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/campus-profesor}" 
                             >CAMPUS VIRTUAL
                         </a>
                     </li>
@@ -332,7 +336,7 @@
                 <div class="box">
                     <figure>
                         <a href="#">
-                            <img src="./logo.png" alt="logo1"> </a>
+                            <img src="./logo-final.png" alt="logo1"> </a>
                     </figure>
                 </div>
 

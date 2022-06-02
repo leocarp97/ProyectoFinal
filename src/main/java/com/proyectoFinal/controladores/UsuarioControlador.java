@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/usuario")
@@ -57,8 +58,6 @@ public class UsuarioControlador {
         return "list-usuario";
     }
 
-
-
     @GetMapping("/list-usuario-activos")
     public String listarUsuariosActivos(ModelMap model) {
 
@@ -69,23 +68,24 @@ public class UsuarioControlador {
         return "list-usuario";
     }
 
-    @GetMapping("/index")
-    public String formulario() {
-        return "index";
-    }
+//    @GetMapping("/index")
+//    public String formulario() {
+//        return "index";
+//    }
 
-    @PostMapping("/index")
-    public String guardar(ModelMap model, @RequestParam(required = false) MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region, @RequestParam Pais pais, @RequestParam (required = false) Rol rol) {
-
-        try {
-            usuarioServicio.registrar(archivo, nombre, apellido, dni, email, telefono, password, region, pais, Rol.ALUMNO);
-
-            return "redirect:/usuario/list-usuario/";
-        } catch (Exception e) {
-            model.put("error", e.getMessage());
-            return "redirect:/";
-        }
-    }
+//    @PostMapping("/index")
+//    public String guardar(ModelMap model, @RequestParam(required = false) MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam(required = false) Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region, @RequestParam Pais pais, @RequestParam (required = false) Rol rol) {
+//
+//        try {
+//            usuarioServicio.registrar(archivo, nombre, apellido, dni, email, telefono, password, region, pais, Rol.ALUMNO);
+//
+//            return "redirect:/login";
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//            model.put("error", e.getMessage());
+//            return "redirect:/";
+//        }
+//    }
     
     @PostMapping("/campus-admin")
     public String guardarProfesor(ModelMap model, @RequestParam(required = false) MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region, @RequestParam Pais pais, @RequestParam (required = false) Rol rol) {
@@ -105,17 +105,23 @@ public class UsuarioControlador {
 
         usuarioServicio.deshabilitar(id);
 
-        return "redirect:/curso/list-alumnos/" + id;
-
+        if(usuarioServicio.BuscarId(id).getRol().equals(Rol.ALUMNO)){
+            return "redirect:/usuario/list-alumnos/";
+        } else {
+            return "redirect:/usuario/list-profesores/";
+        }
     }
 
     @GetMapping("/habilitar-usuario/{id}")
     public String habilitar(@PathVariable String id) throws Exception {
 
         usuarioServicio.habilitar(id);
-
-        return "redirect:/curso/list-alumnos/" + id;
-
+        
+        if(usuarioServicio.BuscarId(id).getRol().equals(Rol.ALUMNO)){
+            return "redirect:/usuario/list-alumnos/";
+        } else {
+            return "redirect:/usuario/list-profesores/";
+        }
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ALUMNO','ROLE_PROFESOR','ROLE_ADMIN')")
@@ -127,15 +133,15 @@ public class UsuarioControlador {
     }
 
     @PostMapping("/actualizar-usuario")
-    public String editar(ModelMap modelo, MultipartFile archivo, @RequestParam String id, @RequestParam(required = false) String nombre, @RequestParam(required = false) String apellido, @RequestParam(required = false) Integer dni, @RequestParam(required = false) String email, @RequestParam(required = false) Integer telefono, @RequestParam(required = false) String region, @RequestParam(required = false) Pais pais) {
+    public String editar(RedirectAttributes attr,ModelMap modelo, MultipartFile archivo, @RequestParam String id, @RequestParam(required = false) String nombre, @RequestParam(required = false) String apellido, @RequestParam(required = false) Integer dni, @RequestParam(required = false) String email, @RequestParam(required = false) Integer telefono, @RequestParam(required = false) String region, @RequestParam(required = false) Pais pais) {
         try {
             usuarioServicio.modificar(archivo, id, nombre, apellido, dni, email, telefono, region, pais);
-            modelo.put("exito", "se pudo actualizar");
-
+            attr.addFlashAttribute("exito", "se pudo actualizar con exito");
+            
             return "redirect:/usuario/editar-perfil/" + id;
 
         } catch (Exception e) {
-            modelo.put("error", e.getMessage());
+            attr.addFlashAttribute("error", e.getMessage());
             System.out.println(e.getMessage());
             return "redirect:/usuario/editar-perfil/" + id;
         }
@@ -150,13 +156,14 @@ public class UsuarioControlador {
         return "añadir-nota";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_PROFESOR')")
     @PostMapping("/añadir-notas")
     public String añadirNota(ModelMap modelo, @RequestParam String id, @RequestParam String notas) {
         try {
             usuarioServicio.agregarNota(id, notas);
 
             modelo.put("exito", "se pudo actualizar");
-            return "redirect:/curso/list-curso";
+            return "redirect:/curso/list-alumnos";
 
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
