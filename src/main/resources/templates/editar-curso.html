@@ -59,6 +59,7 @@
                             th:value="${curso.nombre}"
                         />
 
+
                         <fieldset disabled>
                             <div class="mb-3">
                               <label for="disabledTextInput" class="form-label">Idioma</label>
@@ -123,10 +124,12 @@
                             th:text="${turno.displayValue}"
                             th:selected="${turno.displayValue == curso.turno.displayValue}"
                         ></option>
+
                         </select>
                         <br>
                         <button type="submit" class="moficiacion btn btn-primary">Guardar</button>
                     </div>
+
                     <div class="foto">
                         <img
                             th:if="${curso.foto != null}"
@@ -137,6 +140,7 @@
                         <input type="file" class="form-control" name="archivo" />
                     </div>
                 </form>
+
             </div>
       
         </div>

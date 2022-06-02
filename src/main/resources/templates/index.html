@@ -58,8 +58,10 @@
                                             </div>
                                             <form th:action="@{/usuario/index}" method="POST" enctype="multipart/form-data">
 
+
                                                 <p th:if="${error != null}" th:text="${error}" class="text-danger"></p>
                                                 
+
                                                 <div class="input_container">
                                                     <input class="controls" type="text" name="nombre"  placeholder="Nombre">
                                                     <input class="controls" type="text" name="apellido"  placeholder="Apellido"> 
