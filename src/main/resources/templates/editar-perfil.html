@@ -19,8 +19,8 @@
       href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link rel="stylesheet" href="../../editar-perfil.css" />
-    <link rel="shortcut icon" href="./logo.png">
-    <title>EditarPerfil</title>
+    <link rel="shortcut icon" href="../../logo-final2.png">
+    <title>I Seak</title>
   </head>
 
   <body>
@@ -28,7 +28,7 @@
     <div class="container">
 
         <div class="navbar">
-            <a href="/index"><img src="../../logo.png" class="logo" alt="Main Logo"></a>
+            <a href="/index"><!-- <img src="../../logo-final2.png" class="logo" alt="Main Logo"> --></a>
   
             <ul>
                 
@@ -43,6 +43,9 @@
                     <a  sec:authorize="hasAnyRole('ROLE_PROFESOR')" th:href="@{/campus-profesor}" 
                         >CAMPUS VIRTUAL
                     </a>
+                    <a  sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/campus-admin}" 
+                        >CAMPUS VIRTUAL
+                    </a>
                 </li>
                 <li><a th:href="@{/logout}">CERRAR SESIÓN </a></li>
   
@@ -55,12 +58,22 @@
     <div class="contenedor-editar">
       <div class="datos">
         <h2>Editar Perfil</h2>
+          <div>
+            <p 
+              th:if="${error != null}" class="alert alert-danger" role="alert" 
+              th:text="${error}" style="width: 15rem;"></p>
+            <p 
+              th:if="${exito != null}" class="alert alert-success"role="alert" 
+              th:text="${exito}" style="width: 15rem;">
+            </p>
+          </div>
         <form
           th:action="@{/usuario/actualizar-usuario}"
           method="POST"
           enctype="multipart/form-data"
           class="d-flex"
         >
+
           <div>
             <input type="hidden" th:value="${usuario.id}" name="id" />
 
@@ -80,20 +93,16 @@
               th:value="${usuario.apellido}"
             />
 
-            <fieldset disabled>
-              <div class="mb-3">
-                <label for="disabledTextInput" class="form-label"
-                  >Número de documento</label
-                >
-                <input
-                  type="text"
-                  id="disabledTextInput"
-                  class="form-control"
-                  name="dni"
-                  th:value="${usuario.dni}"
-                />
-              </div>
-            </fieldset>
+            <label for="disabledTextInput" class="form-label"
+              >Número de documento</label
+            >
+            <input
+              type="text"
+              id="disabledTextInput"
+              class="form-control"
+              name="dni"
+              th:value="${usuario.dni}"
+            />
 
             <label>Telefono</label>
             <input
@@ -111,7 +120,19 @@
               th:value="${usuario.email}"
             />
 
-            <label class="form-idioma"> <strong>País:</strong></label>
+            <fieldset disabled>
+              <div class="mb-3">
+                <label for="disabledTextInput" class="form-label">País</label>
+                <input
+                type="text"
+                id="disabledTextInput"
+                class="form-control"
+                name="pais"
+                th:value="${usuario.pais.displayValue}"
+                />
+              </div>
+            </fieldset>
+            <label class="form-idioma"></label>
             <select name="pais" class="controls">
               <option
                 th:each="pais : ${T(com.proyectoFinal.enums.Pais).values()}"
@@ -120,32 +141,18 @@
                 th:selected="${pais.displayValue == usuario.pais.displayValue}"
               ></option>
             </select>
-            <fieldset disabled>
-              <div class="mb-3">
-                <label for="disabledTextInput" class="form-label">País</label>
-                <input
-                  type="text"
-                  id="disabledTextInput"
-                  class="form-control"
-                  name="pais"
-                  th:value="${usuario.pais.displayValue}"
-                />
-              </div>
-            </fieldset>
-
-            <fieldset disabled>
-              <div class="mb-3">
-                <label for="disabledTextInput" class="form-label">Región</label>
-                <input
-                  type="text"
-                  id="disabledTextInput"
-                  class="form-control"
-                  name="region"
-                  th:value="${usuario.region}"
-                />
-              </div>
-            </fieldset>
+            <br>
+            <label for="disabledTextInput" class="form-label">Región</label>
+            <input
+              type="text"
+              id="disabledTextInput"
+              class="form-control"
+              name="region"
+              th:value="${usuario.region}"
+            />
+ 
             <button type="submit" class="btn-aceptar">Aceptar</button>
+            
           </div>
           <div class="foto">
             <img
@@ -170,7 +177,7 @@
       <div class="grupo-1">
         <div class="box">
           <figure>
-            <a href="#"> <img src="../../logo.png" alt="logo1" /> </a>
+            <a href="#"> <img src="../../logo-final.png" alt="logo1" /> </a>
           </figure>
         </div>
 
@@ -199,6 +206,7 @@
           Reservados.</samll
         >
       </div>
+      
     </footer>
   </body>
 </html>

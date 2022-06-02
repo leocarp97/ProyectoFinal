@@ -36,7 +36,8 @@ public class UsuarioServicio implements UserDetailsService {
     @Transactional(rollbackFor = {Exception.class})
     public Usuario registrar(MultipartFile archivo, String nombre, String apellido, Integer dni, String email, Integer telefono, String password, String region, Pais pais, Rol rol) throws Exception {
 
-//        validar(nombre, apellido, dni, telefono, email, password);
+        validar(nombre, apellido, dni, telefono, email);
+        
         Usuario usuario = new Usuario();
 
         usuario.setNombre(nombre);
@@ -62,7 +63,8 @@ public class UsuarioServicio implements UserDetailsService {
     @Transactional(rollbackFor = {Exception.class})
     public void modificar(MultipartFile archivo, String id, String nombre, String apellido, Integer dni, String email, Integer telefono, String region, Pais pais) throws Exception {
 
-//        validar(nombre, apellido, dni, telefono, email, password);
+        validar(nombre, apellido, dni, telefono, email);
+        
         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
 
         if (respuesta.isPresent()) {
@@ -77,14 +79,17 @@ public class UsuarioServicio implements UserDetailsService {
 //            usuario.setPassword(claveEncriptada);
             usuario.setRegion(region);
             usuario.setPais(pais);
-            String idFoto = null;
-            if (usuario.getFoto() != null) {
+            
+            if (archivo != null) {
+                String idFoto = null;
+                if (usuario.getFoto() != null) {
 
-                idFoto = usuario.getFoto().getId();
+                    idFoto = usuario.getFoto().getId();
 
+                }
+                Foto foto = fotoServicio.modificar(archivo, idFoto);
+                usuario.setFoto(foto);
             }
-            Foto foto = fotoServicio.modificar(archivo, idFoto);
-            usuario.setFoto(foto);
 
             usuarioRepositorio.save(usuario);
 
@@ -120,13 +125,8 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional(readOnly = true)
-    public Usuario buscarProfesor(String id, Rol rol) {
-        return usuarioRepositorio.buscarProfesor(id, rol);
-    }
-
-    @Transactional(readOnly = true)
-    public Usuario listarProfesor(String id, Rol rol) {
-        return usuarioRepositorio.buscarProfesor(id, rol);
+    public Usuario buscarProfesor(String id) {
+        return usuarioRepositorio.buscarProfesor(id, Rol.PROFESOR);
     }
 
     @Transactional(readOnly = true)
@@ -151,10 +151,10 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     public Usuario agregarNota(String idAlumno, String nota) throws Exception {
-     
+
         Usuario usuario = BuscarId(idAlumno);
         usuario.getNotas().add(nota);
-     
+
         return usuarioRepositorio.save(usuario);
     }
 
@@ -221,7 +221,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
-    private void validar(String nombre, String apellido, Integer dni, Integer telefono, String email, String password) throws Exception {
+    private void validar(String nombre, String apellido, Integer dni, Integer telefono, String email) throws Exception {
         if (nombre == null || nombre.trim().isEmpty()) {
             throw new Exception("Debe ingresar su nombre");
         }
@@ -237,9 +237,9 @@ public class UsuarioServicio implements UserDetailsService {
         if (telefono == null || telefono < 10) {
             throw new Exception("El numero de telefono ingresado no es correcto");
         }
-        if (password == null || password.trim().isEmpty() || password.length() < 10) {
-            throw new Exception("La contraseña debe tener 10 o más caracteres");
-        }
+//        if (password == null || password.trim().isEmpty() || password.length() < 10) {
+//            throw new Exception("La contraseña debe tener 10 o más caracteres");
+//        }
 
     }
 }

@@ -44,6 +44,16 @@ public class CursoControlador {
 
         return "list-curso";
     }
+    
+    @GetMapping("/list-curso-alumno/{id}")
+    public String buscarCursoDeAlumno(ModelMap model, @PathVariable String id) {
+
+        Curso cursos = cursoServicio.bucarCursoDeAlumno(id);
+
+        model.addAttribute("cursos", cursos);
+
+        return "list-curso";
+    }
 
     @GetMapping("/list-alumnos/{id}")
     public String listarAlumnos(ModelMap model, @PathVariable String id) {
@@ -81,15 +91,16 @@ public class CursoControlador {
     }
 
     @PostMapping("/form-curso")
-    public String guardar(ModelMap model, @RequestParam MultipartFile archivo, @RequestParam String nombre, @RequestParam Nivel nivel, @RequestParam Turno turno, @RequestParam Idioma idioma, @RequestParam String idProfesor) {
+    public String guardar(RedirectAttributes attr, ModelMap model, @RequestParam MultipartFile archivo, @RequestParam String nombre, @RequestParam Nivel nivel, @RequestParam Turno turno, @RequestParam Idioma idioma, @RequestParam String idProfesor) {
 
         try {
             cursoServicio.crear(archivo, nombre, nivel, idioma, turno, idProfesor);
+            attr.addFlashAttribute("exito", "se regitró el curso correctamente");
 
-            return "redirect:/curso/list-curso";
+            return "redirect:/curso/form-curso";
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return "list-curso";
+            attr.addFlashAttribute("error", e.getMessage());
+            return "redirect:/curso/form-curso";
         }
     }
 
@@ -114,7 +125,9 @@ public class CursoControlador {
     @GetMapping("/editar-curso/{id}")
     public String editar(@PathVariable String id, ModelMap modelo) throws Exception {
         Curso c = cursoServicio.BuscarId(id);
+        List<Usuario> u = usuarioServicio.listarProfesores();
         modelo.put("curso", c);
+        modelo.put("profesores", u);
         return "editar-curso";
     }
 
@@ -132,29 +145,22 @@ public class CursoControlador {
     }
 
     @GetMapping("/nivel-cursos/{id}")
-    public String añadirAlumno(ModelMap modelo, @PathVariable String id, HttpSession session) {
+    public String añadirAlumno(RedirectAttributes attr, ModelMap modelo, @PathVariable String id, HttpSession session) {
 
         try {
             Usuario login = (Usuario) session.getAttribute("usuariosession");
 
             System.out.println("id de curso " + id + "   id usuario " + login.getId());
             cursoServicio.añadirAlumno(id, login.getId());
+            attr.addFlashAttribute("exito", "se ha inscripto con éxito al curso");
+            
+            return "redirect:/campus-alumno";
 
         } catch (Exception ex) {
             Logger.getLogger(CursoControlador.class.getName()).log(Level.SEVERE, null, ex);
+            attr.addFlashAttribute("error", "usted ya está inscripto en algun curso");
+            return "redirect:/campus-alumno";
         }
-        return "redirect:/";
-    }
-
-    @GetMapping("mis-cursos/{id}")
-    public String misCursos(ModelMap modelo, @PathVariable String id, HttpSession session) throws Exception {
-
-        List<Curso> cursos = cursoServicio.listarCursosPorProfesor(id);
-
-        modelo.addAttribute("cursos", cursos);
-
-        return "list-curso";
-
     }
 
 //    @GetMapping("/nivel-cursos")
@@ -168,16 +174,17 @@ public class CursoControlador {
 //        }
 //        return "nivel-cursos";
 //    }
+    
     @PostMapping("/actualizar-curso")
-    public String editar(ModelMap modelo, @RequestParam(required = false) MultipartFile archivo, @RequestParam String id, @RequestParam String nombre, @RequestParam Nivel nivel, @RequestParam Idioma idioma, @RequestParam Turno turno, @RequestParam(required = false) String idProfesor) {
+    public String editar(RedirectAttributes attr, ModelMap modelo, MultipartFile archivo, @RequestParam String id, @RequestParam String nombre, @RequestParam Nivel nivel, @RequestParam Idioma idioma, @RequestParam Turno turno, @RequestParam(required = false) String idProfesor) {
         try {
             cursoServicio.modificar(archivo, id, nombre, nivel, idioma, turno, idProfesor);
-            modelo.put("exito", "se pudo actualizar");
-            return "redirect:/curso/list-curso/";
+            attr.addFlashAttribute("exito", "se pudo actualizar con exito");
+            return "redirect:/curso/editar-curso/"+id;
         } catch (Exception e) {
-            modelo.put("error", e.getMessage());
+            attr.addFlashAttribute("error", e.getMessage());
             System.out.println(e.getMessage());
-            return "redirect:/curso/form-curso/";
+            return "redirect:/curso/editar-curso/"+id;
         }
 
     }
