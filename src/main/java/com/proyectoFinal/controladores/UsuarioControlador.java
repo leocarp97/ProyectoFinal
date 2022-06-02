@@ -34,8 +34,12 @@ public class UsuarioControlador {
         return "list-usuario";
     }
 
+
+    
     @GetMapping("/list-alumnos")
     public String listarAlumnos(ModelMap model) throws Exception {
+
+
 
         List<Usuario> usuarios = usuarioServicio.buscarAlumnos();
 

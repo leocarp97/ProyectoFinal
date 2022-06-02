@@ -77,13 +77,14 @@
   
         </nav>
 
+
         <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div th:each="cursos, i : ${cursosBy3}" th:class="carousel-item + ${i.index == 0 ? ' active' : ''}">
                     <div class="contenedor">
                         <div th:each="curso: ${cursos}" class="card" style="width: 18rem;">
 
-  
+
                             <img th:if="${curso.foto != null}" th:src="${'/foto/'} + ${curso.foto.id}"
                                 class="card-img-top">
   
@@ -160,6 +161,7 @@
             <div class="grupo-2">
               <samll>&copy; 2022 <b>I SPEAK INSTITUTE ® </b> - Todos los Derechos Reservados.</samll>
   
+
 
         </div>
     </footer>
