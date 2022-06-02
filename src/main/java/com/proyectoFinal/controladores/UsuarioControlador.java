@@ -73,7 +73,7 @@ public class UsuarioControlador {
     public String formulario() {
         return "index";
     }
-
+    
     @PostMapping("/index")
     public String guardar(ModelMap model, @RequestParam(required = false) MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region, @RequestParam Pais pais, @RequestParam (required = false) Rol rol) {
 
@@ -105,7 +105,7 @@ public class UsuarioControlador {
 
         usuarioServicio.deshabilitar(id);
 
-        return "redirect:/curso/list-alumnos/" + id;
+        return "redirect:/usuario/list-alumnos/";
 
     }
 
@@ -114,7 +114,7 @@ public class UsuarioControlador {
 
         usuarioServicio.habilitar(id);
 
-        return "redirect:/curso/list-alumnos/" + id;
+        return "redirect:/usuario/list-alumnos/";
 
     }
 

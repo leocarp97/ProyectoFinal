@@ -88,7 +88,7 @@ public class CursoControlador {
 
             return "redirect:/curso/list-curso";
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            model.put("error", e.getMessage())
             return "list-curso";
         }
     }
@@ -114,6 +114,8 @@ public class CursoControlador {
     @GetMapping("/editar-curso/{id}")
     public String editar(@PathVariable String id, ModelMap modelo) throws Exception {
         Curso c = cursoServicio.BuscarId(id);
+        List<Usuario> profesores = usuarioServicio.listarProfesores();
+        modelo.put("profesores", profesores);
         modelo.put("curso", c);
         return "editar-curso";
     }

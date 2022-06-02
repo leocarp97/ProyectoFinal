@@ -55,6 +55,7 @@
             th:action="@{/curso/form-curso}" method="POST" enctype="multipart/form-data"
             
           >
+                 <h1 th:if="${error != null}" th:text="${error}" class="text-danger"></h1>
             <div>
   
                 <label class="col-form-label">Nombre</label>
