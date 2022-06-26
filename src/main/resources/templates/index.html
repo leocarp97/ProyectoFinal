@@ -92,7 +92,7 @@
             <div>
                 <h1 sec:authorize="isAuthenticated()" th:text="${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h1>
                 <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Cerrar Sesión</a>
-                <a th:if="${session.usuariosession !=null}" th:href="@{/usuario/editar-perfil/} + ${session.usuariosession.id}" class="btn-primary">Editar Perfil</a>
+                <a sec:authorize="isAuthenticated()" th:if="${session.usuariosession !=null}" th:href="@{/usuario/editar-perfil/} + ${session.usuariosession.id}" class="btn-primary">Editar Perfil</a>
                 <!--            <a th:if="${session.usuariosession !=null}" th:href="@{/usuario/editar-perfil/{id=__${session.usuariosession.id}__}}" class="btn-primary">Editar Perfil</a>-->
             </div>
         </div>

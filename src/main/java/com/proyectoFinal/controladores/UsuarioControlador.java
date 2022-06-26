@@ -31,16 +31,16 @@ public class UsuarioControlador {
 
         return "list-usuario";
     }
-/////terminar
-//    @GetMapping("/list-alumnos")
-//    public String listAlumnos(ModelMap model) {
-//        List<Usuarios> usuarios = 
-//        
-//        List<Double> notas = usuarioServicio.BuscarId(id).getNotas();
-//        model.addAttribute("notas", notas);
-//         model.addAttribute("usuarios", usuarios);
-//
-//    }
+///terminar
+    @GetMapping("/list-alumnos")
+    public String listAlumnos(ModelMap model) {
+        List<Usuarios> usuarios = 
+        List<String> hola = new ArrayList();
+        List<Double> notas = usuarioServicio.BuscarId(id).getNotas();
+        model.addAttribute("notas", notas);
+         model.addAttribute("usuarios", usuarios);
+
+    }
 
     @GetMapping("/list-usuario-activos")
     public String listarUsuariosActivos(ModelMap model) {
