@@ -1,0 +1,260 @@
+.login {
+    background-image: url(fondologinalumno.jpeg);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-attachment: fixed, scroll;
+    background-size: 70%;
+    background-color: white;
+}
+
+.navbar {
+    width: 80%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 130px;
+    cursor: pointer;
+}
+
+.navbar ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar ul li::before {
+    content: "";
+    height: 2.5px;
+    width: 0%;
+    background: black;
+    position: absolute;
+    left: 0;
+    bottom: -12px;
+    transition: 0.4s ease-out;
+}
+
+.navbar ul li:hover::before {
+    width: 100%
+}
+
+.cursos-items :hover::before {
+    background: white;
+    transition-duration:0s;
+    transition-delay: 1s;
+}
+
+.form-alumno {
+    margin-top: 5%;
+    margin-right: 15%;
+    margin-left: 50%;
+    padding: 15px;
+    border-radius: 5%;
+    border-color: rgb(211, 211, 211);
+    border-style: solid;
+    border-width: 4px;
+}
+
+.form-text {
+    text-decoration: none;
+}
+
+.btn-dropdown {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.dropdown-menu .dropdown-item {
+    text-decoration: none;
+}
+
+.btn-login {
+    background: #5d3b7f;
+    color: white;
+}
+
+.btn-login:hover {
+    background: rgb(15, 188, 226);
+
+    color: white;
+    box-shadow: 0 0 10px rgb(243, 226, 205), 0 0 40px rgb(243, 226, 205), 0 0 80px rgb(243, 226, 205);
+
+}
+
+.pie-pagina {
+    width: 100%;
+    background-color: mediumslateblue;
+    margin-top: 7em;
+}
+
+.pie-pagina .grupo-1 {
+
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 50px;
+    padding: 45px 0px;
+}
+
+.pie-pagina .grupo-1 .box figure {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pie-pagina .grupo-1 .box figure img {
+
+    width: 250px;
+
+}
+
+.pie-pagina .grupo-1 .box h2 {
+    color: white;
+    margin-bottom: 25px;
+    font-size: 20px;
+}
+
+.pie-pagina .grupo-1 .box p {
+    color: rgb(255, 255, 255);
+    margin-bottom: 10px;
+}
+
+.pie-pagina .grupo-1 .red-social a {
+    display: inline-block;
+    text-decoration: none;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    color: white;
+    margin-right: 10px;
+    background: rgb(48, 39, 99);
+    text-align: center;
+    border-radius: 10px;
+    transition: all 300ms ease;
+}
+
+.pie-pagina .grupo-1 .red-social a:hover {
+    color: rgb(50, 220, 220);
+
+}
+
+.pie-pagina .grupo-2 {
+    background-color: rgb(48, 39, 99);
+    padding: 15px 10px;
+    text-align: center;
+    color: white;
+
+}
+.modal-dialog{
+    width: 400px;
+}
+.form-register {
+
+    position:fixed;
+    width: 400px;
+    background: #ffffff;
+    
+    padding: 30px;
+
+   z-index: 999;
+    border-radius: 4px;
+    font-family: 'calibri';
+    color: black; 
+
+
+}
+
+.form-register {
+    font-size: 15px;
+    font: 'calibri';
+
+}
+
+.form-idioma h4 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+
+
+.controls {
+    width: 100%;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    border: 1px solid #0a0f10;
+    font-family: 'calibri';
+    font-size: 14px;
+
+}
+
+.form-register p {
+    height: 10px;
+    text-align: center;
+    font-size: 18px;
+
+}
+
+
+
+.form-register a {
+
+
+    color: black;
+    text-decoration: none;
+
+
+}
+
+.form-register a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+.form-register .botons {
+    width: 100%;
+    background: #1f53c5;
+    border: none;
+    padding: 12px;
+    color: white;
+    margin: 16px 0;
+    font-size: 16px;
+
+
+}
+
+@media screen and (max-width:800px) {
+    .pie-pagina .grupo-1 {
+
+        width: 90%;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 30px;
+        padding: 35px 0px;
+    }
+
+}
+
+@keyframes rotar {
+    from {
+        transform: rotateY(0deg);
+    }
+
+    to {
+        transform: rotateY(360deg);
+    }
+}
