@@ -14,16 +14,17 @@
             />
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="./login.css" />
-        <link rel="shortcut icon" href="./logo.png">
-        <title>ProyectoFinal</title>
+        <link rel="shortcut icon" href="./logo-final2.png">
+        <title>I Speak</title>
     </head>
 
     <body class="login">
 
         <div class="navbar">
-            <a href="/index"><img src="./logo.png" class="logo" alt="Main Logo"></a>
+            <a href="/index"><!-- <img src="./logo-final2.png" class="logo" alt="Main Logo"> --></a>
 
             <ul>
+                <li><a href="/index"><strong>INICIO</strong></a></li>
                 <li><a href="/index#quienes-somos"><strong>QUIENES SOMOS</strong></a></li>
                 <li><a href="/info-idiomas"><strong>NUESTROS IDIOMAS</strong> </a></li>
                 <li><a href="#contacto"><strong>CONTACTO</strong></a></li>
@@ -33,9 +34,14 @@
 
         <form class="form-alumno" th:action="@{/logincheck}" method="POST">
             <div class="mb-3">
-                <p th:text="${error}"></p>
-                <p th:text="${logout}"></p>
-                
+                <p 
+                    th:if="${error != null}" class="alert alert-danger" role="alert" 
+                    th:text="${error}">
+                </p>
+                <p 
+                    th:if="${logout != null}" class="alert alert-success" role="alert" 
+                    th:text="${logout}">
+                </p>
                 
                 <label for="exampleInputEmail1" class="form-label">Usuario</label>
                 <input type="email"  name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingrese su usuario">
@@ -58,7 +64,7 @@
                 <div class="box">
                     <figure>
                         <a href="#">
-                            <img src="./logo.png" alt="logo1"> </a>
+                            <img src="./logo-final.png" alt="logo1"> </a>
                     </figure>
                 </div>
     

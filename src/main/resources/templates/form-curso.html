@@ -12,7 +12,7 @@
             crossorigin="anonymous"
             />
     <link rel="stylesheet" href="../../form-curso.css" />
-    <link rel="shortcut icon" href="../../logo.png">
+    <link rel="shortcut icon" href="../../logo-final2.png">
     <title>ProyectoFinal</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
     <div class="container">
 
         <div class="navbar">
-            <a href="/index"><img src="../../logo.png" class="logo" alt="Main Logo"></a>
+            <a href="/index"><!-- <img src="../../logo-final2.png" class="logo" alt="Main Logo"> --></a>
   
             <ul>
                 
@@ -51,6 +51,15 @@
         <div class="datos">
           <h2>Cargar un curso</h2>
           <h5>Registra un curso en el campus</h5>
+          <div>
+            <p 
+              th:if="${error != null}" class="alert alert-danger" role="alert" 
+              th:text="${error}" style="width: 15rem;"></p>
+            <p 
+              th:if="${exito != null}" class="alert alert-success"role="alert" 
+              th:text="${exito}" style="width: 15rem;">
+            </p>
+          </div>
           <form
             th:action="@{/curso/form-curso}" method="POST" enctype="multipart/form-data"
             
@@ -64,19 +73,19 @@
                 <label class="input-group-text" for="inputGroupSelect01">Nivel</label>
                 <select name="nivel" class="form-select" id="inputGroupSelect01">
                     <option th:each="nivel : ${T(com.proyectoFinal.enums.Nivel).values()}"  th:value="${nivel}"
-                            th:text="${nivel.displayValue}" </option>
+                            th:text="${nivel.displayValue}" ></option>
                 </select>
                 
                 <label class="input-group-text" for="inputGroupSelect01">Idioma</label>
                 <select name="idioma" class="form-select" id="inputGroupSelect01">
                     <option th:each="idioma : ${T(com.proyectoFinal.enums.Idioma).values()}"    th:value="${idioma}"
-                            th:text="${idioma.displayValue}" </option>
+                            th:text="${idioma.displayValue}" ></option>
                 </select>
 
                 <label class="input-group-text" for="inputGroupSelect01">Turno</label>
                 <select name="turno" class="form-select" id="inputGroupSelect01">
                     <option th:each="turno : ${T(com.proyectoFinal.enums.Turno).values()}"    th:value="${turno}"
-                            th:text="${turno.displayValue}" </option>
+                            th:text="${turno.displayValue}" ></option>
                 </select>
 
                 <label> Profesor</label> 
@@ -99,7 +108,7 @@
         <div class="grupo-1">
           <div class="box">
             <figure>
-              <a href="#"> <img src="../../logo.png" alt="logo1" /> </a>
+              <a href="#"> <img src="../../logo-final.png" alt="logo1" /> </a>
             </figure>
           </div>
   

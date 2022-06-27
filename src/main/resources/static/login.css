@@ -9,7 +9,7 @@
 
 .navbar {
     width: 80%;
-    margin: auto;
+    margin: 1rem auto;
     padding: 35px 0;
     display: flex;
     align-items: center;
@@ -17,7 +17,7 @@
 }
 
 .logo {
-    width: 130px;
+    width: 80px;
     cursor: pointer;
 }
 
