@@ -3,8 +3,11 @@ package com.proyectoFinal.entidades;
 import com.proyectoFinal.enums.Pais;
 import com.proyectoFinal.enums.Rol;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -47,25 +50,29 @@ public class Usuario implements Serializable {
     @Column(name = "contraseña")
     private String password;
 
+    @ElementCollection(targetClass = String.class)
+    private List<String> notas;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date alta;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date baja;
-    
+
     @OneToOne
     @JoinColumn(name = "foto")
     private Foto foto;
-    
+
     @Enumerated(EnumType.STRING)
     private Pais pais;
 
     private String region;
 
     public Usuario() {
+        notas = new ArrayList();
     }
 
-    public Usuario(String id, String nombre, String apellido, Rol rol, Integer dni, String email, Integer telefono, String password, Date alta, Date baja, Foto foto, Pais pais, String region) {
+    public Usuario(String id, String nombre, String apellido, Rol rol, Integer dni, String email, Integer telefono, String password, List<String> notas, Date alta, Date baja, Foto foto, Pais pais, String region) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -74,6 +81,7 @@ public class Usuario implements Serializable {
         this.email = email;
         this.telefono = telefono;
         this.password = password;
+        this.notas = notas;
         this.alta = alta;
         this.baja = baja;
         this.foto = foto;
@@ -145,6 +153,14 @@ public class Usuario implements Serializable {
         this.password = password;
     }
 
+    public List<String> getNotas() {
+        return notas;
+    }
+
+    public void setNotas(List<String> notas) {
+        this.notas = notas;
+    }
+
     public Date getAlta() {
         return alta;
     }
@@ -185,9 +201,16 @@ public class Usuario implements Serializable {
         this.region = region;
     }
 
+
     @Override
     public String toString() {
-        return nombre + " " + apellido;
+        return nombre + " " + apellido ;
     }
+
+//    @Override
+//    public String toString() {
+//        return "Usuario{" + "notas=" + notas + '}';
+//    }
+
 
 }

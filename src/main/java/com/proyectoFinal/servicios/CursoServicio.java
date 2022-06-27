@@ -21,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class CursoServicio {
 
+    private final List<Curso> listaCursos= new ArrayList();
+    
     @Autowired
     private CursoRepositorio cursoRepositorio;
 
@@ -35,7 +37,7 @@ public class CursoServicio {
 
     public Curso crear(MultipartFile archivo, String nombre, Nivel nivel, Idioma idioma, Turno turno, String idProfesor) throws Exception {
 
-        validar(nombre, nivel, idioma, idProfesor);
+        validar(nombre, nivel, idioma);
 
         Curso curso = new Curso();
 
@@ -43,9 +45,9 @@ public class CursoServicio {
         curso.setNivel(nivel);
         curso.setIdioma(idioma);
         curso.setTurno(turno);
-        curso.setAlumnos(usuarioServicio.buscarAlumnos());
+//        curso.setAlumnos(usuarioServicio.buscarAlumnos());
 
-        Usuario profesor = usuarioServicio.buscarProfesor(idProfesor, Rol.PROFESOR);
+        Usuario profesor = usuarioServicio.buscarProfesor(idProfesor);
         if (profesor != null) {
             curso.setProfesor(profesor);
         } else {
@@ -73,7 +75,7 @@ public class CursoServicio {
 
     public Curso modificar(MultipartFile archivo, String id, String nombre, Nivel nivel, Idioma idioma, Turno turno, String idProfesor) throws Exception {
 
-        validar(nombre, nivel, idioma, idProfesor);
+        validar(nombre, nivel, idioma);
 
         Optional<Curso> respuesta = cursoRepositorio.findById(id);
         if (respuesta.isPresent()) {
@@ -83,11 +85,9 @@ public class CursoServicio {
             curso.setNivel(nivel);
             curso.setIdioma(idioma);
             curso.setTurno(turno);
-            Usuario profesor = usuarioServicio.buscarProfesor(idProfesor, Rol.PROFESOR);
+            Usuario profesor = usuarioServicio.buscarProfesor(idProfesor);
             if (profesor != null) {
                 curso.setProfesor(profesor);
-            } else {
-                throw new Exception("No se pudo encontrar el profesor solicitado");
             }
 
             String idFoto = null;
@@ -155,21 +155,33 @@ public class CursoServicio {
         }
 
     }
-     @Transactional(rollbackFor = Exception.class)
-    public Curso añadirAlumno(String id, String idAlumno) throws Exception {
+    
+    public Curso bucarCursoDeAlumno(String idAlumno) {
+        List<Curso> cursos = listarCursos();
+        for (Curso curso : cursos) {
+            for (Usuario alumno : curso.getAlumnos()) {
+                System.out.println(alumno.getNombre());
+                if(alumno.getId().equals(idAlumno)) {
+                    return curso;
+                }
+            }
+        }
+        return null;
+    }
 
-        if (id != null ) {
+    @Transactional(rollbackFor = Exception.class)
+    public void añadirAlumno(String id, String idAlumno) throws Exception {
+
+        if (id != null) {
             Curso curso = cursoRepositorio.getById(id);
 
             Usuario usuario = usuarioRepositorio.getById(idAlumno);
 
             curso.getAlumnos().add(usuario);
-            return curso;
-        }else   {
-            throw  new Exception("No existe el curso");
-        }
 
-        
+        } else {
+            throw new Exception("No existe el curso");
+        }
 
     }
 
@@ -177,19 +189,34 @@ public class CursoServicio {
     public List<Curso> listarCursos() {
         return cursoRepositorio.findAll();
     }
+ 
+    @Transactional(readOnly = true)
+    public List<Curso> listarCursosPorAlumno() {
+        return cursoRepositorio.buscarCursos();
+    }
+    
+     @Transactional(readOnly = true)
+    public List<Curso> listarCursosPorProfesor(String idProfesor) {
+        return cursoRepositorio.buscarCursosPorProfesor(idProfesor);
+    }
 
+    @Transactional(readOnly = true)
+    public List<Usuario> listarAlumnos(String id) {
+        return cursoRepositorio.buscarAlumnos(id);
+    }
+    
     @Transactional(readOnly = true)
     public List<Curso> buscarCursosActivos() {
         return cursoRepositorio.buscarActivos();
     }
 
-    private void validar(String nombre, Nivel nivel, Idioma idioma, String idProfesor) throws Exception {
+    private void validar(String nombre, Nivel nivel, Idioma idioma) throws Exception {
         if (nombre == null || nombre.trim().isEmpty()) {
             throw new Exception("Debe ingresar su nombre");
         }
-        if (idProfesor == null || idProfesor.trim().isEmpty()) {
-            throw new Exception("El ID no puede ser nulo");
-        }
+//        if (idProfesor == null || idProfesor.trim().isEmpty()) {
+//            throw new Exception("El ID del profesor no puede ser nulo");
+//        }
         if (nivel == null || nivel.toString().trim().isEmpty()) {
             throw new Exception("Debe indicar el nivel del curso");
         }
