@@ -95,7 +95,7 @@ public class CursoControlador {
 
         try {
             cursoServicio.crear(archivo, nombre, nivel, idioma, turno, idProfesor);
-            attr.addFlashAttribute("exito", "se regitró el curso correctamente");
+            attr.addFlashAttribute("exito", "se registró el curso correctamente");
 
             return "redirect:/curso/form-curso";
         } catch (Exception e) {

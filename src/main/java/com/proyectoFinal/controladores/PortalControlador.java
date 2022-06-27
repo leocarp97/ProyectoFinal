@@ -38,19 +38,19 @@ public class PortalControlador {
         return "index.html";
     }
 
-    @PostMapping("/index")
-    public String guardar(RedirectAttributes attr, ModelMap model, @RequestParam(required = false) MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam(required = false) Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region, @RequestParam Pais pais, @RequestParam (required = false) Rol rol) {
-
-        try {
-            usuarioServicio.registrar(archivo, nombre, apellido, dni, email, telefono, password, region, pais, Rol.ALUMNO);
-            attr.addFlashAttribute("exito", "usted se ha registrado exitosamente");
-            return "redirect:/";
-        } catch (Exception e) {
-            attr.addFlashAttribute("error", e.getMessage());
-            model.put("error", e.getMessage());
-            return "redirect:/";
-        }
-    }
+//    @PostMapping("/index")
+//    public String guardar(RedirectAttributes attr, ModelMap model, @RequestParam(required = false) MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam(required = false) Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region, @RequestParam Pais pais, @RequestParam (required = false) Rol rol) {
+//
+//        try {
+//            usuarioServicio.registrar(archivo, nombre, apellido, dni, email, telefono, password, region, pais, Rol.ALUMNO);
+//            attr.addFlashAttribute("exito", "usted se ha registrado exitosamente");
+//            return "redirect:/";
+//        } catch (Exception e) {
+//            attr.addFlashAttribute("error", e.getMessage());
+//            model.put("error", e.getMessage());
+//            return "redirect:/";
+//        }
+//    }
 
     @GetMapping("/login")
     public String login(ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) throws Exception {
