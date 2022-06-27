@@ -34,9 +34,11 @@ public class UsuarioServicio implements UserDetailsService {
     FotoServicio fotoServicio;
 
     @Transactional(rollbackFor = {Exception.class})
-    public Usuario registrar(MultipartFile archivo, String nombre, String apellido, Integer dni, String email, Integer telefono, String password, String region, Pais pais) throws Exception {
+    public Usuario registrar(MultipartFile archivo, String nombre, String apellido, Integer dni, String email, Integer telefono, String password, String region, Pais pais, Rol rol) throws Exception {
 
-        validar(nombre, apellido, dni, email, telefono, password);
+
+        validar(nombre, apellido, dni, telefono, email);
+        
 
         Usuario usuario = new Usuario();
 
@@ -48,7 +50,7 @@ public class UsuarioServicio implements UserDetailsService {
         String claveEncriptada = new BCryptPasswordEncoder().encode(password);
         usuario.setPassword(claveEncriptada);
         usuario.setRegion(region);
-        usuario.setRol(Rol.ALUMNO);
+        usuario.setRol(rol);
         usuario.setPais(pais);
         usuario.setAlta(new Date());
         usuario.setBaja(null);
@@ -61,10 +63,10 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional(rollbackFor = {Exception.class})
-    public void modificar(MultipartFile archivo, String id, String nombre, String apellido, Integer dni, String email, Integer telefono, String password, String region, Pais pais) throws Exception {
+    public void modificar(MultipartFile archivo, String id, String nombre, String apellido, Integer dni, String email, Integer telefono, String region, Pais pais) throws Exception {
 
-        validar(nombre, apellido, dni, email, telefono, password);
-
+        validar(nombre, apellido, dni, telefono, email);
+        
         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
 
         if (respuesta.isPresent()) {
@@ -75,18 +77,21 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setDni(dni);
             usuario.setEmail(email);
             usuario.setTelefono(telefono);
-            String claveEncriptada = new BCryptPasswordEncoder().encode(password);
-            usuario.setPassword(claveEncriptada);
+//            String claveEncriptada = new BCryptPasswordEncoder().encode(password);
+//            usuario.setPassword(claveEncriptada);
             usuario.setRegion(region);
             usuario.setPais(pais);
-            String idFoto = null;
-            if (usuario.getFoto() != null) {
+            
+            if (archivo != null) {
+                String idFoto = null;
+                if (usuario.getFoto() != null) {
 
-                idFoto = usuario.getFoto().getId();
+                    idFoto = usuario.getFoto().getId();
 
+                }
+                Foto foto = fotoServicio.modificar(archivo, idFoto);
+                usuario.setFoto(foto);
             }
-            Foto foto = fotoServicio.modificar(archivo, idFoto);
-            usuario.setFoto(foto);
 
             usuarioRepositorio.save(usuario);
 
@@ -100,11 +105,11 @@ public class UsuarioServicio implements UserDetailsService {
         return usuarioRepositorio.findAll();
     }
 
-     @Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public List<Usuario> listarProfesores() {
         return usuarioRepositorio.listarProfesor(Rol.PROFESOR);
     }
-    
+
     @Transactional(readOnly = true)
     public List<Usuario> buscarUsuariosActivos() {
         return usuarioRepositorio.buscarActivos();
@@ -122,13 +127,8 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional(readOnly = true)
-    public Usuario buscarProfesor(String id, Rol rol) {
-        return usuarioRepositorio.buscarProfesor(id, rol);
-    }
-    
-    @Transactional(readOnly = true)
-    public Usuario listarProfesor(String id, Rol rol) {
-        return usuarioRepositorio.buscarProfesor(id, rol);
+    public Usuario buscarProfesor(String id) {
+        return usuarioRepositorio.buscarProfesor(id, Rol.PROFESOR);
     }
 
     @Transactional(readOnly = true)
@@ -152,6 +152,18 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
+    public Usuario agregarNota(String idAlumno, String nota) throws Exception {
+
+        Usuario usuario = BuscarId(idAlumno);
+        usuario.getNotas().add(nota);
+
+        return usuarioRepositorio.save(usuario);
+    }
+
+//    public List<String> traerNotas(String id, List<String> notas) {
+//
+//        return usuarioRepositorio.buscarNotas(id);
+//    }
     @Transactional(rollbackFor = Exception.class)
     public Usuario habilitar(String id) throws Exception {
         if (id == null || id.trim().isEmpty()) {
@@ -168,45 +180,68 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
+//        @Transactional(rollbackFor = Exception.class)
+//    public void añadirNota(String id) throws Exception {
+//
+//        if (id != null) {
+//         
+//            Usuario usuario = usuarioRepositorio.getById(id);
+//
+//       List<String> notas = new ArrayList();
+//      
+//           usuario.getNotas().add(notas);
+//
+//        } else {
+//            throw new Exception("No existe el alumno");
+//        }
+//
+//    }
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
         Usuario u = usuarioRepositorio.buscarPorEmail(email);
 
-        if (u == null) {
+//        if (u == null) {
+//            return null;
+//        }
+        if (u != null) {
+            List<GrantedAuthority> permisos = new ArrayList<>();
+
+//            GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_" + u.getRol().toString());
+            GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_" + u.getRol());
+            permisos.add(p1);
+
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+            HttpSession session = attr.getRequest().getSession(true);
+            session.setAttribute("usuariosession", u);
+
+            return new User(u.getEmail(), u.getPassword(), permisos);
+        } else {
             return null;
         }
 
-        List<GrantedAuthority> permisos = new ArrayList<>();
-
-        GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_" + u.getRol().toString());
-        permisos.add(p1);
-        
-        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-
-        HttpSession session = attr.getRequest().getSession(true);
-        session.setAttribute("usuariosession", u);
-
-        return new User(u.getEmail(), u.getPassword(), permisos);
     }
 
-    private void validar(String nombre, String apellido, Integer dni, String email, Integer telefono, String password) throws Exception {
+    private void validar(String nombre, String apellido, Integer dni, Integer telefono, String email) throws Exception {
         if (nombre == null || nombre.trim().isEmpty()) {
             throw new Exception("Debe ingresar su nombre");
         }
         if (apellido == null || apellido.trim().isEmpty()) {
             throw new Exception("Debe ingresar su apellido");
         }
-//        if (dni == null || dni < 8) {
-//            throw new Exception("El dni no puede ser nulo y/o menor a 8 caracteres");
-//        }
+        if (dni == null || dni < 8) {
+            throw new Exception("El dni no puede ser nulo y/o menor a 8 caracteres");
+        }
         if (email == null || email.trim().isEmpty()) {
             throw new Exception("Debe ingresar su correo electrónico");
         }
-//        if (telefono == null || telefono < 10) {
-//            throw new Exception("El numero de telefono ingresado no es correcto");
-//        }
+        if (telefono == null || telefono < 10) {
+            throw new Exception("El numero de telefono ingresado no es correcto");
+        }
 //        if (password == null || password.trim().isEmpty() || password.length() < 10) {
 //            throw new Exception("La contraseña debe tener 10 o más caracteres");
 //        }
+
     }
 }

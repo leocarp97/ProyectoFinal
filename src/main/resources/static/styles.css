@@ -27,7 +27,7 @@ body {
 }
 
 .logo {
-    width: 100px;
+    width: 80px;
     cursor: pointer;
 }
 
@@ -78,8 +78,6 @@ body {
     background-color: #0a0f10;
     border: none;
 }
-
-
 
 .dropidiomas {
     color: rgb(255, 255, 255);
@@ -611,19 +609,15 @@ background: linear-gradient(180deg, rgba(10,15,16,1) 0%, rgba(21,6,34,1) 59%, rg
 }
 
 .form-register {
-
     position: fixed;
     width: 400px;
     background: mediumslateblue;
     opacity: 0.8;
     padding: 30px;
-
     z-index: 999;
     border-radius: 4px;
     font-family: 'calibri';
     color: black;
-
-
 }
 
 .form-register {
@@ -637,8 +631,6 @@ background: linear-gradient(180deg, rgba(10,15,16,1) 0%, rgba(21,6,34,1) 59%, rg
     margin-bottom: 20px;
 }
 
-
-
 .controls {
     width: 100%;
     background: #ffffff;
@@ -648,7 +640,6 @@ background: linear-gradient(180deg, rgba(10,15,16,1) 0%, rgba(21,6,34,1) 59%, rg
     border: 1px solid #0a0f10;
     font-family: 'calibri';
     font-size: 14px;
-
 }
 
 .form-register p {
@@ -658,15 +649,9 @@ background: linear-gradient(180deg, rgba(10,15,16,1) 0%, rgba(21,6,34,1) 59%, rg
 
 }
 
-
-
 .form-register a {
-
-
     color: black;
     text-decoration: none;
-
-
 }
 
 .form-register a:hover {
@@ -682,8 +667,6 @@ background: linear-gradient(180deg, rgba(10,15,16,1) 0%, rgba(21,6,34,1) 59%, rg
     color: white;
     margin: 16px 0;
     font-size: 16px;
-
-
 }
 
 input_container {
