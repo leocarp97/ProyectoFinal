@@ -163,18 +163,6 @@ public class CursoControlador {
         }
     }
 
-//    @GetMapping("/nivel-cursos")
-//    public String mostrarXnivel(ModelMap modelo) {
-//        try {
-//            List<Curso> cursos = cursoServicio.listarCursos();
-//            modelo.put("cursos", cursos);
-//
-//        } catch (Exception e) {
-//            modelo.put("error", e.getMessage());
-//        }
-//        return "nivel-cursos";
-//    }
-    
     @PostMapping("/actualizar-curso")
     public String editar(RedirectAttributes attr, ModelMap modelo, MultipartFile archivo, @RequestParam String id, @RequestParam String nombre, @RequestParam Nivel nivel, @RequestParam Idioma idioma, @RequestParam Turno turno, @RequestParam(required = false) String idProfesor) {
         try {
