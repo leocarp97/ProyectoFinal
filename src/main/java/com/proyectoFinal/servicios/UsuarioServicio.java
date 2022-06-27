@@ -36,8 +36,10 @@ public class UsuarioServicio implements UserDetailsService {
     @Transactional(rollbackFor = {Exception.class})
     public Usuario registrar(MultipartFile archivo, String nombre, String apellido, Integer dni, String email, Integer telefono, String password, String region, Pais pais, Rol rol) throws Exception {
 
+
         validar(nombre, apellido, dni, telefono, email);
         
+
         Usuario usuario = new Usuario();
 
         usuario.setNombre(nombre);

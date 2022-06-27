@@ -35,8 +35,12 @@ public class UsuarioControlador {
         return "list-usuario";
     }
 
+
+    
     @GetMapping("/list-alumnos")
     public String listarAlumnos(ModelMap model) throws Exception {
+
+
 
         List<Usuario> usuarios = usuarioServicio.buscarAlumnos();
 
@@ -65,6 +69,7 @@ public class UsuarioControlador {
         return "list-usuario";
     }
 
+
     @GetMapping("/index")
     public String formulario() {
         return "index";
@@ -83,6 +88,7 @@ public class UsuarioControlador {
             return "redirect:/login";
         }
     }
+
     
     @PostMapping("/campus-admin")
     public String guardarProfesor(ModelMap model, @RequestParam(required = false) MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Integer dni, @RequestParam String email, @RequestParam Integer telefono, @RequestParam String password, @RequestParam String region, @RequestParam Pais pais, @RequestParam (required = false) Rol rol) {
@@ -102,23 +108,27 @@ public class UsuarioControlador {
 
         usuarioServicio.deshabilitar(id);
 
+
         if(usuarioServicio.BuscarId(id).getRol().equals(Rol.ALUMNO)){
             return "redirect:/usuario/list-alumnos/";
         } else {
             return "redirect:/usuario/list-profesores/";
         }
+
     }
 
     @GetMapping("/habilitar-usuario/{id}")
     public String habilitar(@PathVariable String id) throws Exception {
 
         usuarioServicio.habilitar(id);
+
         
         if(usuarioServicio.BuscarId(id).getRol().equals(Rol.ALUMNO)){
             return "redirect:/usuario/list-alumnos/";
         } else {
             return "redirect:/usuario/list-profesores/";
         }
+
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ALUMNO','ROLE_PROFESOR','ROLE_ADMIN')")

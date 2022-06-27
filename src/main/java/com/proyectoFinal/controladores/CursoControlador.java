@@ -99,8 +99,10 @@ public class CursoControlador {
 
             return "redirect:/curso/form-curso";
         } catch (Exception e) {
+
             attr.addFlashAttribute("error", e.getMessage());
             return "redirect:/curso/form-curso";
+
         }
     }
 
@@ -125,7 +127,9 @@ public class CursoControlador {
     @GetMapping("/editar-curso/{id}")
     public String editar(@PathVariable String id, ModelMap modelo) throws Exception {
         Curso c = cursoServicio.BuscarId(id);
+
         List<Usuario> u = usuarioServicio.listarProfesores();
+
         modelo.put("curso", c);
         modelo.put("profesores", u);
         return "editar-curso";
