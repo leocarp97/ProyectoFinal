@@ -50,9 +50,18 @@ and open the template in the editor.
         </div>
         
         <table class="table table-bordered  " >
+            <div>
+                <p 
+                  th:if="${error != null}" class="alert alert-danger" role="alert" 
+                  th:text="${error}" style="width: 15rem; position: absolute; margin-left: 45rem; margin-top: 8rem;">
+                </p>
+                <p 
+                  th:if="${exito != null}" class="alert alert-success"role="alert" 
+                  th:text="${exito}" style="width: 15rem;position: absolute; margin-left: 33rem; margin-top: 8rem;">
+                </p>
+            </div>
             <thead>
                 <tr>
-
                     <th scope="col">Nombre</th>
                     <th scope="col">Nivel</th>
                     <th scope="col">Idioma</th>
@@ -73,17 +82,18 @@ and open the template in the editor.
 
                     <td th:text="${curso.profesor}"></td>
 
-                    <td >
+                    <td sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')" 
+                        th:text="${curso.baja}">>
                         <a 
                             sec:authorize="hasAnyRole('ROLE_ALUMNO')" 
                             th:href="@{/curso/list-alumnos/}+${curso.id}" 
                             class="btn btn-outline-success">Ver más
                         </a>
                     </td>
-                    <td 
+                    <!-- <td 
                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')" 
                         th:text="${curso.baja}">
-                    </td>
+                    </td> -->
                     <td >
                         <a 
                             sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')" 
@@ -114,7 +124,7 @@ and open the template in the editor.
             </tbody>
         </table>
 
-        
+
 
         <!--        <select name="turno"  class="form-select" id="inputGroupSelect01">
         
